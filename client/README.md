@@ -1,2 +1,0 @@
-# visor-client
-A prototype of the client which will handle injecting into game processes, creating an overlay once inside the game process and hooking the relevant DXGI functions to then capture the content on the window.
