@@ -74,6 +74,8 @@ bool InjectLibrary(const unsigned int pid, const string &libraryPath) {
 	}
 
 	cout << "Library injected in process " << pid << "." << endl;
-	//CloseHandle(injectionProcess);
+	// Free up the virtual memory we assigned earlier and close proc handle
+	//VirtualFree(injectionProcess, allocation, pathLength, MEM_RELEASE);
+	CloseHandle(injectionProcess);
 	return true;
 }
