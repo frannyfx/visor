@@ -53,7 +53,7 @@ bool InjectLibrary(const unsigned int pid, const string &libraryPath) {
 		return false;
 	}
 
-	LPVOID allocation = VirtualAllocEx(injectionProcess, NULL, libraryPath.length() + 1, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+	LPVOID allocation = VirtualAllocEx(injectionProcess, 0, libraryPath.length() + 1, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
 	if (allocation == NULL) {
 		cerr << "Failed to allocate memory in the target process." << endl;
 		return false;
@@ -75,7 +75,7 @@ bool InjectLibrary(const unsigned int pid, const string &libraryPath) {
 
 	cout << "Library injected in process " << pid << "." << endl;
 	// Free up the virtual memory we assigned earlier and close proc handle
-	//VirtualFree(injectionProcess, allocation, pathLength, MEM_RELEASE);
+	VirtualFreeEx(injectionProcess, allocation, 0, MEM_RELEASE);
 	CloseHandle(injectionProcess);
 	return true;
 }
