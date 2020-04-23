@@ -8,7 +8,7 @@
 
 using namespace std;
 
-string GetProcessName(const unsigned int &pid) {
+string GetProcessName(const unsigned int pid) {
 	TCHAR processName[MAX_PATH] = TEXT("");
 	HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, pid);
 
@@ -48,7 +48,7 @@ int GetPIDWithName(const string &processName) {
 	return 0;
 }
 
-bool InjectLibrary(const int &pid, const string &libraryPath) {
+bool InjectLibrary(const unsigned int pid, const string &libraryPath) {
 	unsigned int pathLength = libraryPath.length() + 1;
 	HANDLE injectionProcess = OpenProcess(PROCESS_ALL_ACCESS, false, pid);
 	if (injectionProcess == NULL) {

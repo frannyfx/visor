@@ -3,4 +3,4 @@
 using namespace std;
 
 int GetPIDWithName(const string &processName);
-bool InjectLibrary(const int& pid, const string& libraryPath);
+bool InjectLibrary(const unsigned int pid, const string &libraryPath);
