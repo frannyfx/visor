@@ -15,14 +15,15 @@ int main()
     // Get the PID of the process
     int pid = GetPIDWithName(processName);
     if (pid == 0) {
-        cerr << "Could not get handle on process " << processName << "\." << endl;
+        cerr << "Could not get handle on process " << processName << endl;
         return 1;
     }
 
     cout << "Found process " << processName << " (" << pid << ")." << endl;
 
     // Get library path and inject
-    string libraryPath = parentDirectory + "\\Core.dll";
+    //string libraryPath = "C:\\Users\\spydas\\source\\repos\\visor\\Debug\\Core.dll";
+    string libraryPath = parentDirectory + "\\Core.dll";;
     cout << "Attempting to inject library " << libraryPath << " into " << processName << " (" << pid << ")." << endl;
     InjectLibrary(pid, libraryPath);
     return 0;

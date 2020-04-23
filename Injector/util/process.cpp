@@ -53,7 +53,7 @@ bool InjectLibrary(const unsigned int pid, const string &libraryPath) {
 		return false;
 	}
 
-	LPVOID allocation = VirtualAllocEx(injectionProcess, 0, libraryPath.length() + 1, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+	LPVOID allocation = VirtualAllocEx(injectionProcess, 0, libraryPath.length() + 1, MEM_COMMIT, PAGE_READWRITE);
 	if (allocation == NULL) {
 		cerr << "Failed to allocate memory in the target process." << endl;
 		return false;
@@ -65,7 +65,7 @@ bool InjectLibrary(const unsigned int pid, const string &libraryPath) {
 		return false;
 	}
 
-	LPTHREAD_START_ROUTINE loadLibrary = (LPTHREAD_START_ROUTINE)GetProcAddress(LoadLibrary(_T("kernel32")), "LoadLibraryA");
+	LPTHREAD_START_ROUTINE loadLibrary = (LPTHREAD_START_ROUTINE)GetProcAddress(GetModuleHandleA("Kernel32.dll"), "LoadLibraryA");
 	HANDLE threadReturn = CreateRemoteThread(injectionProcess, 0, 0, loadLibrary, allocation, 0, 0);
 	WaitForSingleObject(threadReturn, INFINITE);
 	if (threadReturn == NULL) {

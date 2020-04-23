@@ -154,9 +154,6 @@
   <ItemGroup>
     <ClCompile Include="entry.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="hook\hook.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
