@@ -3,7 +3,7 @@
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD reasonForCall, LPVOID lpReserved) {
 	switch (reasonForCall) {
 	case DLL_PROCESS_ATTACH:
-		MessageBox(0, L"Hello", L"Injected", 0);
+		MessageBoxA(0, "Hello", "Injected", 0);
 		//CreateThread(NULL, 0, InstallHooks, NULL, 0, NULL);
 		break;
 	case DLL_THREAD_ATTACH:
