@@ -65,9 +65,9 @@ bool InjectLibrary(const unsigned int pid, const string &libraryPath) {
 		return false;
 	}
 
-	DWORD threadId;
 	LPTHREAD_START_ROUTINE loadLibrary = (LPTHREAD_START_ROUTINE)GetProcAddress(LoadLibrary(_T("kernel32")), "LoadLibraryA");
-	HANDLE threadReturn = CreateRemoteThread(injectionProcess, NULL, 0, loadLibrary, allocation, 0, &threadId);
+	HANDLE threadReturn = CreateRemoteThread(injectionProcess, 0, 0, loadLibrary, allocation, 0, 0);
+	WaitForSingleObject(threadReturn, INFINITE);
 	if (threadReturn == NULL) {
 		cerr << "Failed to create remote thread." << endl;
 		return false;
