@@ -153,7 +153,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="entry.cpp" />
-    <ClCompile Include="hook\hook.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hook\hook.h" />
