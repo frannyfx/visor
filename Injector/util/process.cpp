@@ -18,8 +18,6 @@ string GetProcessName(const unsigned int pid) {
 		if (EnumProcessModules(hProcess, &hMod, sizeof(hMod), &cbNeeded)) {
 			GetModuleBaseName(hProcess, hMod, processName, sizeof(processName) / sizeof(TCHAR));
 		}
-
-		CloseHandle(hProcess);
 	}
 
 	return ConvertTCHARArrayToString(processName);
@@ -49,20 +47,19 @@ int GetPIDWithName(const string &processName) {
 }
 
 bool InjectLibrary(const unsigned int pid, const string &libraryPath) {
-	unsigned int pathLength = libraryPath.length() + 1;
 	HANDLE injectionProcess = OpenProcess(PROCESS_ALL_ACCESS, false, pid);
 	if (injectionProcess == NULL) {
 		cerr << "Failed to get target process handle." << endl;
 		return false;
 	}
 
-	LPVOID allocation = VirtualAllocEx(injectionProcess, NULL, pathLength, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+	LPVOID allocation = VirtualAllocEx(injectionProcess, NULL, libraryPath.length() + 1, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
 	if (allocation == NULL) {
 		cerr << "Failed to allocate memory in the target process." << endl;
 		return false;
 	}
 
-	int writeOK = WriteProcessMemory(injectionProcess, allocation, libraryPath.c_str(), pathLength, 0);
+	int writeOK = WriteProcessMemory(injectionProcess, allocation, libraryPath.c_str(), libraryPath.length() + 1, 0);
 	if (writeOK == 0) {
 		cerr << "Failed to write memory in the target process." << endl;
 		return false;
@@ -76,7 +73,7 @@ bool InjectLibrary(const unsigned int pid, const string &libraryPath) {
 		return false;
 	}
 
-	cout << "Library injected." << endl;
-	CloseHandle(injectionProcess);
+	cout << "Library injected in process " << pid << "." << endl;
+	//CloseHandle(injectionProcess);
 	return true;
 }
