@@ -156,6 +156,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\Engine.cpp" />
+    <ClCompile Include="Engine\Notification.cpp" />
     <ClCompile Include="Entry.cpp" />
     <ClCompile Include="Hook\APIs\D3D10.cpp" />
     <ClCompile Include="Hook\APIs\D3D11.cpp" />
@@ -175,6 +177,8 @@
     <ClCompile Include="Utils\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\Engine.h" />
+    <ClInclude Include="Engine\Notification.h" />
     <ClInclude Include="Hook\APIs\D3D10.h" />
     <ClInclude Include="Hook\APIs\D3D11.h" />
     <ClInclude Include="Hook\APIs\D3D12.h" />

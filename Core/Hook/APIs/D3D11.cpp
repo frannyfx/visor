@@ -21,6 +21,7 @@
 #include "../../Include/ImGui/imgui.h"
 #include "../../Include/ImGui/imgui_impl_win32.h"
 #include "../../Include/ImGui/imgui_impl_dx11.h"
+#include "../../Engine/Engine.h"
 
 using namespace std;
 
@@ -68,10 +69,7 @@ namespace D3D11Hook {
 
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
-		ImGui::NewFrame();
-		bool show_demo_window = true;
-		ShowExampleAppSimpleOverlay(&show_demo_window);
-		ImGui::Render();
+		Engine::Render();
 		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
 		return PLH::FnCast(presentHookTrampoline, PresentHook)(pSwapChain, syncInterval, flags);

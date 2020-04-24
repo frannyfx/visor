@@ -4,6 +4,7 @@
 
 #include "Hook.h"
 #include "GraphicsAPI.h"
+#include "../Engine/Engine.h"
 
 #if VISOR_HOOK_D3D9
 #include "APIs/D3D9.h"
@@ -112,5 +113,6 @@ DWORD __stdcall InitialiseHooks(LPVOID) {
 	}
 #endif
 
+	Engine::ShowNotification("Visor injected successfully", "Long Live JUUL");
 	return NULL;
 }
