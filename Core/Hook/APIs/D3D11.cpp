@@ -40,7 +40,7 @@ void InitialiseD3D11Hooks() {
 	HWND hWindow = GetForegroundWindow();
 
 	// Create swap chain description
-	D3D_FEATURE_LEVEL featureLevel = D3D_FEATURE_LEVEL_11_0;
+	D3D_FEATURE_LEVEL featureLevel = D3D_FEATURE_LEVEL::D3D_FEATURE_LEVEL_11_0;
 	DXGI_SWAP_CHAIN_DESC swapChainDesc = CreateSwapChainDescription(hWindow);
 	if (FAILED(D3D11CreateDeviceAndSwapChain(NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, NULL, &featureLevel, 1, D3D11_SDK_VERSION, &swapChainDesc, &pSwapChain, &pDevice, NULL, &pContext))) {
 		cout << "Failed to create D3D11 device and swapchain." << endl;
