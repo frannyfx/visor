@@ -165,6 +165,31 @@
     <ClCompile Include="Hook\APIs\OpenGL.cpp" />
     <ClCompile Include="Hook\APIs\Vulkan.cpp" />
     <ClCompile Include="Hook\Hook.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1ColorRGBA.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1ColorRGBAInterface.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1DWriteRenderTarget.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1DWriteRenderTargetInterface.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1Factory.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1FactoryInterface.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1FontWrapper.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1FontWrapperInterface.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphAtlas.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphAtlasInterface.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphProvider.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphProviderInterface.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphRenderStates.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphRenderStatesInterface.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphSheet.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphSheetInterface.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphVertexDrawer.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphVertexDrawerInterface.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1StateSaver.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1TextGeometry.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1TextGeometryInterface.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1TextRenderer.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\CFW1TextRendererInterface.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\FW1FontWrapper.cpp" />
+    <ClCompile Include="Include\FW1FontWrapper\FW1Precompiled.cpp" />
     <ClCompile Include="Utils\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +202,22 @@
     <ClInclude Include="Hook\APIs\Vulkan.h" />
     <ClInclude Include="Hook\GraphicsAPI.h" />
     <ClInclude Include="Hook\Hook.h" />
+    <ClInclude Include="Include\FW1FontWrapper\CFW1ColorRGBA.h" />
+    <ClInclude Include="Include\FW1FontWrapper\CFW1DWriteRenderTarget.h" />
+    <ClInclude Include="Include\FW1FontWrapper\CFW1Factory.h" />
+    <ClInclude Include="Include\FW1FontWrapper\CFW1FontWrapper.h" />
+    <ClInclude Include="Include\FW1FontWrapper\CFW1GlyphAtlas.h" />
+    <ClInclude Include="Include\FW1FontWrapper\CFW1GlyphProvider.h" />
+    <ClInclude Include="Include\FW1FontWrapper\CFW1GlyphRenderStates.h" />
+    <ClInclude Include="Include\FW1FontWrapper\CFW1GlyphSheet.h" />
+    <ClInclude Include="Include\FW1FontWrapper\CFW1GlyphVertexDrawer.h" />
+    <ClInclude Include="Include\FW1FontWrapper\CFW1Object.h" />
+    <ClInclude Include="Include\FW1FontWrapper\CFW1StateSaver.h" />
+    <ClInclude Include="Include\FW1FontWrapper\CFW1TextGeometry.h" />
+    <ClInclude Include="Include\FW1FontWrapper\CFW1TextRenderer.h" />
+    <ClInclude Include="Include\FW1FontWrapper\FW1CompileSettings.h" />
+    <ClInclude Include="Include\FW1FontWrapper\FW1FontWrapper.h" />
+    <ClInclude Include="Include\FW1FontWrapper\FW1Precompiled.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
