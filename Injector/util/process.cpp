@@ -83,6 +83,5 @@ bool InjectLibrary(const unsigned int pid, const string &libraryPath) {
 
 	// Free up the virtual memory we assigned earlier and close proc handle
 	VirtualFreeEx(injectionProcess, allocation, 0, MEM_RELEASE);
-	CloseHandle(injectionProcess);
 	return true;
 }

@@ -20,33 +20,33 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{8E611255-8995-4DE2-BEC4-C0A7493B0EDE}</ProjectGuid>
+    <ProjectGuid>{06AE59C6-1532-437A-84ED-01059527B0D7}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Core</RootNamespace>
+    <RootNamespace>Test</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -70,12 +70,12 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)\Build\$(Configuration)\$(Platform)</OutDir>
     <IntDir>$(SolutionDir)\Build\Intermediate\$(Configuration)\$(Platform)\$(ProjectName)</IntDir>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)\Build\$(Configuration)\$(Platform)</OutDir>
     <IntDir>$(SolutionDir)\Build\Intermediate\$(Configuration)\$(Platform)\$(ProjectName)</IntDir>
@@ -86,37 +86,32 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EntryPointSymbol>
-      </EntryPointSymbol>
-    </Link>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -156,52 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="entry.cpp" />
-    <ClCompile Include="hook\hook.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1ColorRGBA.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1ColorRGBAInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1DWriteRenderTarget.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1DWriteRenderTargetInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1Factory.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1FactoryInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1FontWrapper.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1FontWrapperInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphAtlas.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphAtlasInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphProvider.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphProviderInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphRenderStates.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphRenderStatesInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphSheet.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphSheetInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphVertexDrawer.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphVertexDrawerInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1StateSaver.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1TextGeometry.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1TextGeometryInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1TextRenderer.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1TextRendererInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\FW1FontWrapper.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\FW1Precompiled.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="hook\hook.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1ColorRGBA.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1DWriteRenderTarget.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1Factory.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1FontWrapper.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1GlyphAtlas.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1GlyphProvider.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1GlyphRenderStates.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1GlyphSheet.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1GlyphVertexDrawer.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1Object.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1StateSaver.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1TextGeometry.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1TextRenderer.h" />
-    <ClInclude Include="include\FW1FontWrapper\FW1CompileSettings.h" />
-    <ClInclude Include="include\FW1FontWrapper\FW1FontWrapper.h" />
-    <ClInclude Include="include\FW1FontWrapper\FW1Precompiled.h" />
+    <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

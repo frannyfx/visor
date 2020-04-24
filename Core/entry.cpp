@@ -1,14 +1,24 @@
 #include <Windows.h>
-//#include "hook/hook.h"
+#include "hook/hook.h"
+#include <iostream>
+
+using namespace std;
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD reasonForCall, LPVOID lpReserved) {
 	switch (reasonForCall) {
 	case DLL_PROCESS_ATTACH:
-		MessageBoxA(0, "Hello", "Injected", 0);
-		//CreateThread(NULL, 0, InstallHooks, NULL, 0, NULL);
+		DisableThreadLibraryCalls(hModule);
+
+		// Create debug console
+#ifdef _DEBUG
+		AllocConsole();
+		freopen("CONIN$", "r", stdin);
+		freopen("CONOUT$", "w", stdout);
+		cout << "Visor injected successfully." << endl;
+#endif
+		// Create thread
+		CreateThread(NULL, 0, InstallHooks, NULL, 0, NULL);
 		break;
-	case DLL_THREAD_ATTACH:
-	case DLL_THREAD_DETACH:
 	case DLL_PROCESS_DETACH:
 		break;
 	}

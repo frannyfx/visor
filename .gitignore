@@ -1,5 +1,6 @@
 # Ignore output/build folders
-client/build
+Build
+Build/*
 
 # Windows thumbnail cache files
 Thumbs.db
