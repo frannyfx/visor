@@ -1,120 +1,116 @@
-#include <Windows.h>
-#include <fstream>
-#include <string>
+#include <vector>
 #include <iostream>
+#include <Windows.h>
 
-// DirectX
-#include <d3d11.h>
-#pragma comment(lib, "d3d11.lib")
+#include "Hook.h"
+#include "GraphicsAPI.h"
 
-// Detour
-#ifdef _WIN64
-#include <polyhook2/Detour/x64Detour.hpp>
-#else
-#include <polyhook2/Detour/x86Detour.hpp>
+#if VISOR_HOOK_D3D9
+#include "APIs/D3D9.h"
 #endif
 
-// Hooking libraries
-#include <polyhook2/CapstoneDisassembler.hpp>
-#include "../include/FW1FontWrapper/FW1FontWrapper.h"
+#if VISOR_HOOK_D3D10
+#include "APIs/D3D10.h"
+#endif
+
+#if VISOR_HOOK_D3D11
+#include "APIs/D3D11.h"
+#endif
+
+#if VISOR_HOOK_D3D12
+#include "APIs/D3D12.h"
+#endif
+
+#if VISOR_HOOK_OPENGL
+#include "APIs/OpenGL.h"
+#endif
+
+#if VISOR_HOOK_VULKAN
+#include "APIs/Vulkan.h"
+#endif
 
 using namespace std;
 
-typedef HRESULT(__stdcall* D3D11PresentHook) (IDXGISwapChain* pSwapChain, UINT syncInterval, UINT flags);
+LoadedGraphicsAPIs DetectGraphicsAPI() {
+	LoadedGraphicsAPIs loaded = { false, false, false, false, false, false };
 
-// DX
-ID3D11Device* pDevice;
-ID3D11DeviceContext* pContext;
-IDXGISwapChain* pSwapChain;
+#if VISOR_HOOK_D3D9
+	HANDLE d3d9Handle = GetModuleHandle(TEXT("d3d9.dll"));
+	loaded.D3D9Loaded = d3d9Handle != NULL;
+#endif
 
-DWORD_PTR* pSwapChainVTable = NULL;
-DWORD_PTR* pDeviceContextVTable = NULL;
+#if VISOR_HOOK_D3D10
+	HANDLE d3d10Handle = GetModuleHandle(TEXT("d3d10.dll"));
+	loaded.D3D10Loaded = d3d10Handle != NULL;
+#endif
 
-D3D11PresentHook* originalPresent;
-uint64_t presentHookTrampoline = NULL;
+#if VISOR_HOOK_D3D11
+	HANDLE d3d11Handle = GetModuleHandle(TEXT("d3d11.dll"));
+	loaded.D3D11Loaded = d3d11Handle != NULL;
+#endif
 
-/*
-void Log(const std::string& text) {
-	std::ofstream log("C:\\Users\\blazi\\Desktop\\kush.log", std::ofstream::app | std::ofstream::out);
-	log << text << std::endl;
-}*/
+#if VISOR_HOOK_D3D12
+	HANDLE d3d12Handle = GetModuleHandle(TEXT("d3d12.dll"));
+	loaded.D3D12Loaded = d3d12Handle != NULL;
+#endif
 
-// Rendering text
-IFW1Factory* pFW1Factory = NULL;
-IFW1FontWrapper* pFontWrapper = NULL;
+#if VISOR_HOOK_OPENGL
+	HANDLE openGLHandle = GetModuleHandle(TEXT("opengl32.dll"));
+	loaded.OpenGLLoaded = openGLHandle != NULL;
+#endif
 
-// Logic
-bool presentCalled = false;
+#if VISOR_HOOK_VULKAN
+	HANDLE vulkanHandle = GetModuleHandle(TEXT("vulkan-1.dll"));
+	loaded.VulkanLoaded = vulkanHandle != NULL;
+#endif
 
-HRESULT __stdcall PresentHook(IDXGISwapChain* pSwapChain, UINT syncInterval, UINT flags) {
-	if (!presentCalled) {
-		cout << "Present hook called." << endl;
-		pSwapChain->GetDevice(__uuidof(pDevice), (void**)&pDevice);
-		pDevice->GetImmediateContext(&pContext);
-
-		FW1CreateFactory(FW1_VERSION, &pFW1Factory);
-		pFW1Factory->CreateFontWrapper(pDevice, L"Arial", &pFontWrapper);
-		pFW1Factory->Release();
-		presentCalled = true;
-	}
-
-	pFontWrapper->DrawString(pContext, L"Visor injected successfully", 14, 16, 16, 0xffff0000, FW1_RESTORESTATE);
-	return PLH::FnCast(presentHookTrampoline, PresentHook)(pSwapChain, syncInterval, flags);
+	return loaded;
 }
 
+DWORD __stdcall InitialiseHooks(LPVOID) {
+	LoadedGraphicsAPIs loaded = DetectGraphicsAPI();
 
-DWORD __stdcall InstallHooks(LPVOID) {
-	cout << "Installing hooks..." << endl;
-
-	// Get window handle
-	HWND hWindow = GetForegroundWindow();
-	
-	// Create swap chain description
-	D3D_FEATURE_LEVEL featureLevel = D3D_FEATURE_LEVEL_11_0;
-	DXGI_SWAP_CHAIN_DESC swapChainDesc;
-	ZeroMemory(&swapChainDesc, sizeof(swapChainDesc));
-	swapChainDesc.BufferCount = 1;
-	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	swapChainDesc.OutputWindow = hWindow;
-	swapChainDesc.SampleDesc.Count = 1;
-	swapChainDesc.Windowed = TRUE;
-	swapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
-	swapChainDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
-	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-	
-	if (FAILED(D3D11CreateDeviceAndSwapChain(NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, NULL, &featureLevel, 1, D3D11_SDK_VERSION, &swapChainDesc, &pSwapChain, &pDevice, NULL, &pContext))) {
-		cout << "Failed to create DirectX device and swapchain." << endl;
+	// Prevent loading if no graphics APIs are loaded.
+	if (!loaded.D3D9Loaded && !loaded.D3D10Loaded && !loaded.D3D11Loaded && !loaded.D3D12Loaded && !loaded.OpenGLLoaded && !loaded.VulkanLoaded) {
+		cout << "No supported graphics APIs loaded!\nVisor exiting..." << endl;
 		return NULL;
 	}
 
-	cout << "Created DirectX device successfully." << endl;
-	
-	pSwapChainVTable = (DWORD_PTR*)((DWORD_PTR*)pSwapChain)[0];
-	pDeviceContextVTable = (DWORD_PTR*)((DWORD_PTR*)pContext)[0];
-
-#ifdef _WIN64
-	PLH::CapstoneDisassembler disassembler(PLH::Mode::x64);
-	PLH::x64Detour detour((uint64_t)(pSwapChainVTable[8]), (uint64_t)PresentHook, &presentHookTrampoline, disassembler);
-	detour.hook();
-#else
-	PLH::CapstoneDisassembler disassembler(PLH::Mode::x86);
-	PLH::x86Detour detour((uint64_t)(pSwapChainVTable[8]), (uint64_t)PresentHook, &presentHookTrampoline, disassembler);
-	detour.hook();
+#if VISOR_HOOK_D3D9
+	if (loaded.D3D9Loaded) {
+		InitialiseD3D9Hooks();
+	}
 #endif
 
-	cout << "Hooked Present function successfully." << endl;
+#if VISOR_HOOK_D3D10
+	if (loaded.D3D10Loaded) {
+		InitialiseD3D10Hooks();
+	}
+#endif
 
-	pDevice->Release();
-	pContext->Release();
-	pSwapChain->Release();
+#if VISOR_HOOK_D3D11
+	if (loaded.D3D11Loaded) {
+		InitialiseD3D11Hooks();
+	}
+#endif
+
+#if VISOR_HOOK_D3D12
+	if (loaded.D3D12Loaded) {
+		InitialiseD3D12Hooks();
+	}
+#endif
+
+#if VISOR_HOOK_OPENGL
+	if (loaded.OpenGLLoaded) {
+		InitialiseOpenGLHooks();
+	}
+#endif
+
+#if VISOR_HOOK_VULKAN
+	if (loaded.VulkanLoaded) {
+		InitialiseVulkanHooks();
+	}
+#endif
+
 	return NULL;
-}
-
-void UninstallHooks() {
-	// Unhook function
-
-
-	// Release resources
-	//pFontWrapper->Release();
 }

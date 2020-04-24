@@ -1,4 +1,12 @@
 #pragma once
 #include <Windows.h>
-DWORD __stdcall InstallHooks(LPVOID);
-void UninstallHooks();
+
+// Define which graphics hooks to support
+#define VISOR_HOOK_D3D9			1;
+#define VISOR_HOOK_D3D10		1;
+#define VISOR_HOOK_D3D11		1;
+#define VISOR_HOOK_D3D12		1;
+#define VISOR_HOOK_OPENGL		1;
+#define VISOR_HOOK_VULKAN		1;
+
+DWORD __stdcall InitialiseHooks(LPVOID);

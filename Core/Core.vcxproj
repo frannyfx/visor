@@ -157,51 +157,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Entry.cpp" />
+    <ClCompile Include="Hook\APIs\D3D10.cpp" />
+    <ClCompile Include="Hook\APIs\D3D11.cpp" />
+    <ClCompile Include="Hook\APIs\D3D12.cpp" />
+    <ClCompile Include="Hook\APIs\D3D9.cpp" />
+    <ClCompile Include="Hook\APIs\DXGI.cpp" />
+    <ClCompile Include="Hook\APIs\OpenGL.cpp" />
+    <ClCompile Include="Hook\APIs\Vulkan.cpp" />
     <ClCompile Include="Hook\Hook.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1ColorRGBA.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1ColorRGBAInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1DWriteRenderTarget.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1DWriteRenderTargetInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1Factory.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1FactoryInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1FontWrapper.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1FontWrapperInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphAtlas.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphAtlasInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphProvider.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphProviderInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphRenderStates.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphRenderStatesInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphSheet.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphSheetInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphVertexDrawer.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1GlyphVertexDrawerInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1StateSaver.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1TextGeometry.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1TextGeometryInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1TextRenderer.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\CFW1TextRendererInterface.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\FW1FontWrapper.cpp" />
-    <ClCompile Include="include\FW1FontWrapper\FW1Precompiled.cpp" />
+    <ClCompile Include="Utils\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Hook\APIs\D3D10.h" />
+    <ClInclude Include="Hook\APIs\D3D11.h" />
+    <ClInclude Include="Hook\APIs\D3D12.h" />
+    <ClInclude Include="Hook\APIs\D3D9.h" />
+    <ClInclude Include="Hook\APIs\DXGI.h" />
+    <ClInclude Include="Hook\APIs\OpenGL.h" />
+    <ClInclude Include="Hook\APIs\Vulkan.h" />
+    <ClInclude Include="Hook\GraphicsAPI.h" />
     <ClInclude Include="Hook\Hook.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1ColorRGBA.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1DWriteRenderTarget.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1Factory.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1FontWrapper.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1GlyphAtlas.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1GlyphProvider.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1GlyphRenderStates.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1GlyphSheet.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1GlyphVertexDrawer.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1Object.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1StateSaver.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1TextGeometry.h" />
-    <ClInclude Include="include\FW1FontWrapper\CFW1TextRenderer.h" />
-    <ClInclude Include="include\FW1FontWrapper\FW1CompileSettings.h" />
-    <ClInclude Include="include\FW1FontWrapper\FW1FontWrapper.h" />
-    <ClInclude Include="include\FW1FontWrapper\FW1Precompiled.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

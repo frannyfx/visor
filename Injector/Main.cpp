@@ -5,7 +5,7 @@
 
 using namespace std;
 
-string processName = "GFXTest64.exe";
+string processName = "csgo.exe";
 
 int main()
 {
@@ -25,12 +25,8 @@ int main()
     cout << "Found process " << processName << " (" << pid << ")." << endl;
 
     // Get library path and inject
-    //string libraryPath = "C:\\Users\\spydas\\source\\repos\\visor\\Debug\\Core.dll";
+    //parentDirectory = "C:\\Users\\blazi\\Desktop\\Visor\\Build\\Debug\\Win32";
     cout << "Injecting libraries from " << parentDirectory << " into " << processName << " (" << pid << ")." << endl;
-
-    InjectLibrary(pid, parentDirectory + "\\capstone.dll");
-    InjectLibrary(pid, parentDirectory + "\\PolyHook_2.dll");
-    InjectLibrary(pid, parentDirectory + "\\FW1FontWrapper.dll");
     InjectLibrary(pid, parentDirectory + "\\Core.dll");
     return 0;
 }

@@ -17,7 +17,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD reasonForCall, LPVOID lpReserved) {
 		cout << "Visor injected successfully." << endl;
 #endif
 		// Create thread
-		CreateThread(NULL, 0, InstallHooks, NULL, 0, NULL);
+		CreateThread(NULL, 0, InitialiseHooks, NULL, 0, NULL);
 		break;
 	case DLL_PROCESS_DETACH:
 		break;
