@@ -1,3 +1,5 @@
 #pragma once
 
-void InitialiseD3D11Hooks();
+namespace D3D11Hook {
+	void InitialiseD3D11Hooks();
+}

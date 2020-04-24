@@ -78,7 +78,7 @@ DWORD __stdcall InitialiseHooks(LPVOID) {
 
 #if VISOR_HOOK_D3D9
 	if (loaded.D3D9Loaded) {
-		InitialiseD3D9Hooks();
+		D3D9Hook::InitialiseD3D9Hooks();
 	}
 #endif
 
@@ -90,7 +90,7 @@ DWORD __stdcall InitialiseHooks(LPVOID) {
 
 #if VISOR_HOOK_D3D11
 	if (loaded.D3D11Loaded) {
-		InitialiseD3D11Hooks();
+		D3D11Hook::InitialiseD3D11Hooks();
 	}
 #endif
 

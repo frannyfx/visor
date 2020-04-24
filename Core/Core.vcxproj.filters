@@ -45,79 +45,22 @@
     <ClCompile Include="Utils\Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1ColorRGBA.cpp">
+    <ClCompile Include="Include\ImGui\imgui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1ColorRGBAInterface.cpp">
+    <ClCompile Include="Include\ImGui\imgui_impl_win32.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1DWriteRenderTarget.cpp">
+    <ClCompile Include="Include\ImGui\imgui_demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1DWriteRenderTargetInterface.cpp">
+    <ClCompile Include="Include\ImGui\imgui_draw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1Factory.cpp">
+    <ClCompile Include="Include\ImGui\imgui_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1FactoryInterface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1FontWrapper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1FontWrapperInterface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphAtlas.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphAtlasInterface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphProvider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphProviderInterface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphRenderStates.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphRenderStatesInterface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphSheet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphSheetInterface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphVertexDrawer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1GlyphVertexDrawerInterface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1StateSaver.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1TextGeometry.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1TextGeometryInterface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1TextRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\CFW1TextRendererInterface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\FW1FontWrapper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\FW1FontWrapper\FW1Precompiled.cpp">
+    <ClCompile Include="Include\ImGui\imgui_impl_dx11.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -149,52 +92,28 @@
     <ClInclude Include="Hook\APIs\DXGI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\FW1FontWrapper\CFW1ColorRGBA.h">
+    <ClInclude Include="Include\ImGui\imgui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\FW1FontWrapper\CFW1DWriteRenderTarget.h">
+    <ClInclude Include="Include\ImGui\imgui_impl_dx11.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\FW1FontWrapper\CFW1Factory.h">
+    <ClInclude Include="Include\ImGui\imgui_impl_win32.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\FW1FontWrapper\CFW1FontWrapper.h">
+    <ClInclude Include="Include\ImGui\imconfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\FW1FontWrapper\CFW1GlyphAtlas.h">
+    <ClInclude Include="Include\ImGui\imgui_internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\FW1FontWrapper\CFW1GlyphProvider.h">
+    <ClInclude Include="Include\ImGui\imstb_rectpack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\FW1FontWrapper\CFW1GlyphRenderStates.h">
+    <ClInclude Include="Include\ImGui\imstb_textedit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\FW1FontWrapper\CFW1GlyphSheet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\FW1FontWrapper\CFW1GlyphVertexDrawer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\FW1FontWrapper\CFW1Object.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\FW1FontWrapper\CFW1StateSaver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\FW1FontWrapper\CFW1TextGeometry.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\FW1FontWrapper\CFW1TextRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\FW1FontWrapper\FW1CompileSettings.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\FW1FontWrapper\FW1FontWrapper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\FW1FontWrapper\FW1Precompiled.h">
+    <ClInclude Include="Include\ImGui\imstb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
