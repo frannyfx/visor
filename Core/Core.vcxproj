@@ -156,8 +156,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="entry.cpp" />
-    <ClCompile Include="hook\hook.cpp" />
+    <ClCompile Include="Entry.cpp" />
+    <ClCompile Include="Hook\Hook.cpp" />
     <ClCompile Include="include\FW1FontWrapper\CFW1ColorRGBA.cpp" />
     <ClCompile Include="include\FW1FontWrapper\CFW1ColorRGBAInterface.cpp" />
     <ClCompile Include="include\FW1FontWrapper\CFW1DWriteRenderTarget.cpp" />
@@ -185,7 +185,7 @@
     <ClCompile Include="include\FW1FontWrapper\FW1Precompiled.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="hook\hook.h" />
+    <ClInclude Include="Hook\Hook.h" />
     <ClInclude Include="include\FW1FontWrapper\CFW1ColorRGBA.h" />
     <ClInclude Include="include\FW1FontWrapper\CFW1DWriteRenderTarget.h" />
     <ClInclude Include="include\FW1FontWrapper\CFW1Factory.h" />

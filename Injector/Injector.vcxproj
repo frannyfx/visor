@@ -153,13 +153,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="util\process.cpp" />
-    <ClCompile Include="util\utils.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Util\Process.cpp" />
+    <ClCompile Include="Util\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="util\process.h" />
-    <ClInclude Include="util\utils.h" />
+    <ClInclude Include="Util\Process.h" />
+    <ClInclude Include="Util\Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

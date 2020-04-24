@@ -15,12 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="entry.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="hook\hook.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="include\FW1FontWrapper\CFW1ColorRGBA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -96,11 +90,14 @@
     <ClCompile Include="include\FW1FontWrapper\FW1Precompiled.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Entry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hook\Hook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="hook\hook.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\FW1FontWrapper\FW1Precompiled.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -147,6 +144,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\FW1FontWrapper\FW1FontWrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hook\Hook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

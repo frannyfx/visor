@@ -1,6 +1,6 @@
 #include <Windows.h>
-#include "hook/hook.h"
 #include <iostream>
+#include "Hook/Hook.h"
 
 using namespace std;
 
