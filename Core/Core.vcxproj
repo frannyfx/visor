@@ -169,6 +169,7 @@
     <ClCompile Include="Include\ImGui\imgui_demo.cpp" />
     <ClCompile Include="Include\ImGui\imgui_draw.cpp" />
     <ClCompile Include="Include\ImGui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="Include\ImGui\imgui_impl_dx9.cpp" />
     <ClCompile Include="Include\ImGui\imgui_impl_win32.cpp" />
     <ClCompile Include="Include\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Utils\Log.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="Include\ImGui\imconfig.h" />
     <ClInclude Include="Include\ImGui\imgui.h" />
     <ClInclude Include="Include\ImGui\imgui_impl_dx11.h" />
+    <ClInclude Include="Include\ImGui\imgui_impl_dx9.h" />
     <ClInclude Include="Include\ImGui\imgui_impl_win32.h" />
     <ClInclude Include="Include\ImGui\imgui_internal.h" />
     <ClInclude Include="Include\ImGui\imstb_rectpack.h" />

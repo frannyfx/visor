@@ -41,7 +41,7 @@ namespace D3D11Hook {
 
 	HRESULT __stdcall PresentHook(IDXGISwapChain* pSwapChain, UINT syncInterval, UINT flags) {
 		if (!presentCalled) {
-			cout << "Present hook called." << endl;
+			cout << "D3D11 Present hook called." << endl;
 			
 			// Get swapchain device
 			pSwapChain->GetDevice(__uuidof(pDevice), (void**)&pDevice);
@@ -59,6 +59,7 @@ namespace D3D11Hook {
 
 			ImGui_ImplWin32_Init(sd.OutputWindow);
 			ImGui_ImplDX11_Init(pDevice, pContext);
+			pContext->OMSetRenderTargets(1, &renderTargetView, NULL);
 			
 			presentCalled = true;
 		}
@@ -66,7 +67,6 @@ namespace D3D11Hook {
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
-		pContext->OMSetRenderTargets(1, &renderTargetView, NULL);
 
 		bool show_demo_window = true;
 		ImGui::ShowDemoWindow(&show_demo_window);
@@ -96,7 +96,7 @@ namespace D3D11Hook {
 		pSwapChainVTable = (DWORD_PTR*)((DWORD_PTR*)pSwapChain)[0];
 		pDeviceContextVTable = (DWORD_PTR*)((DWORD_PTR*)pContext)[0];
 
-		// Set up UI
+		// Setup ImGui
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO(); (void)io;

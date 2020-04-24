@@ -16,26 +16,50 @@
 // Offsets
 #include "D3D9.h"
 
+// GUI
+#include "../../Include/ImGui/imgui.h"
+#include "../../Include/ImGui/imgui_impl_win32.h"
+#include "../../Include/ImGui/imgui_impl_dx9.h"
+
 using namespace std;
 
 namespace D3D9Hook {
 	// Hooking
-	typedef HRESULT(__stdcall* D3D9EndSceneHook) (LPDIRECT3DDEVICE9* pDevice);
-	uint64_t endSceneHookTrampoline = NULL;
-	bool endSceneCalled = false;
+	typedef HRESULT(__stdcall* D3D9EndSceneHook) (LPDIRECT3DDEVICE9 pDevice, const RECT* pSourceRect, const RECT* pDestRect, HWND hDestWindowOverride, const RGNDATA* pDirtyRegion);
+	uint64_t presentHookTrampoline = NULL;
+	bool presentCalled = false;
 
 	// D3D objects
 	LPDIRECT3DDEVICE9 device;
 
 	DWORD_PTR* pDeviceVTable = NULL;
 
-	HRESULT __stdcall EndSceneHook(LPDIRECT3DDEVICE9* pDevice) {
-		if (!endSceneCalled) {
-			cout << "EndScene hook called." << endl;
-			endSceneCalled = true;
+	HRESULT __stdcall PresentHook(LPDIRECT3DDEVICE9 pDevice, const RECT* pSourceRect, const RECT* pDestRect, HWND hDestWindowOverride, const RGNDATA* pDirtyRegion) {
+		if (!presentCalled) {
+			cout << "D3D9 Present hook called." << endl;
+
+			// Get device parameters
+			D3DDEVICE_CREATION_PARAMETERS parameters;
+			pDevice->GetCreationParameters(&parameters);
+
+			// Initialise ImGui
+			ImGui_ImplWin32_Init(parameters.hFocusWindow);
+			ImGui_ImplDX9_Init(pDevice);
+
+			presentCalled = true;
 		}
 
-		return PLH::FnCast(endSceneHookTrampoline, EndSceneHook)(pDevice);
+		// Render
+		ImGui_ImplDX9_NewFrame();
+		ImGui_ImplWin32_NewFrame();
+		ImGui::NewFrame();
+
+		bool show_demo_window = true;
+		ImGui::ShowDemoWindow(&show_demo_window);
+		ImGui::Render();
+		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+
+		return PLH::FnCast(presentHookTrampoline, PresentHook)(pDevice, pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);
 	}
 
 	D3DPRESENT_PARAMETERS GetPresentParameters(const HWND& hWindow, const D3DDISPLAYMODE& displayMode) {
@@ -81,15 +105,21 @@ namespace D3D9Hook {
 		// Get VTable
 		pDeviceVTable = (DWORD_PTR*)((DWORD_PTR*)device)[0];
 
-		// Hook EndScene function
+		// Setup ImGui
+		IMGUI_CHECKVERSION();
+		ImGui::CreateContext();
+		ImGuiIO& io = ImGui::GetIO(); (void)io;
+		ImGui::StyleColorsDark();
+
+		// Hook Present function
 		cout << "Hooking EndScene function..." << endl;
 #ifdef _WIN64
 		PLH::CapstoneDisassembler disassembler(PLH::Mode::x64);
-		PLH::x64Detour detour((uint64_t)pDeviceVTable[static_cast<uint32_t>(D3D9Hook::D3D9Offsets::EndScene)], (uint64_t)EndSceneHook, &endSceneHookTrampoline, disassembler);
+		PLH::x64Detour detour((uint64_t)pDeviceVTable[static_cast<uint32_t>(D3D9Hook::D3D9Offsets::Present)], (uint64_t)PresentHook, &presentHookTrampoline, disassembler);
 		detour.hook();
 #else
 		PLH::CapstoneDisassembler disassembler(PLH::Mode::x64);
-		PLH::x86Detour detour((uint64_t)pDeviceVTable[static_cast<uint32_t>(D3D9Hook::D3D9Offsets::EndScene)], (uint64_t)EndSceneHook, &endSceneHookTrampoline, disassembler);
+		PLH::x86Detour detour((uint64_t)pDeviceVTable[static_cast<uint32_t>(D3D9Hook::D3D9Offsets::Present)], (uint64_t)PresentHook, &presentHookTrampoline, disassembler);
 		detour.hook();
 #endif
 	}
