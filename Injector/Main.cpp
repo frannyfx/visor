@@ -5,7 +5,7 @@
 
 using namespace std;
 
-string processName = "csgo.exe";
+string processName = "BlackOps.exe";
 
 int main()
 {

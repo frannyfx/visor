@@ -111,7 +111,7 @@ namespace D3D9Hook {
 		ImGui::StyleColorsDark();
 
 		// Hook Present function
-		cout << "Hooking EndScene function..." << endl;
+		cout << "Hooking Present function..." << endl;
 #ifdef _WIN64
 		PLH::CapstoneDisassembler disassembler(PLH::Mode::x64);
 		PLH::x64Detour detour((uint64_t)pDeviceVTable[static_cast<uint32_t>(D3D9Hook::D3D9Offsets::Present)], (uint64_t)PresentHook, &presentHookTrampoline, disassembler);
