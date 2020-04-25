@@ -24,7 +24,7 @@ Visor will support the following graphics libraries:
 - DirectX10 (not yet implemented)
 - DirectX11
 - DirectX12 (not yet implemented)
-- OpenGL (upcoming)
+- OpenGL 
 - Vulkan (upcoming)
 
 ### Credits
