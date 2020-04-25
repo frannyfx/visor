@@ -6,8 +6,8 @@ message ClientMessage {
         CAPTURE_STARTED = 1;
         CAPTURE_STOPPED = 2;
         CAPTURE_ERROR = 3;
-        FRAME = 3;
-        BOOKMARK = 4;
+        FRAME = 4;
+        BOOKMARK = 5;
     }
     
     message Hello {
@@ -62,5 +62,5 @@ message ClientMessage {
     Type message_type = 2;
     Hello hello = 3;
     Frame frame = 4;
-    Bookmark bookmark = 4;
+    Bookmark bookmark = 5;
 }
