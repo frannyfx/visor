@@ -6,6 +6,11 @@
 
 // Hooking
 #include "../../Include/MinHook/MinHook.h"
+#if _WIN64
+#pragma comment(lib, "Include/MinHook/lib/MinHook.x64.lib")
+#else
+#pragma comment(lib, "Include/MinHook/lib/MinHook.x86.lib")
+#endif
 
 // GUI
 #include "../../Include/ImGui/imgui.h"
@@ -28,5 +33,8 @@ void InitialiseOpenGLHooks() {
 	cout << "Installing hooks for OpenGL..." << endl;
 	if (MH_Initialize() != MH_OK) return;
 
-	if (MH_CreateHook(GetProcAddress(GetModuleHandle(TEXT("opengl32.dll")), "wglSwapBuffer"), &hkwglSwapBuffers, reinterpret_cast<LPVOID*>(&twglSwapBuffers)) != MH_OK) return;
+	if (MH_CreateHook(GetProcAddress(GetModuleHandle(TEXT("opengl32.dll")), "wglSwapBuffer"), &hkwglSwapBuffers, reinterpret_cast<LPVOID*>(&twglSwapBuffers)) != MH_OK) {
+		cout << "lol" << endl;
+		return;
+	}
 }
