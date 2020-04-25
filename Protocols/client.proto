@@ -3,8 +3,9 @@ syntax = "proto3";
 message ClientMessage {
     enum Type {
         HELLO = 0;
-        RECORDING_STARTED = 1;
-        RECORDING_STOPPED = 2;
+        CAPTURE_STARTED = 1;
+        CAPTURE_STOPPED = 2;
+        CAPTURE_ERROR = 3;
         FRAME = 3;
         BOOKMARK = 4;
     }
@@ -16,6 +17,50 @@ message ClientMessage {
         string executable_path = 4;
     }
 
+    message Frame {
+        bytes buffer = 1;
+    }
+
+    message Bookmark {
+        enum BookmarkType {
+            NONE = 0;
+            CSGO = 1;
+        }
+
+        message CSGODeepIntegration {
+            enum CSGOEvent {
+                MATCH_START = 0;
+                MATCH_END = 1;
+                ROUND_START = 2;
+                ROUND_END = 3;
+                KILL = 4;
+                DEATH = 5;
+                SUICIDE = 6;
+                HOSTAGE_RESCUED = 7;
+                BOMB_PLANTED = 8;
+                BOMB_DEFUSED = 9;
+            }
+
+            message KillDetails {
+                bool is_headshot = 1;
+                bool is_wallbang = 2;
+                bool with_assist = 3;
+                bool through_smoke = 4;
+                bool while_blinded = 5;
+            }
+
+            CSGOEvent event = 1;
+            bool is_competitive = 2;
+            KillDetails kill_details = 3;
+        }
+
+        bool is_manual = 1;
+        BookmarkType type = 2;
+        CSGODeepIntegration csgo = 3;
+    }
+
     Type message_type = 1;
     Hello hello = 2;
+    Frame frame = 3;
+    Bookmark bookmark = 4;
 }

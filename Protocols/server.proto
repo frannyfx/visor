@@ -37,7 +37,7 @@ message ServerMessage {
     enum Type {
         CONFIG = 0;
         ENCODER_READY = 1;
-        
+        ENCODER_ERROR = 2;
     }
 
     Type message_type = 1;
