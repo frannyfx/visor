@@ -36,12 +36,12 @@ namespace OpenGLHook {
 		LPVOID toHook = GetProcAddress(GetModuleHandleA("opengl32.dll"), "wglSwapBuffers");
 
 		if (MH_CreateHook(toHook, &hkwglSwapBuffers, reinterpret_cast<LPVOID*>(&twglSwapBuffers)) != MH_OK) {
-			cout << "Failed to install hooks for OpenGL..." << endl;
+			cout << "Failed to install hooks for OpenGL." << endl;
 			return;
 		};
 
 		if (MH_EnableHook(toHook) != MH_OK) {
-			cout << "Failed to enable hooks for OpenGL..." << endl;
+			cout << "Failed to enable hooks for OpenGL." << endl;
 			return;
 		}
 	}
