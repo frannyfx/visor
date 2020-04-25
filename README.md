@@ -30,7 +30,7 @@ Visor will support the following graphics libraries:
 ### Credits
 The projects that made Visor possible:
 - Capstone Disassembler
-- PolyHook 2.0
+- MinHook
 - ImGui
 
 The people that made Visor possible:
