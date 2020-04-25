@@ -1,5 +1,5 @@
 #pragma once
-enum GraphicsAPI {
+enum class GraphicsAPI {
 	D3D9,
 	D3D10,
 	D3D11,

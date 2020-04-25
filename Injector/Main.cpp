@@ -5,8 +5,13 @@
 
 using namespace std;
 
-string processName = "csgo.exe";
+string processName = "GFXTest64.exe";
 
+#if _WIN64
+#define MIN_HOOK_NAME "\\MinHook.x64.dll"
+#else
+#define MIN_HOOK_NAME "\\MinHook.x86.dll"
+#endif
 int main()
 {
     // Get running directory
@@ -29,6 +34,7 @@ int main()
     cout << "Injecting libraries from " << parentDirectory << " into " << processName << " (" << pid << ")." << endl;
     InjectLibrary(pid, parentDirectory + "\\capstone.dll");
     InjectLibrary(pid, parentDirectory + "\\PolyHook_2.dll");
+    InjectLibrary(pid, parentDirectory + MIN_HOOK_NAME);
     InjectLibrary(pid, parentDirectory + "\\Core.dll");
     return 0;
 }

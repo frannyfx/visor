@@ -5,6 +5,13 @@
 #include "Hook.h"
 #include "GraphicsAPI.h"
 #include "../Engine/Engine.h"
+#include "../Include/MinHook/MinHook.h"
+
+#if _WIN64
+#pragma comment(lib, "Include/MinHook/lib/MinHook.x64.lib")
+#else
+#pragma comment(lib, "Include/MinHook/lib/MinHook.x86.lib")
+#endif
 
 #if VISOR_HOOK_D3D9
 #include "APIs/D3D9.h"
@@ -76,6 +83,8 @@ DWORD __stdcall InitialiseHooks(LPVOID) {
 		cout << "No supported graphics APIs loaded!\nVisor exiting..." << endl;
 		return NULL;
 	}
+
+	MH_Initialize();
 
 #if VISOR_HOOK_D3D9
 	if (loaded.D3D9Loaded) {

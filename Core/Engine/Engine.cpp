@@ -1,19 +1,28 @@
 #include <iostream>
 #include <string>
+#include <vector>
+#include <map>
+
 #include "../Include/ImGui/imgui.h"
 #include "Notification.h"
-#include <vector>
+#include "Engine.h"
+#include "EngineResources.h"
 
 using namespace std;
 
 namespace Engine {
-	//ImDrawList drawList = ImDrawList(ImGui::GetDrawListSharedData());
+	// On-screen elements
 	vector<Notification> notifications = {};
-	void Render() {
+
+	void Render(GraphicsAPI graphicsAPI) {
+		// Clear out old resources to prevent memory leaks
+		EngineResources::Cleanup();
+
+		// Begin new frame
 		ImGui::NewFrame();
 
 		for (vector<Notification>::iterator it = notifications.begin(); it != notifications.end();) {
-			it->Render();
+			it->Render(graphicsAPI);
 
 			// Remove notifications and only increment when the notification still has time to live.
 			if (it->GetTimeAlive() > it->NOTIFICATION_DURATION) {

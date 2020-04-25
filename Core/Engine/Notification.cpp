@@ -3,6 +3,7 @@
 #include "Notification.h"
 #include "../Include/ImGui/imgui.h"
 #include "../Utils/Utils.h"
+#include "EngineResources.h"
 
 using namespace std;
 using namespace std::chrono;
@@ -13,7 +14,7 @@ int Notification::GetTimeAlive() {
 	return timeAlive.count();
 }
 
-void Notification::Render() {
+void Notification::Render(GraphicsAPI graphicsAPI) {
 	// Get time alive, we will perform animations with it
 	int timeAlive = GetTimeAlive();
 
@@ -36,6 +37,7 @@ void Notification::Render() {
 	}
 
 	// Set alpha
+	float previousAlpha = style.Alpha;
 	style.Alpha = alpha;
 
 	ImVec2 window_pos = ImVec2(NOTIFICATION_DISTANCE, NOTIFICATION_DISTANCE);
@@ -43,10 +45,14 @@ void Notification::Render() {
 	ImGui::PushStyleColor(ImGuiCol_WindowBg,  Utils::GetU32(30, 30, 30, NOTIFICATION_BG_ALPHA * 255));
 	ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
 	if (ImGui::Begin(title.c_str(), &visible, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav)) {
+		EngineResources::RenderTexture(graphicsAPI, TextureID::VISOR_LOGO, ImVec2(40, 40));
+		ImGui::SameLine();
 		ImGui::Text(title.c_str());
-		ImGui::Text(content.c_str());
 	}
 
 	ImGui::PopStyleColor();
 	ImGui::End();
+
+	// Reset alpha
+	style.Alpha = previousAlpha;
 }

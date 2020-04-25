@@ -22,6 +22,7 @@
 #include "../../Include/ImGui/imgui_impl_win32.h"
 #include "../../Include/ImGui/imgui_impl_dx11.h"
 #include "../../Engine/Engine.h"
+#include "../../Engine/EngineResources.h"
 
 using namespace std;
 
@@ -60,6 +61,10 @@ namespace D3D11Hook {
 			DXGI_SWAP_CHAIN_DESC sd;
 			pSwapChain->GetDesc(&sd);
 
+			// Initialise our engine
+			EngineResources::SetD3D11Device(pDevice);
+			EngineResources::AddTexture(new Texture(TextureID::VISOR_LOGO, "C:\\Users\\blazi\\Desktop\\squidward.jpg"));
+
 			ImGui_ImplWin32_Init(sd.OutputWindow);
 			ImGui_ImplDX11_Init(pDevice, pContext);
 			pContext->OMSetRenderTargets(1, &renderTargetView, NULL);
@@ -69,7 +74,7 @@ namespace D3D11Hook {
 
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
-		Engine::Render();
+		Engine::Render(GraphicsAPI::D3D11);
 		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
 		return PLH::FnCast(presentHookTrampoline, PresentHook)(pSwapChain, syncInterval, flags);

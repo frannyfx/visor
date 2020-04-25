@@ -21,6 +21,7 @@
 #include "../../Include/ImGui/imgui_impl_win32.h"
 #include "../../Include/ImGui/imgui_impl_dx9.h"
 #include "../../Engine/Engine.h"
+#include "../../Engine/EngineResources.h"
 
 using namespace std;
 
@@ -45,6 +46,10 @@ namespace D3D9Hook {
 			D3DDEVICE_CREATION_PARAMETERS parameters;
 			pDevice->GetCreationParameters(&parameters);
 
+			// Initialise our engine
+			EngineResources::SetD3D9Device(&pDevice);
+			EngineResources::AddTexture(new Texture(TextureID::VISOR_LOGO, "C:\\Users\\blazi\\Desktop\\squidward.jpg"));
+
 			// Initialise ImGui
 			ImGui_ImplWin32_Init(parameters.hFocusWindow);
 			ImGui_ImplDX9_Init(pDevice);
@@ -55,7 +60,7 @@ namespace D3D9Hook {
 		// Render
 		ImGui_ImplDX9_NewFrame();
 		ImGui_ImplWin32_NewFrame();
-		Engine::Render();
+		Engine::Render(GraphicsAPI::D3D9);
 		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 
 		return PLH::FnCast(presentHookTrampoline, PresentHook)(pDevice, pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);

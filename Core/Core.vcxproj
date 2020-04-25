@@ -74,11 +74,13 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)\Build\$(Configuration)\$(Platform)</OutDir>
     <IntDir>$(SolutionDir)\Build\Intermediate\$(Configuration)\$(Platform)\$(ProjectName)</IntDir>
+    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)\Build\$(Configuration)\$(Platform)</OutDir>
     <IntDir>$(SolutionDir)\Build\Intermediate\$(Configuration)\$(Platform)\$(ProjectName)</IntDir>
+    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -95,13 +97,18 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/D_HAS_STD_BYTE=0 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EntryPointSymbol>
       </EntryPointSymbol>
+      <AdditionalDependencies>$(DXSDK_DIR)Lib\x86\d3dx9.lib;$(DXSDK_DIR)Lib\x86\d3dx11.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y  $(ProjectDir)Include\MinHook\lib\MinHook.x86.dll $(OutDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -112,12 +119,16 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/D_HAS_STD_BYTE=0 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(DXSDK_DIR)Lib\x64\d3dx9.lib;$(DXSDK_DIR)Lib\x64\d3dx11.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y  $(ProjectDir)Include\MinHook\lib\MinHook.x64.dll $(OutDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -157,7 +168,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Engine.cpp" />
+    <ClCompile Include="Engine\EngineResources.cpp" />
     <ClCompile Include="Engine\Notification.cpp" />
+    <ClCompile Include="Engine\Texture.cpp" />
     <ClCompile Include="Entry.cpp" />
     <ClCompile Include="Hook\APIs\D3D10.cpp" />
     <ClCompile Include="Hook\APIs\D3D11.cpp" />
@@ -179,7 +192,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Engine.h" />
+    <ClInclude Include="Engine\EngineResources.h" />
     <ClInclude Include="Engine\Notification.h" />
+    <ClInclude Include="Engine\Texture.h" />
     <ClInclude Include="Hook\APIs\D3D10.h" />
     <ClInclude Include="Hook\APIs\D3D11.h" />
     <ClInclude Include="Hook\APIs\D3D12.h" />
@@ -198,7 +213,17 @@
     <ClInclude Include="Include\ImGui\imstb_rectpack.h" />
     <ClInclude Include="Include\ImGui\imstb_textedit.h" />
     <ClInclude Include="Include\ImGui\imstb_truetype.h" />
+    <ClInclude Include="Include\MinHook\MinHook.h" />
+    <ClInclude Include="Include\STB\stb_image.h" />
     <ClInclude Include="Utils\Utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Include\MinHook\lib\MinHook.x64.dll" />
+    <None Include="Include\MinHook\lib\MinHook.x86.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Include\MinHook\lib\MinHook.x64.lib" />
+    <Library Include="Include\MinHook\lib\MinHook.x86.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <chrono>
+#include "../Hook/GraphicsAPI.h"
+
 using namespace std;
 using namespace std::chrono;
 
@@ -23,7 +25,7 @@ public:
 		displayTime = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
 	}
 
-	void Render();
+	void Render(GraphicsAPI graphicsAPI);
 	int GetTimeAlive();
 
 	Notification& operator=(const Notification& other) {

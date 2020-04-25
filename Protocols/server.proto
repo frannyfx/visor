@@ -9,6 +9,11 @@ enum Position {
 
 message Config {
     message ResourceConfig {
+        message Resource {
+            int32 resource_id = 1;
+            string path = 2;
+        }
+
         string resource_path = 1;
     }
     
@@ -44,6 +49,7 @@ message ServerMessage {
         ENCODER_ERROR = 2;
     }
 
-    Type message_type = 1;
-    Config config = 2;
+    string session_id = 1;
+    Type message_type = 2;
+    Config config = 3;
 }
