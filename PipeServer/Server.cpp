@@ -10,7 +10,7 @@ namespace Server {
     DWORD WINAPI InstanceThread(LPVOID);
 
     // Pipe data
-    bool running = true;
+	bool running = true;
     LPCTSTR lpvMessage = TEXT("http://localhost:1337");
     LPCTSTR lpszPipename = TEXT("\\\\.\\pipe\\visor_discovery");
 
