@@ -5,14 +5,9 @@
 #include <dxgi.h>
 #pragma comment(lib, "d3d11.lib")
 
-// Hooking
-#include <polyhook2/CapstoneDisassembler.hpp>
 
-#ifdef _WIN64
-#include <polyhook2/Detour/x64Detour.hpp>
-#else
-#include <polyhook2/Detour/x86Detour.hpp>
-#endif
+// Hooking
+#include "../../Include/MinHook/MinHook.h"
 
 // Offsets
 #include "DXGI.h"
@@ -26,12 +21,11 @@
 
 using namespace std;
 
-static void ShowExampleAppSimpleOverlay(bool* p_open);
 
 namespace D3D11Hook {
 	// Hooking
 	typedef HRESULT(__stdcall* D3D11PresentHook) (IDXGISwapChain* pSwapChain, UINT syncInterval, UINT flags);
-	uint64_t presentHookTrampoline = NULL;
+	D3D11PresentHook presentHookTrampoline = NULL;
 	bool presentCalled = false;
 
 	// D3D objects
@@ -61,7 +55,7 @@ namespace D3D11Hook {
 			DXGI_SWAP_CHAIN_DESC sd;
 			pSwapChain->GetDesc(&sd);
 
-			// Initialise our engine
+			//Initialise our engine
 			EngineResources::SetD3D11Device(pDevice);
 			EngineResources::AddTexture(new Texture(TextureID::VISOR_LOGO, "C:\\Users\\blazi\\Desktop\\squidward.jpg"));
 
@@ -77,7 +71,7 @@ namespace D3D11Hook {
 		Engine::Render(GraphicsAPI::D3D11);
 		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
-		return PLH::FnCast(presentHookTrampoline, PresentHook)(pSwapChain, syncInterval, flags);
+		return presentHookTrampoline(pSwapChain, syncInterval, flags);
 	}
 
 	void InitialiseD3D11Hooks() {
@@ -108,48 +102,17 @@ namespace D3D11Hook {
 
 		// Hook Present function
 		cout << "Hooking Present function..." << endl;
-#ifdef _WIN64
-		PLH::CapstoneDisassembler disassembler(PLH::Mode::x64);
-		PLH::x64Detour detour((uint64_t)pSwapChainVTable[static_cast<uint32_t>(DXGIHook::DXGIOffsets::Present)], (uint64_t)PresentHook, &presentHookTrampoline, disassembler);
-		detour.hook();
-#else
-		PLH::CapstoneDisassembler disassembler(PLH::Mode::x86);
-		PLH::x86Detour detour((uint64_t)pSwapChainVTable[static_cast<uint32_t>(DXGIHook::DXGIOffsets::Present)], (uint64_t)PresentHook, &presentHookTrampoline, disassembler);
-		detour.hook();
-#endif
-	}
-}
 
-static void ShowExampleAppSimpleOverlay(bool* p_open)
-{
-	const float DISTANCE = 10.0f;
-	static int corner = 0;
-	ImGuiIO& io = ImGui::GetIO();
-	if (corner != -1)
-	{
-		ImVec2 window_pos = ImVec2((corner & 1) ? io.DisplaySize.x - DISTANCE : DISTANCE, (corner & 2) ? io.DisplaySize.y - DISTANCE : DISTANCE);
-		ImVec2 window_pos_pivot = ImVec2((corner & 1) ? 1.0f : 0.0f, (corner & 2) ? 1.0f : 0.0f);
-		ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
-	}
-	ImGui::SetNextWindowBgAlpha(0.35f); // Transparent background
-	if (ImGui::Begin("Example: Simple overlay", p_open, (corner != -1 ? ImGuiWindowFlags_NoMove : 0) | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav))
-	{
-		ImGui::Text("Simple overlay\n" "in the corner of the screen.\n" "(right-click to change position)");
-		ImGui::Separator();
-		if (ImGui::IsMousePosValid())
-			ImGui::Text("Mouse Position: (%.1f,%.1f)", io.MousePos.x, io.MousePos.y);
-		else
-			ImGui::Text("Mouse Position: <invalid>");
-		if (ImGui::BeginPopupContextWindow())
-		{
-			if (ImGui::MenuItem("Custom", NULL, corner == -1)) corner = -1;
-			if (ImGui::MenuItem("Top-left", NULL, corner == 0)) corner = 0;
-			if (ImGui::MenuItem("Top-right", NULL, corner == 1)) corner = 1;
-			if (ImGui::MenuItem("Bottom-left", NULL, corner == 2)) corner = 2;
-			if (ImGui::MenuItem("Bottom-right", NULL, corner == 3)) corner = 3;
-			if (p_open && ImGui::MenuItem("Close")) *p_open = false;
-			ImGui::EndPopup();
+		LPVOID toHook = (LPVOID)pSwapChainVTable[static_cast<uint32_t>(DXGIHook::DXGIOffsets::Present)];
+
+		if (MH_CreateHook(toHook, &PresentHook, reinterpret_cast<LPVOID*>(&presentHookTrampoline)) != MH_OK) {
+			cout << "Failed to install hooks for D3D11..." << endl;
+			return;
+		};
+
+		if (MH_EnableHook(toHook) != MH_OK) {
+			cout << "Failed to enable hooks for D3D11..." << endl;
+			return;
 		}
 	}
-	ImGui::End();
 }

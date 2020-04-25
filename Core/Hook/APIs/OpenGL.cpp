@@ -6,11 +6,6 @@
 
 // Hooking
 #include "../../Include/MinHook/MinHook.h"
-#if _WIN64
-#pragma comment(lib, "Include/MinHook/lib/MinHook.x64.lib")
-#else
-#pragma comment(lib, "Include/MinHook/lib/MinHook.x86.lib")
-#endif
 
 // GUI
 #include "../../Include/ImGui/imgui.h"
@@ -20,7 +15,7 @@
 
 using namespace std;
 
-typedef BOOL(__stdcall* owglSwapBuffers)(HDC);
+typedef BOOL(__stdcall* owglSwapBuffers)(HDC hdc);
 // Trampoline function
 owglSwapBuffers twglSwapBuffers = NULL;
 
@@ -31,10 +26,16 @@ BOOL __stdcall hkwglSwapBuffers(HDC hdc) {
 
 void InitialiseOpenGLHooks() {
 	cout << "Installing hooks for OpenGL..." << endl;
-	if (MH_Initialize() != MH_OK) return;
+	
+	LPVOID toHook = GetProcAddress(GetModuleHandleA("opengl32.dll"), "wglSwapBuffers");
 
-	if (MH_CreateHook(GetProcAddress(GetModuleHandle(TEXT("opengl32.dll")), "wglSwapBuffer"), &hkwglSwapBuffers, reinterpret_cast<LPVOID*>(&twglSwapBuffers)) != MH_OK) {
-		cout << "lol" << endl;
+	if (MH_CreateHook(toHook, &hkwglSwapBuffers, reinterpret_cast<LPVOID*>(&twglSwapBuffers)) != MH_OK) {
+		cout << "Failed to install hooks for OpenGL..." << endl;
+		return;
+	};
+
+	if (MH_EnableHook(toHook) != MH_OK) {
+		cout << "Failed to enable hooks for OpenGL..." << endl;
 		return;
 	}
 }
