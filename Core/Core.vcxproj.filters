@@ -81,7 +81,7 @@
     <ClCompile Include="Engine\EngineResources.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Communication\Client.cpp">
+    <ClCompile Include="Communication\Discovery.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -161,7 +161,7 @@
     <ClInclude Include="Include\MinHook\MinHook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Communication\Client.h">
+    <ClInclude Include="Communication\Discovery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

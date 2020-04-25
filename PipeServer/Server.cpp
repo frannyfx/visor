@@ -11,7 +11,8 @@ namespace Server {
 
     // Pipe data
 	bool running = true;
-    LPCTSTR lpszPipename = TEXT("\\\\.\\pipe\\visor");
+    LPCTSTR lpvMessage = TEXT("http://localhost:1337");
+    LPCTSTR lpszPipename = TEXT("\\\\.\\pipe\\visor_discovery");
 
 	void Server::Start() {
         HANDLE hPipe = NULL;
@@ -91,11 +92,11 @@ namespace Server {
         hPipe = (HANDLE)lpvParam;
 
         while (true) {
-            fSuccess = ReadFile(
+            fSuccess = WriteFile(
                 hPipe,
-                pchRequest,
+                lpvMessage,
                 BUFSIZE * sizeof(TCHAR),
-                &cbBytesRead,
+                &cbWritten,
                 NULL
             );
 

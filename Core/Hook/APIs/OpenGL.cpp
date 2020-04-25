@@ -10,7 +10,6 @@
 // GUI
 #include "../../Include/ImGui/imgui.h"
 #include "../../Include/ImGui/imgui_impl_win32.h"
-#include "../../Include/ImGui/imgui_impl_dx11.h"
 #include "../../Engine/Engine.h"
 
 using namespace std;
