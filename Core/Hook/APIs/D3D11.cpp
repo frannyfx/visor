@@ -5,7 +5,6 @@
 #include <dxgi.h>
 #pragma comment(lib, "d3d11.lib")
 
-
 // Hooking
 #include "../../Include/MinHook/MinHook.h"
 
@@ -20,7 +19,6 @@
 #include "../../Engine/EngineResources.h"
 
 using namespace std;
-
 
 namespace D3D11Hook {
 	// Hooking
@@ -106,12 +104,12 @@ namespace D3D11Hook {
 		LPVOID toHook = (LPVOID)pSwapChainVTable[static_cast<uint32_t>(DXGIHook::DXGIOffsets::Present)];
 
 		if (MH_CreateHook(toHook, &PresentHook, reinterpret_cast<LPVOID*>(&presentHookTrampoline)) != MH_OK) {
-			cout << "Failed to install hooks for D3D11..." << endl;
+			cout << "Failed to install hooks for D3D11." << endl;
 			return;
 		};
 
 		if (MH_EnableHook(toHook) != MH_OK) {
-			cout << "Failed to enable hooks for D3D11..." << endl;
+			cout << "Failed to enable hooks for D3D11." << endl;
 			return;
 		}
 	}

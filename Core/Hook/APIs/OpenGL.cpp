@@ -15,27 +15,34 @@
 
 using namespace std;
 
-typedef BOOL(__stdcall* owglSwapBuffers)(HDC hdc);
-// Trampoline function
-owglSwapBuffers twglSwapBuffers = NULL;
+namespace OpenGLHook {
+	// Hooking
+	typedef BOOL(__stdcall* owglSwapBuffers)(HDC hdc);
+	owglSwapBuffers twglSwapBuffers = NULL;
+	bool swapBuffersCalled = false;
 
-BOOL __stdcall hkwglSwapBuffers(HDC hdc) {
-	cout << "Hooked" << endl;
-	return twglSwapBuffers(hdc);
-}
+	BOOL __stdcall hkwglSwapBuffers(HDC hdc) {
+		if (!swapBuffersCalled) {
+			cout << "OpenGL SwapBuffers hook called." << endl;
+			swapBuffersCalled = true;
+		}
 
-void InitialiseOpenGLHooks() {
-	cout << "Installing hooks for OpenGL..." << endl;
-	
-	LPVOID toHook = GetProcAddress(GetModuleHandleA("opengl32.dll"), "wglSwapBuffers");
+		return twglSwapBuffers(hdc);
+	}
 
-	if (MH_CreateHook(toHook, &hkwglSwapBuffers, reinterpret_cast<LPVOID*>(&twglSwapBuffers)) != MH_OK) {
-		cout << "Failed to install hooks for OpenGL..." << endl;
-		return;
-	};
+	void InitialiseOpenGLHooks() {
+		cout << "Installing hooks for OpenGL..." << endl;
 
-	if (MH_EnableHook(toHook) != MH_OK) {
-		cout << "Failed to enable hooks for OpenGL..." << endl;
-		return;
+		LPVOID toHook = GetProcAddress(GetModuleHandleA("opengl32.dll"), "wglSwapBuffers");
+
+		if (MH_CreateHook(toHook, &hkwglSwapBuffers, reinterpret_cast<LPVOID*>(&twglSwapBuffers)) != MH_OK) {
+			cout << "Failed to install hooks for OpenGL..." << endl;
+			return;
+		};
+
+		if (MH_EnableHook(toHook) != MH_OK) {
+			cout << "Failed to enable hooks for OpenGL..." << endl;
+			return;
+		}
 	}
 }

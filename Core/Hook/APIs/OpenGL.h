@@ -1,2 +1,4 @@
 #pragma once
-void InitialiseOpenGLHooks();
+namespace OpenGLHook {
+	void InitialiseOpenGLHooks();
+}

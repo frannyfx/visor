@@ -117,7 +117,7 @@ DWORD __stdcall InitialiseHooks(LPVOID) {
 
 #if VISOR_HOOK_OPENGL
 	if (loaded.OpenGLLoaded) {
-		InitialiseOpenGLHooks();
+		OpenGLHook::InitialiseOpenGLHooks();
 	}
 #endif
 

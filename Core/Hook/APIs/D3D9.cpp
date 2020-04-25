@@ -113,15 +113,14 @@ namespace D3D9Hook {
 		LPVOID toHook = (LPVOID)pDeviceVTable[static_cast<uint32_t>(D3D9Hook::D3D9Offsets::Present)];
 
 		if (MH_CreateHook(toHook, &PresentHook, reinterpret_cast<LPVOID*>(&presentHookTrampoline)) != MH_OK) {
-			cout << "Failed to install hooks for D3D9..." << endl;
+			cout << "Failed to install hooks for D3D9." << endl;
 			return;
 		}
 
 		if (MH_EnableHook(toHook) != MH_OK) {
-			cout << "Failed to enable hooks for D3D9..." << endl;
+			cout << "Failed to enable hooks for D3D9." << endl;
 			return;
 		}
-
 	}
 }
 

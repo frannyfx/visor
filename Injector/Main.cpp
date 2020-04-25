@@ -33,7 +33,7 @@ int main()
     //parentDirectory = "C:\\Users\\blazi\\Desktop\\Visor\\Build\\Debug\\Win32";
     cout << "Injecting libraries from " << parentDirectory << " into " << processName << " (" << pid << ")." << endl;
     InjectLibrary(pid, parentDirectory + "\\capstone.dll");
-    InjectLibrary(pid, parentDirectory + "\\PolyHook_2.dll");
+    //InjectLibrary(pid, parentDirectory + "\\PolyHook_2.dll");
     InjectLibrary(pid, parentDirectory + MIN_HOOK_NAME);
     InjectLibrary(pid, parentDirectory + "\\Core.dll");
     return 0;
