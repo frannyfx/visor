@@ -5,7 +5,7 @@
 #include "Hook.h"
 #include "GraphicsAPI.h"
 #include "../Engine/Engine.h"
-#include "../Include/MinHook/MinHook.h"
+#include <MinHook/MinHook.h>
 #include "../Communication/Discovery.h"
 
 #if _WIN64

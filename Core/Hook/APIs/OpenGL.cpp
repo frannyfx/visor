@@ -2,12 +2,11 @@
 #include <iostream>
 
 // Hooking
-#include "../../Include/MinHook/MinHook.h"
+#include <MinHook/MinHook.h>
 
 // GUI
-
-#include "../../Include/ImGui/imgui.h"
-#include "../../Include/ImGui/imgui_impl_win32.h"
+#include <ImGui/imgui.h>
+#include <ImGui/imgui_impl_win32.h>
 #include "../../Engine/Engine.h"
 
 using namespace std;
