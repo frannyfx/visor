@@ -175,6 +175,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Communication\Client.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\EngineResources.cpp" />
     <ClCompile Include="Engine\Notification.cpp" />
@@ -199,6 +200,7 @@
     <ClCompile Include="Utils\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Communication\Client.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\EngineResources.h" />
     <ClInclude Include="Engine\Notification.h" />

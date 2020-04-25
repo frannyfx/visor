@@ -6,6 +6,7 @@
 #include "GraphicsAPI.h"
 #include "../Engine/Engine.h"
 #include "../Include/MinHook/MinHook.h"
+#include "../Communication/Client.h"
 
 #if _WIN64
 #pragma comment(lib, "Include/MinHook/lib/MinHook.x64.lib")
@@ -84,6 +85,10 @@ DWORD __stdcall InitialiseHooks(LPVOID) {
 		return NULL;
 	}
 
+	// Start pipe client
+	Client::Start();
+
+	// Initialise MinHook
 	MH_Initialize();
 
 #if VISOR_HOOK_D3D9
