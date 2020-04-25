@@ -1,16 +1,10 @@
 #include <Windows.h>
 #include <iostream>
 
-// Graphics
-#include "OpenGL.h"
-
 // Hooking
 #include "../../Include/MinHook/MinHook.h"
 
 // GUI
-#include "../../Include/ImGui/imgui.h"
-#include "../../Include/ImGui/imgui_impl_win32.h"
-#include "../../Include/ImGui/imgui_impl_dx11.h"
 #include "../../Engine/Engine.h"
 
 using namespace std;
@@ -24,6 +18,8 @@ namespace OpenGLHook {
 	BOOL __stdcall hkwglSwapBuffers(HDC hdc) {
 		if (!swapBuffersCalled) {
 			cout << "OpenGL SwapBuffers hook called." << endl;
+
+
 			swapBuffersCalled = true;
 		}
 
