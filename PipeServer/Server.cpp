@@ -10,15 +10,16 @@ namespace Server {
     DWORD WINAPI InstanceThread(LPVOID);
 
     // Pipe data
-	bool running = true;
-    LPCTSTR lpszPipename = TEXT("\\\\.\\pipe\\visor");
+    bool running = true;
+    LPCTSTR lpvMessage = TEXT("http://localhost:1337");
+    LPCTSTR lpszPipename = TEXT("\\\\.\\pipe\\visor_discovery");
 
-	void Server::Start() {
+    void Server::Start() {
         HANDLE hPipe = NULL;
         HANDLE hThread = NULL;
         DWORD  dwThreadId = 0;
 
-		while (running) {
+        while (running) {
             hPipe = CreateNamedPipe(
                 lpszPipename,             // pipe name 
                 PIPE_ACCESS_DUPLEX,       // read/write access 
@@ -56,8 +57,8 @@ namespace Server {
                 else CloseHandle(hThread);
             }
             else CloseHandle(hPipe);
-		}
-	}
+        }
+    }
 
     DWORD WINAPI InstanceThread(LPVOID lpvParam) {
         HANDLE hHeap = GetProcessHeap();
@@ -91,11 +92,11 @@ namespace Server {
         hPipe = (HANDLE)lpvParam;
 
         while (true) {
-            fSuccess = ReadFile(
+            fSuccess = WriteFile(
                 hPipe,
-                pchRequest,
+                lpvMessage,
                 BUFSIZE * sizeof(TCHAR),
-                &cbBytesRead,
+                &cbWritten,
                 NULL
             );
 

@@ -6,7 +6,7 @@
 #include "GraphicsAPI.h"
 #include "../Engine/Engine.h"
 #include "../Include/MinHook/MinHook.h"
-#include "../Communication/Client.h"
+#include "../Communication/Discovery.h"
 
 #if _WIN64
 #pragma comment(lib, "Include/MinHook/lib/MinHook.x64.lib")
@@ -86,7 +86,7 @@ DWORD __stdcall InitialiseHooks(LPVOID) {
 	}
 
 	// Start pipe client
-	Client::Start();
+	Discovery::Start();
 
 	// Initialise MinHook
 	MH_Initialize();

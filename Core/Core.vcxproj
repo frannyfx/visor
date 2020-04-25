@@ -175,7 +175,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Communication\Client.cpp" />
+    <ClCompile Include="Communication\Discovery.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\EngineResources.cpp" />
     <ClCompile Include="Engine\Notification.cpp" />
@@ -194,15 +194,13 @@
     <ClCompile Include="Include\ImGui\imgui_draw.cpp" />
     <ClCompile Include="Include\ImGui\imgui_impl_dx11.cpp" />
     <ClCompile Include="Include\ImGui\imgui_impl_dx9.cpp" />
-    <ClCompile Include="Include\ImGui\imgui_impl_glfw.cpp" />
-    <ClCompile Include="Include\ImGui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="Include\ImGui\imgui_impl_win32.cpp" />
     <ClCompile Include="Include\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Utils\Log.cpp" />
     <ClCompile Include="Utils\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Communication\Client.h" />
+    <ClInclude Include="Communication\Discovery.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\EngineResources.h" />
     <ClInclude Include="Engine\Notification.h" />
@@ -220,8 +218,6 @@
     <ClInclude Include="Include\ImGui\imgui.h" />
     <ClInclude Include="Include\ImGui\imgui_impl_dx11.h" />
     <ClInclude Include="Include\ImGui\imgui_impl_dx9.h" />
-    <ClInclude Include="Include\ImGui\imgui_impl_glfw.h" />
-    <ClInclude Include="Include\ImGui\imgui_impl_opengl3.h" />
     <ClInclude Include="Include\ImGui\imgui_impl_win32.h" />
     <ClInclude Include="Include\ImGui\imgui_internal.h" />
     <ClInclude Include="Include\ImGui\imstb_rectpack.h" />
