@@ -113,6 +113,6 @@ DWORD __stdcall InitialiseHooks(LPVOID) {
 	}
 #endif
 
-	Engine::ShowNotification("Visor injected successfully", "Long Live JUUL");
+	Engine::ShowNotification("Visor injected successfully.", "frannyfx and Neriuzz made this shit.");
 	return NULL;
 }

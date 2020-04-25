@@ -5,7 +5,7 @@
 
 using namespace std;
 
-string processName = "GFXTest64.exe";
+string processName = "csgo.exe";
 
 int main()
 {
