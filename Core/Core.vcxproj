@@ -175,6 +175,7 @@
     <ClCompile Include="Include\ImGui\imgui_impl_win32.cpp" />
     <ClCompile Include="Include\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Utils\Log.cpp" />
+    <ClCompile Include="Utils\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Engine.h" />
@@ -197,6 +198,7 @@
     <ClInclude Include="Include\ImGui\imstb_rectpack.h" />
     <ClInclude Include="Include\ImGui\imstb_textedit.h" />
     <ClInclude Include="Include\ImGui\imstb_truetype.h" />
+    <ClInclude Include="Utils\Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

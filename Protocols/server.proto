@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+enum Position {
+    TOP_LEFT = 0;
+    TOP_RIGHT = 1;
+    BOTTOM_LEFT = 2;
+    BOTTOM_RIGHT = 3;
+}
+
+message Config {
+    message ResourceConfig {
+        string resource_path = 1;
+    }
+    
+    message OverlayConfig {
+        bool enabled = 1;
+        Position position = 2;
+    }
+
+    message CaptureConfig {
+        enum CaptureMode {
+            DVR = 0;
+            INSTANT_REPLAY = 1;
+        }
+
+        bool enabled = 1;
+        CaptureMode capture_mode = 2;
+        int32 framerate = 3;
+    }
+
+    ResourceConfig resources = 1;
+    OverlayConfig overlay = 2;
+    CaptureConfig capture = 3;
+}
+
+message ServerMessage {
+    enum Type {
+        CONFIG = 0;
+        ENCODER_READY = 1;
+        
+    }
+
+    Type message_type = 1;
+    Config config = 2;
+}

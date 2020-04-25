@@ -7,12 +7,21 @@
 using namespace std;
 
 namespace Engine {
+	//ImDrawList drawList = ImDrawList(ImGui::GetDrawListSharedData());
 	vector<Notification> notifications = {};
 	void Render() {
 		ImGui::NewFrame();
 
-		for (auto &notification : notifications) {
-			notification.Render();
+		for (vector<Notification>::iterator it = notifications.begin(); it != notifications.end();) {
+			it->Render();
+
+			// Remove notifications and only increment when the notification still has time to live.
+			if (it->GetTimeAlive() > it->NOTIFICATION_DURATION) {
+				it = notifications.erase(it);
+			}
+			else {
+				++it;
+			}
 		}
 
 		ImGui::Render();

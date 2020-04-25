@@ -893,7 +893,7 @@ struct ImGuiColumns
 
 // ImDrawList: You may set this to higher values (e.g. 2 or 3) to increase tessellation of fast rounded corners path.
 #ifndef IM_DRAWLIST_ARCFAST_TESSELLATION_MULTIPLIER
-#define IM_DRAWLIST_ARCFAST_TESSELLATION_MULTIPLIER             1
+#define IM_DRAWLIST_ARCFAST_TESSELLATION_MULTIPLIER             3
 #endif
 
 // Data shared between all ImDrawList instances

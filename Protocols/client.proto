@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+message ClientMessage {
+    enum Type {
+        HELLO = 0;
+        RECORDING_STARTED = 1;
+        RECORDING_STOPPED = 2;
+        FRAME = 3;
+        BOOKMARK = 4;
+    }
+    
+    message Hello {
+        string session_id = 1;
+        int32 pid = 2;
+        int32 game_id = 3;
+        string executable_path = 4;
+    }
+
+    Type message_type = 1;
+    Hello hello = 2;
+}

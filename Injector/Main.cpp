@@ -5,7 +5,7 @@
 
 using namespace std;
 
-string processName = "BlackOps.exe";
+string processName = "GFXTest64.exe";
 
 int main()
 {
