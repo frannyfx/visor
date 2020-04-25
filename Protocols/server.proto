@@ -14,7 +14,10 @@ message Config {
     
     message OverlayConfig {
         bool enabled = 1;
-        Position position = 2;
+        bool show_notifications = 2;
+        bool show_capture_indicator = 3;
+        Position notifications_position = 4;
+        Position capture_indicator_position = 5;
     }
 
     message CaptureConfig {
@@ -26,6 +29,7 @@ message Config {
         bool enabled = 1;
         CaptureMode capture_mode = 2;
         int32 framerate = 3;
+        int32 instant_replay_duration = 4;
     }
 
     ResourceConfig resources = 1;
