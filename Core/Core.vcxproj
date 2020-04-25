@@ -214,6 +214,8 @@
     <ClInclude Include="Hook\APIs\Vulkan.h" />
     <ClInclude Include="Hook\GraphicsAPI.h" />
     <ClInclude Include="Hook\Hook.h" />
+    <ClInclude Include="Include\GLFW\glfw3.h" />
+    <ClInclude Include="Include\GLFW\glfw3native.h" />
     <ClInclude Include="Include\ImGui\imconfig.h" />
     <ClInclude Include="Include\ImGui\imgui.h" />
     <ClInclude Include="Include\ImGui\imgui_impl_dx11.h" />

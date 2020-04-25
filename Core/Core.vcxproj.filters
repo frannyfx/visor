@@ -164,6 +164,12 @@
     <ClInclude Include="Communication\Discovery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Include\GLFW\glfw3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\GLFW\glfw3native.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Include\MinHook\lib\MinHook.x64.dll" />

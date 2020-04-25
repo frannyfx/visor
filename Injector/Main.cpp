@@ -30,10 +30,12 @@ int main()
     cout << "Found process " << processName << " (" << pid << ")." << endl;
 
     // Get library path and inject
-    //parentDirectory = "C:\\Users\\blazi\\Desktop\\Visor\\Build\\Debug\\Win32";
     cout << "Injecting libraries from " << parentDirectory << " into " << processName << " (" << pid << ")." << endl;
+<<<<<<< HEAD
+=======
     //InjectLibrary(pid, parentDirectory + "\\capstone.dll");
     //InjectLibrary(pid, parentDirectory + "\\PolyHook_2.dll");
+>>>>>>> 443a09f41652986a930aa2c0de1f0cdb0c1fa1f4
     InjectLibrary(pid, parentDirectory + MIN_HOOK_NAME);
     InjectLibrary(pid, parentDirectory + "\\Core.dll");
     return 0;
