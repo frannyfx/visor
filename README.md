@@ -16,7 +16,7 @@ In the future we would like to automate the process by periodically scanning the
 ### Overlay
 Using our library, we're able to render an overlay over a graphics application to show the user notifications.
 
-![Visor injection PoC](Docs/Images/visor_injection.png)
+![Visor injection PoC](Docs/Images/visor_injection_new.png)
 
 ### Supported graphics libraries
 Visor will support the following graphics libraries:
@@ -29,7 +29,6 @@ Visor will support the following graphics libraries:
 
 ### Credits
 The projects that made Visor possible:
-- Capstone Disassembler
 - MinHook
 - ImGui
 
