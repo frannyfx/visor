@@ -27,33 +27,12 @@ namespace D3D12Hook {
 	bool presentCalled = false;
 
 	// D3D Objects
-	IDXGIDevice* pDevice;
+	ID3D12Device* pDevice;
 	DWORD_PTR* pSwapChainVTable = NULL;
 
 	long __stdcall PresentHook(IDXGISwapChain* pSwapChain, UINT syncInterval, UINT flags) {
 		if (!presentCalled) {
 			cout << "D3D12 Present hook called." << endl;
-			// Get swapchain device
-			pSwapChain->GetDevice(__uuidof(pDevice), (void**)&pDevice);
-			pDevice->GetImmediateContext(&pContext);
-
-			// Get render target
-			ID3D11Texture2D* pBackBuffer;
-			pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
-			pDevice->CreateRenderTargetView(pBackBuffer, NULL, &renderTargetView);
-			pBackBuffer->Release();
-
-			// Get swapchain description
-			DXGI_SWAP_CHAIN_DESC sd;
-			pSwapChain->GetDesc(&sd);
-
-			//Initialise our engine
-			EngineResources::SetD3D11Device(pDevice);
-			//EngineResources::AddTexture(new Texture(TextureID::VISOR_LOGO, "C:\\Users\\blazi\\Desktop\\glasses.png"));
-
-			ImGui_ImplWin32_Init(sd.OutputWindow);
-			ImGui_ImplDX11_Init(pDevice, pContext);
-			pContext->OMSetRenderTargets(1, &renderTargetView, NULL);
 			presentCalled = true;
 		}
 
