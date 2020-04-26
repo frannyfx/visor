@@ -1,6 +1,8 @@
 #include <vector>
 #include <iostream>
 #include <Windows.h>
+#include <chrono>
+#include <thread>
 
 #include "Hook.h"
 #include "GraphicsAPI.h"
@@ -126,7 +128,7 @@ DWORD __stdcall InitialiseHooks(LPVOID) {
 		InitialiseVulkanHooks();
 	}
 #endif
-
-	Engine::ShowNotification("Visor injected successfully.", "frannyfx and Neriuzz made this shit.");
+	
+	Engine::ShowNotification("Visor is enabled.", "Press CTRL + F2 to bookmark.");
 	return NULL;
 }
