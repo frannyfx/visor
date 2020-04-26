@@ -15,4 +15,9 @@ namespace Utils {
 	{
 		return ((a & 0xff) << 24) + ((b & 0xff) << 16) + ((g & 0xff) << 8) + (r & 0xff);
 	}
+	
+	float Lerp(float a, float b, float f) {
+		f = Clamp(f, 0, 1);
+		return a + (b - a) * f;
+	}
 }
