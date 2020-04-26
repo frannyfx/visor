@@ -187,6 +187,7 @@
     <ClCompile Include="Hook\APIs\D3D12.cpp" />
     <ClCompile Include="Hook\APIs\D3D9.cpp" />
     <ClCompile Include="Hook\APIs\DXGI.cpp" />
+    <ClCompile Include="Hook\APIs\HookBase.cpp" />
     <ClCompile Include="Hook\APIs\OpenGL.cpp" />
     <ClCompile Include="Hook\APIs\Vulkan.cpp" />
     <ClCompile Include="Hook\Hook.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="Hook\APIs\D3D12.h" />
     <ClInclude Include="Hook\APIs\D3D9.h" />
     <ClInclude Include="Hook\APIs\DXGI.h" />
+    <ClInclude Include="Hook\APIs\HookBase.h" />
     <ClInclude Include="Hook\APIs\OpenGL.h" />
     <ClInclude Include="Hook\APIs\Vulkan.h" />
     <ClInclude Include="Hook\GraphicsAPI.h" />

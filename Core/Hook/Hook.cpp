@@ -98,37 +98,42 @@ DWORD __stdcall InitialiseHooks(LPVOID) {
 
 #if VISOR_HOOK_D3D9
 	if (loaded.D3D9Loaded) {
-		D3D9Hook::InitialiseD3D9Hooks();
+		//D3D9Hook::InitialiseD3D9Hooks();
 	}
 #endif
 
 #if VISOR_HOOK_D3D10
 	if (loaded.D3D10Loaded) {
-		InitialiseD3D10Hooks();
+		//InitialiseD3D10Hooks();
 	}
 #endif
 
 #if VISOR_HOOK_D3D11
 	if (loaded.D3D11Loaded) {
-		D3D11Hook::InitialiseD3D11Hooks();
+		//D3D11Hook::InitialiseD3D11Hooks();
+		Hook::D3D11Hook d3d11Hook;
+		d3d11Hook.Install();
+		d3d11Hook.WaitForInstall();
 	}
 #endif
 
+	cout << "Done!" << endl;
+
 #if VISOR_HOOK_D3D12
 	if (loaded.D3D12Loaded) {
-		D3D12Hook::InitialiseD3D12Hooks();
+		//D3D12Hook::InitialiseD3D12Hooks();
 	}
 #endif
 
 #if VISOR_HOOK_OPENGL
 	if (loaded.OpenGLLoaded) {
-		OpenGLHook::InitialiseOpenGLHooks();
+		//OpenGLHook::InitialiseOpenGLHooks();
 	}
 #endif
 
 #if VISOR_HOOK_VULKAN
 	if (loaded.VulkanLoaded) {
-		InitialiseVulkanHooks();
+		//InitialiseVulkanHooks();
 	}
 #endif
 	

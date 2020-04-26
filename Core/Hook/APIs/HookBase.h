@@ -11,9 +11,17 @@ namespace Hook {
 		bool success;
 		mutex installationMutex;
 		condition_variable installedCV;
-		void WaitForInstall();
+
+		void FinishInstall(bool s);
+		
+		HookBase() : installed(false), success(false) {}
+
 	public:
-		void Install();
-		void Uninstall();
+		virtual void Install() = 0;
+		virtual void Enable() = 0;
+		virtual void Disable() = 0;
+		virtual void Uninstall() = 0;
+		void WaitForInstall();
+		bool IsInstalled();
 	};
 }
