@@ -17,14 +17,25 @@
 #include <ImGui/imgui_impl_dx11.h>
 #include "../../Engine/Engine.h"
 #include "../../Engine/EngineResources.h"
+#include <condition_variable>
 
 using namespace std;
 
 namespace D3D11Hook {
+	// Forward declaration
+	void Uninstall();
+
 	// Hooking
 	typedef HRESULT(__stdcall* D3D11PresentHook) (IDXGISwapChain* pSwapChain, UINT syncInterval, UINT flags);
 	D3D11PresentHook presentHookTrampoline = NULL;
 	bool presentCalled = false;
+	LPVOID toHook = NULL;
+
+	// Installation
+	mutex installationMutex;
+	condition_variable installedCV;
+	bool installed = false;
+	bool success = false;
 
 	// D3D objects
 	ID3D11Device* pDevice;
@@ -39,8 +50,17 @@ namespace D3D11Hook {
 		if (!presentCalled) {
 			cout << "D3D11 Present hook called." << endl;
 			
-			// Get swapchain device
+			// Get swapchain device, make sure it's valid
 			pSwapChain->GetDevice(__uuidof(pDevice), (void**)&pDevice);
+			if (pDevice == nullptr) {
+				cout << "Likely another version of D3D is loaded. Disabling hook..." << endl;
+				success = false;
+				installedCV.notify_all();
+				return presentHookTrampoline(pSwapChain, syncInterval, flags);
+			}
+
+			// The device is the right version, initialise engine.
+			success = true;
 			pDevice->GetImmediateContext(&pContext);
 
 			// Get render target
@@ -60,7 +80,6 @@ namespace D3D11Hook {
 			ImGui_ImplWin32_Init(sd.OutputWindow);
 			ImGui_ImplDX11_Init(pDevice, pContext);
 			pContext->OMSetRenderTargets(1, &renderTargetView, NULL);
-			
 			presentCalled = true;
 		}
 
@@ -72,7 +91,28 @@ namespace D3D11Hook {
 		return presentHookTrampoline(pSwapChain, syncInterval, flags);
 	}
 
-	void InitialiseD3D11Hooks() {
+	void FinishInstall(bool s) {
+		installed = true;
+		success = s;
+		installedCV.notify_all();
+	}
+
+	bool GetInstalled() {
+		return installed;
+	}
+
+	DWORD WINAPI Install(LPVOID) {
+		Hook();
+		std::unique_lock<std::mutex> lock(installationMutex);
+		installedCV.wait(lock, GetInstalled);
+		if (!success) {
+
+			Uninstall();
+		}
+		return NULL;
+	}
+
+	void Hook() {
 		cout << "Initialising hooks for D3D11..." << endl;
 
 		// Get window handle
@@ -86,23 +126,20 @@ namespace D3D11Hook {
 			return;
 		}
 
-		cout << "Created DirectX device successfully." << endl;
+		cout << "Created D3D11 device successfully." << endl;
 
 		// Get VTable
 		pSwapChainVTable = (DWORD_PTR*)((DWORD_PTR*)pSwapChain)[0];
 		pDeviceContextVTable = (DWORD_PTR*)((DWORD_PTR*)pContext)[0];
 
-		// Setup ImGui
-		IMGUI_CHECKVERSION();
-		ImGui::CreateContext();
-		ImGuiIO& io = ImGui::GetIO(); (void)io;
-		ImGui::StyleColorsDark();
+		// Release resources
+		pDevice->Release();
+		pSwapChain->Release();
+		pDevice = NULL;
+		pSwapChain = NULL;
 
-		// Hook Present function
-		cout << "Hooking Present function..." << endl;
-
-		LPVOID toHook = (LPVOID)pSwapChainVTable[static_cast<uint32_t>(DXGIHook::DXGIOffsets::Present)];
-
+		// Hook Present function.
+		toHook = (LPVOID)pSwapChainVTable[static_cast<uint32_t>(DXGIHook::DXGIOffsets::Present)];
 		if (MH_CreateHook(toHook, &PresentHook, reinterpret_cast<LPVOID*>(&presentHookTrampoline)) != MH_OK) {
 			cout << "Failed to install hooks for D3D11." << endl;
 			return;
@@ -112,5 +149,10 @@ namespace D3D11Hook {
 			cout << "Failed to enable hooks for D3D11." << endl;
 			return;
 		}
+	}
+
+	void Uninstall() {
+		MH_DisableHook(toHook);
+		//MH_RemoveHook(toHook);
 	}
 }

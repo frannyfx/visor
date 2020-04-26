@@ -8,6 +8,7 @@
 using namespace std;
 
 namespace Engine {
+	void Initialise();
 	void ShowNotification(const string& title, const string& body);
 	void Render(GraphicsAPI graphicsAPI);
 }

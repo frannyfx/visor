@@ -93,6 +93,9 @@ DWORD __stdcall InitialiseHooks(LPVOID) {
 	// Initialise MinHook
 	MH_Initialize();
 
+	// Initialise Engine
+	Engine::Initialise();
+
 #if VISOR_HOOK_D3D9
 	if (loaded.D3D9Loaded) {
 		D3D9Hook::InitialiseD3D9Hooks();

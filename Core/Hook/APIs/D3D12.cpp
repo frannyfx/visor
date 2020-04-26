@@ -11,20 +11,21 @@
 // GUI
 #include <ImGui/imgui.h>
 #include <ImGui/imgui_impl_win32.h>
-#if _WIN64
-#include <ImGui/imgui_impl_dx12.h>
-#endif
 #include "../../Engine/Engine.h"
 #include "../../Engine/EngineResources.h"
 
 using namespace std;
 
-namespace D3D12Hook {
+namespace D3D12Hook 
+{
+	// Forward declaration
+	void Uninstall();
 
 	// Hooking
 	typedef long(__stdcall* D3D12PresentHook) (IDXGISwapChain* pSwapChain, UINT syncInterval, UINT flags);
 	D3D12PresentHook presentHookTrampoline = NULL;
 	bool presentCalled = false;
+	LPVOID toHook = NULL;
 
 	// D3D Objects
 	ID3D12Device* pDevice;
@@ -33,6 +34,8 @@ namespace D3D12Hook {
 	long __stdcall PresentHook(IDXGISwapChain* pSwapChain, UINT syncInterval, UINT flags) {
 		if (!presentCalled) {
 			cout << "D3D12 Present hook called." << endl;
+			pSwapChain->GetDevice(__uuidof(pDevice), (void**)&pDevice);
+
 			presentCalled = true;
 		}
 
@@ -131,7 +134,8 @@ namespace D3D12Hook {
 
 		// Get VTable
 		pSwapChainVTable = (DWORD_PTR*)((DWORD_PTR*)pSwapChain)[0];
-		LPVOID toHook = (LPVOID)pSwapChainVTable[140];
+		toHook = (LPVOID)pSwapChainVTable[8];
+
 		if (MH_CreateHook(toHook, &PresentHook, reinterpret_cast<LPVOID*>(&presentHookTrampoline)) != MH_OK) {
 			cout << "Failed to install hooks for D3D12." << endl;
 			return;
@@ -141,7 +145,10 @@ namespace D3D12Hook {
 			cout << "Failed to enable hooks for D3D12." << endl;
 			return;
 		}
+	}
 
-		cout << pSwapChain << endl;
+	void Uninstall() {
+		MH_DisableHook(toHook);
+		MH_RemoveHook(toHook);
 	}
 }

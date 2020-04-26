@@ -5,7 +5,7 @@
 
 using namespace std;
 
-string processName = "GFXTest64.exe";
+string processName = "D3D12HelloTriangle.exe";
 
 #if _WIN64
 #define MIN_HOOK_NAME "\\MinHook.x64.dll"

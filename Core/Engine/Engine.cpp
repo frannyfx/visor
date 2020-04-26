@@ -14,6 +14,14 @@ namespace Engine {
 	// On-screen elements
 	vector<Notification> notifications = {};
 
+	void Initialise() {
+		// Setup ImGui
+		IMGUI_CHECKVERSION();
+		ImGui::CreateContext();
+		ImGuiIO& io = ImGui::GetIO(); (void)io;
+		ImGui::StyleColorsDark();
+	}
+
 	void Render(GraphicsAPI graphicsAPI) {
 		// Clear out old resources to prevent memory leaks
 		EngineResources::Cleanup();

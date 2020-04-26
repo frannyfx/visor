@@ -104,8 +104,7 @@ namespace Discovery {
 		);
 
 		if (fSuccess) {
-			wstring receivedEndpoint(chBuf);
-			HandleResult(true, string(receivedEndpoint.begin(), receivedEndpoint.end()));
+			HandleResult(true, string(chBuf));
 			return NULL;
 		}
 		
