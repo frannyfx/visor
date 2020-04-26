@@ -193,6 +193,7 @@
     <ClCompile Include="Include\ImGui\imgui_demo.cpp" />
     <ClCompile Include="Include\ImGui\imgui_draw.cpp" />
     <ClCompile Include="Include\ImGui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="Include\ImGui\imgui_impl_dx12.cpp" />
     <ClCompile Include="Include\ImGui\imgui_impl_dx9.cpp" />
     <ClCompile Include="Include\ImGui\imgui_impl_win32.cpp" />
     <ClCompile Include="Include\ImGui\imgui_widgets.cpp" />
@@ -214,11 +215,10 @@
     <ClInclude Include="Hook\APIs\Vulkan.h" />
     <ClInclude Include="Hook\GraphicsAPI.h" />
     <ClInclude Include="Hook\Hook.h" />
-    <ClInclude Include="Include\GLFW\glfw3.h" />
-    <ClInclude Include="Include\GLFW\glfw3native.h" />
     <ClInclude Include="Include\ImGui\imconfig.h" />
     <ClInclude Include="Include\ImGui\imgui.h" />
     <ClInclude Include="Include\ImGui\imgui_impl_dx11.h" />
+    <ClInclude Include="Include\ImGui\imgui_impl_dx12.h" />
     <ClInclude Include="Include\ImGui\imgui_impl_dx9.h" />
     <ClInclude Include="Include\ImGui\imgui_impl_win32.h" />
     <ClInclude Include="Include\ImGui\imgui_internal.h" />

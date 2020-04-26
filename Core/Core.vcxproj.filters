@@ -84,6 +84,9 @@
     <ClCompile Include="Communication\Discovery.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Include\ImGui\imgui_impl_dx12.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Hook\Hook.h">
@@ -164,10 +167,7 @@
     <ClInclude Include="Communication\Discovery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\GLFW\glfw3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\GLFW\glfw3native.h">
+    <ClInclude Include="Include\ImGui\imgui_impl_dx12.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

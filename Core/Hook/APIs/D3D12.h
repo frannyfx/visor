@@ -1,2 +1,4 @@
 #pragma once
-void InitialiseD3D12Hooks();
+namespace D3D12Hook {
+	void InitialiseD3D12Hooks();
+}

@@ -40,7 +40,7 @@ namespace D3D9Hook {
 
 			// Initialise our engine
 			EngineResources::SetD3D9Device(&pDevice);
-			EngineResources::AddTexture(new Texture(TextureID::VISOR_LOGO, "C:\\Users\\blazi\\Desktop\\squidward.jpg"));
+			//EngineResources::AddTexture(new Texture(TextureID::VISOR_LOGO, "C:\\Users\\blazi\\Desktop\\squidward.jpg"));
 
 			// Initialise ImGui
 			ImGui_ImplWin32_Init(parameters.hFocusWindow);
