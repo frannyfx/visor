@@ -20,7 +20,6 @@
 
 using namespace std;
 
-
 namespace D3D11Hook {
 	// Hooking
 	typedef HRESULT(__stdcall* D3D11PresentHook) (IDXGISwapChain* pSwapChain, UINT syncInterval, UINT flags);
