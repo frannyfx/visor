@@ -217,6 +217,16 @@
     <ClInclude Include="Hook\APIs\Vulkan.h" />
     <ClInclude Include="Hook\GraphicsAPI.h" />
     <ClInclude Include="Hook\Hook.h" />
+    <ClInclude Include="Include\D3DX\d3dx9.h" />
+    <ClInclude Include="Include\D3DX\d3dx9anim.h" />
+    <ClInclude Include="Include\D3DX\d3dx9core.h" />
+    <ClInclude Include="Include\D3DX\d3dx9effect.h" />
+    <ClInclude Include="Include\D3DX\d3dx9math.h" />
+    <ClInclude Include="Include\D3DX\d3dx9mesh.h" />
+    <ClInclude Include="Include\D3DX\d3dx9shader.h" />
+    <ClInclude Include="Include\D3DX\d3dx9shape.h" />
+    <ClInclude Include="Include\D3DX\d3dx9tex.h" />
+    <ClInclude Include="Include\D3DX\d3dx9xof.h" />
     <ClInclude Include="Include\ImGui\imconfig.h" />
     <ClInclude Include="Include\ImGui\imgui.h" />
     <ClInclude Include="Include\ImGui\imgui_impl_dx11.h" />
@@ -230,6 +240,7 @@
     <ClInclude Include="Utils\Utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Include\D3DX\d3dx9math.inl" />
     <None Include="Include\MinHook\lib\MinHook.x64.dll" />
     <None Include="Include\MinHook\lib\MinHook.x86.dll" />
     <None Include="Include\websocketpp\out\build\x64-Debug\CMakeFiles\3.16.19112601-MSVC_2\CMakeDetermineCompilerABI_C.bin" />

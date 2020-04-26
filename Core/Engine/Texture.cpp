@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Texture.h"
-#include <d3dx9tex.h>
+#include <D3DX/d3dx9tex.h>
 
 using namespace std;
 
