@@ -20,32 +20,20 @@
 #include "../../Engine/Engine.h"
 #include "../../Engine/EngineResources.h"
 
-namespace Hook {
-	class D3D11Hook : public Hook::HookBase {
+namespace Hook::D3D11 {
+	class Instance : public Hook::HookBase {
 	private:
-		// Hooking
-		typedef HRESULT(__stdcall* D3D11PresentHook) (IDXGISwapChain* pSwapChain, UINT syncInterval, UINT flags);
-		D3D11PresentHook presentHookTrampoline = NULL;
-		bool presentCalled = false;
-		LPVOID presentHookAddress = NULL;
-
-		// Direct3D
-		ID3D11Device* pDevice;
-		ID3D11DeviceContext* pContext;
-		IDXGISwapChain* pSwapChain;
-		ID3D11RenderTargetView* renderTargetView;
-
-		DWORD_PTR* pSwapChainVTable = NULL;
-		DWORD_PTR* pDeviceContextVTable = NULL;
-
-		// Hook
-		HRESULT __stdcall PresentHook(IDXGISwapChain* pSwapChain, UINT syncInterval, UINT flags);
+		// Singleton
+		static Instance* instance;
+		Instance();
 
 	public: 
+		static Instance* GetInstance();
+
 		void Install();
 		void Enable();
 		void Disable();
 		void Uninstall();
-		
 	};
 }
+

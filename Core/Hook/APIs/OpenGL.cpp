@@ -1,53 +1,65 @@
-#include <Windows.h>
-#include <iostream>
+#include "OpenGL.h"
 
-// Hooking
-#include <MinHook/MinHook.h>
-
-// GUI
-#include <ImGui/imgui.h>
-#include <ImGui/imgui_impl_win32.h>
-#include "../../Engine/Engine.h"
-
-// GUI
-#include <ImGui/imgui.h>
-#include <ImGui/imgui_impl_win32.h>
-#include <ImGui/imgui_impl_dx12.h>
-#include "../../Engine/Engine.h"
-#include "../../Engine/EngineResources.h"
-
-using namespace std;
-
-namespace OpenGLHook {
+namespace Hook::OpenGL {
 	// Hooking
 	typedef BOOL(__stdcall* owglSwapBuffers)(HDC hdc);
-	owglSwapBuffers twglSwapBuffers = NULL;
+	owglSwapBuffers swapBuffersTrampoline = NULL;
 	bool swapBuffersCalled = false;
+	LPVOID swapBuffersAddress = NULL;
+
+	// Instance
+	Instance* instance = Instance::GetInstance();
 
 	BOOL __stdcall hkwglSwapBuffers(HDC hdc) {
+		// Prevent calling while hook is being disabled
+		if (instance->IsInstalled() && !instance->IsSuccessful())
+			return swapBuffersTrampoline(hdc);
+
+		// Initialise
 		if (!swapBuffersCalled) {
 			cout << "OpenGL SwapBuffers hook called." << endl;
 
-
+			// Complete installation
 			swapBuffersCalled = true;
+			instance->FinishInstall(true);
 		}
 
-		return twglSwapBuffers(hdc);
+		return swapBuffersTrampoline(hdc);
 	}
 
-	void InitialiseOpenGLHooks() {
+	Instance* Instance::GetInstance() {
+		static Instance instance;
+		return &instance;
+	}
+
+	Instance::Instance() {}
+
+	void Instance::Install() {
 		cout << "Installing hooks for OpenGL..." << endl;
 
-		LPVOID toHook = GetProcAddress(GetModuleHandleA("opengl32.dll"), "wglSwapBuffers");
-
-		if (MH_CreateHook(toHook, &hkwglSwapBuffers, reinterpret_cast<LPVOID*>(&twglSwapBuffers)) != MH_OK) {
+		// Hook swap buffers
+		swapBuffersAddress = GetProcAddress(GetModuleHandleA("opengl32.dll"), "wglSwapBuffers");
+		if (MH_CreateHook(swapBuffersAddress, &hkwglSwapBuffers, reinterpret_cast<LPVOID*>(&swapBuffersTrampoline)) != MH_OK) {
 			cout << "Failed to install hooks for OpenGL." << endl;
+			FinishInstall(false);
 			return;
 		};
 
-		if (MH_EnableHook(toHook) != MH_OK) {
+		Enable();
+	}
+
+	void Instance::Enable() {
+		if (MH_EnableHook(swapBuffersAddress) != MH_OK) {
 			cout << "Failed to enable hooks for OpenGL." << endl;
 			return;
 		}
+	}
+
+	void Instance::Disable() {
+		MH_DisableHook(swapBuffersAddress);
+	}
+
+	void Instance::Uninstall() {
+		MH_RemoveHook(swapBuffersAddress);
 	}
 }

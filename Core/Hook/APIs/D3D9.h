@@ -1,7 +1,28 @@
 #pragma once
+#include <iostream>
 
-namespace D3D9Hook {
-    enum class D3D9Offsets {
+// Graphics
+#include <d3d9.h>
+#pragma comment(lib, "d3d9.lib")
+
+// Hooking
+#include <MinHook/MinHook.h>
+#include "HookBase.h"
+
+// Offsets
+#include "D3D9.h"
+
+// GUI
+#include <ImGui/imgui.h>
+#include <ImGui/imgui_impl_win32.h>
+#include <ImGui/imgui_impl_dx9.h>
+#include "../../Engine/Engine.h"
+#include "../../Engine/EngineResources.h"
+
+using namespace std;
+
+namespace Hook::D3D9 {
+    enum class Offsets {
         QueryInterface = 0,
         AddRef = 1,
         Release = 2,
@@ -123,5 +144,18 @@ namespace D3D9Hook {
         CreateQuery = 118
     };
 
-    void InitialiseD3D9Hooks();
+    class Instance : public Hook::HookBase {
+    private:
+        // Singleton
+        static Instance* instance;
+        Instance();
+
+    public:
+        static Instance* GetInstance();
+
+        void Install();
+        void Enable();
+        void Disable();
+        void Uninstall();
+    };
 }

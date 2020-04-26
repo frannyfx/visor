@@ -20,6 +20,7 @@
 #include "APIs/D3D9.h"
 #endif
 
+#if VISOR_HOOK_DXGI
 #if VISOR_HOOK_D3D10
 #include "APIs/D3D10.h"
 #endif
@@ -30,6 +31,7 @@
 
 #if VISOR_HOOK_D3D12
 #include "APIs/D3D12.h"
+#endif
 #endif
 
 #if VISOR_HOOK_OPENGL
@@ -50,6 +52,7 @@ LoadedGraphicsAPIs DetectGraphicsAPI() {
 	loaded.D3D9Loaded = d3d9Handle != NULL;
 #endif
 
+#if VISOR_HOOK_DXGI
 #if VISOR_HOOK_D3D10
 	HANDLE d3d10Handle = GetModuleHandle(TEXT("d3d10.dll"));
 	loaded.D3D10Loaded = d3d10Handle != NULL;
@@ -63,6 +66,7 @@ LoadedGraphicsAPIs DetectGraphicsAPI() {
 #if VISOR_HOOK_D3D12
 	HANDLE d3d12Handle = GetModuleHandle(TEXT("d3d12.dll"));
 	loaded.D3D12Loaded = d3d12Handle != NULL;
+#endif
 #endif
 
 #if VISOR_HOOK_OPENGL
@@ -98,36 +102,66 @@ DWORD __stdcall InitialiseHooks(LPVOID) {
 
 #if VISOR_HOOK_D3D9
 	if (loaded.D3D9Loaded) {
-		//D3D9Hook::InitialiseD3D9Hooks();
+		Hook::D3D9::Instance* d3d9Instance = Hook::D3D9::Instance::GetInstance();
+		d3d9Instance->Install();
+		d3d9Instance->WaitForInstall();
+		if (d3d9Instance->IsInstalled() && !d3d9Instance->IsSuccessful()) {
+			d3d9Instance->Disable();
+			d3d9Instance->Uninstall();
+		}
 	}
 #endif
 
+#if VISOR_HOOK_DXGI
+	// Prevent loading newer versions if previous ones succeeded
+	bool dxgiSuccessful = false;
+
+	// Instances
+	Hook::D3D11::Instance* d3d11Instance = Hook::D3D11::Instance::GetInstance();
+	Hook::D3D12::Instance* d3d12Instance = Hook::D3D12::Instance::GetInstance();
+
 #if VISOR_HOOK_D3D10
-	if (loaded.D3D10Loaded) {
-		//InitialiseD3D10Hooks();
+	if (!dxgiSuccessful && loaded.D3D10Loaded) {
+		
 	}
 #endif
 
 #if VISOR_HOOK_D3D11
-	if (loaded.D3D11Loaded) {
-		//D3D11Hook::InitialiseD3D11Hooks();
-		Hook::D3D11Hook d3d11Hook;
-		d3d11Hook.Install();
-		d3d11Hook.WaitForInstall();
+	if (!dxgiSuccessful && loaded.D3D11Loaded) {
+		d3d11Instance->Install();
+		d3d11Instance->WaitForInstall();
+		if (d3d11Instance->IsInstalled() && !d3d11Instance->IsSuccessful()) {
+			d3d11Instance->Disable();
+			d3d11Instance->Uninstall();
+		}
+
+		dxgiSuccessful = d3d11Instance->IsSuccessful();
 	}
 #endif
 
-	cout << "Done!" << endl;
-
 #if VISOR_HOOK_D3D12
-	if (loaded.D3D12Loaded) {
-		//D3D12Hook::InitialiseD3D12Hooks();
+	if (!dxgiSuccessful && loaded.D3D12Loaded) {
+		d3d12Instance->Install();
+		d3d12Instance->WaitForInstall();
+		if (d3d12Instance->IsInstalled() && !d3d12Instance->IsSuccessful()) {
+			d3d12Instance->Disable();
+			d3d12Instance->Uninstall();
+		}
+
+		dxgiSuccessful = d3d12Instance->IsSuccessful();
 	}
+#endif
 #endif
 
 #if VISOR_HOOK_OPENGL
 	if (loaded.OpenGLLoaded) {
-		//OpenGLHook::InitialiseOpenGLHooks();
+		Hook::OpenGL::Instance* openGLInstance = Hook::OpenGL::Instance::GetInstance();
+		openGLInstance->Install();
+		openGLInstance->WaitForInstall();
+		if (openGLInstance->IsInstalled() && !openGLInstance->IsSuccessful()) {
+			openGLInstance->Disable();
+			openGLInstance->Uninstall();
+		}
 	}
 #endif
 

@@ -1,49 +1,55 @@
-#include <iostream>
+#include "D3D12.h"
 
-// Graphics
-#include "DXGI.h"
-#include <d3d12.h>
-#pragma comment(lib, "d3d12.lib")
-
-// Hooking
-#include <MinHook/MinHook.h>
-
-// GUI
-#include <ImGui/imgui.h>
-#include <ImGui/imgui_impl_win32.h>
-#include "../../Engine/Engine.h"
-#include "../../Engine/EngineResources.h"
-
-using namespace std;
-
-namespace D3D12Hook 
+namespace Hook::D3D12 
 {
-	// Forward declaration
-	void Uninstall();
-
 	// Hooking
 	typedef long(__stdcall* D3D12PresentHook) (IDXGISwapChain* pSwapChain, UINT syncInterval, UINT flags);
 	D3D12PresentHook presentHookTrampoline = NULL;
 	bool presentCalled = false;
-	LPVOID toHook = NULL;
+	LPVOID presentHookAddress = NULL;
 
 	// D3D Objects
 	ID3D12Device* pDevice;
 	DWORD_PTR* pSwapChainVTable = NULL;
 
+	// Instance
+	Instance* instance = Instance::GetInstance();
+
 	long __stdcall PresentHook(IDXGISwapChain* pSwapChain, UINT syncInterval, UINT flags) {
+		// Prevent calling while hook is being disabled
+		if (instance->IsInstalled() && !instance->IsSuccessful())
+			return presentHookTrampoline(pSwapChain, syncInterval, flags);
+
+		// Initialise
 		if (!presentCalled) {
 			cout << "D3D12 Present hook called." << endl;
 			pSwapChain->GetDevice(__uuidof(pDevice), (void**)&pDevice);
+			if (pDevice == nullptr) {
+				cout << "D3D device version mismatch. Disabling D3D12 hook." << endl;
+				Instance::GetInstance()->FinishInstall(false);
+				return presentHookTrampoline(pSwapChain, syncInterval, flags);
+			}
 
+			// Complete install
 			presentCalled = true;
+			Instance::GetInstance()->FinishInstall(true);
 		}
 
 		return presentHookTrampoline(pSwapChain, syncInterval, flags);
 	}
 
-	void InitialiseD3D12Hooks() {
-		cout << "Initialising hooks for D3D12" << endl;
+	Instance* Instance::GetInstance() {
+		static Instance instance;
+		return &instance;
+	}
+
+	Instance::Instance() {}
+
+	void Instance::Install() {
+		if (installed || enabled)
+			return;
+
+		cout << "Installing hooks for D3D12..." << endl;
 
 		// Get a handle on the foreground window
 		HWND hWindow = GetForegroundWindow();
@@ -51,48 +57,55 @@ namespace D3D12Hook
 		// Get handle on libD3D12
 		HMODULE libD3D12;
 		if ((libD3D12 = GetModuleHandle(TEXT("d3d12.dll"))) == NULL) {
-			cout << "Couldn't get handle on d3d12.dll" << endl;
+			cout << "Couldn't get handle on d3d12.dll." << endl;
+			FinishInstall(false);
 			return;
 		}
 
 		// Get handle on libDXGI
 		HMODULE libDXGI;
 		if ((libDXGI = GetModuleHandle(TEXT("dxgi.dll"))) == NULL) {
-			cout << "Couldn't get handle on dxgi.dll" << endl;
+			cout << "Couldn't get handle on dxgi.dll." << endl;
+			FinishInstall(false);
 			return;
 		}
 
 		// Get pointer for create factory method
 		void* CreateDXGIFactory;
 		if ((CreateDXGIFactory = GetProcAddress(libDXGI, "CreateDXGIFactory")) == NULL) {
-			cout << "Couldn't get pointer for CreateDXGIFactory method" << endl;
+			cout << "Couldn't get pointer for CreateDXGIFactory method." << endl;
+			FinishInstall(false);
 			return;
 		}
 
 		// Create a DXGI factory
 		IDXGIFactory* pFactory;
 		if (((long(__stdcall*)(const IID&, void**))(CreateDXGIFactory))(__uuidof(IDXGIFactory), (void**)&pFactory) < 0) {
-			cout << "Couldn't create IDXGIFactory" << endl;
+			cout << "Couldn't create IDXGIFactory." << endl;
+			FinishInstall(false);
 			return;
 		}
 
 		// Create DXGI adapter
 		IDXGIAdapter* pAdapter;
 		if (pFactory->EnumAdapters(0, &pAdapter) == DXGI_ERROR_NOT_FOUND) {
-			cout << "Couldn't create DXGI adapter" << endl;
+			cout << "Couldn't create DXGI adapter." << endl;
+			FinishInstall(false);
 			return;
 		}
 
 		// Get pointer for create device method
 		void* D3D12CreateDevice;
 		if ((D3D12CreateDevice = GetProcAddress(libD3D12, "D3D12CreateDevice")) == NULL) {
-			cout << "Couldn't get pointer for D3D12CreateDevice method" << endl;
+			cout << "Couldn't get pointer for D3D12CreateDevice method." << endl;
+			FinishInstall(false);
 			return;
 		}
 
 		// Create the device
 		if (((long(__stdcall*)(IUnknown*, D3D_FEATURE_LEVEL, const IID&, void**))(D3D12CreateDevice))(pAdapter, D3D_FEATURE_LEVEL_11_0, __uuidof(ID3D12Device), (void**)&pDevice) < 0) {
-			cout << "Couldn't create D3D12 Device" << endl;
+			cout << "Couldn't create D3D12 Device." << endl;
+			FinishInstall(false);
 			return;
 		}
 
@@ -105,21 +118,24 @@ namespace D3D12Hook
 		ID3D12CommandQueue* pCommandQueue;
 		if (pDevice->CreateCommandQueue(&queueDesc, __uuidof(ID3D12CommandQueue), (void**)&pCommandQueue) < 0)
 		{
-			cout << "Failed to create command queue" << endl;
+			cout << "Failed to create command queue." << endl;
+			FinishInstall(false);
 			return;
 		}
 
 		ID3D12CommandAllocator* pCommandAllocator;
 		if (pDevice->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, __uuidof(ID3D12CommandAllocator), (void**)&pCommandAllocator) < 0)
 		{
-			cout << "Failed to create command allocator" << endl;
+			cout << "Failed to create command allocator." << endl;
+			FinishInstall(false);
 			return;
 		}
 
 		ID3D12GraphicsCommandList* pCommandList;
 		if (pDevice->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, pCommandAllocator, NULL, __uuidof(ID3D12GraphicsCommandList), (void**)&pCommandList) < 0)
 		{
-			cout << "Failed to create command list" << endl;
+			cout << "Failed to create command list." << endl;
+			FinishInstall(false);
 			return;
 		}
 
@@ -128,27 +144,49 @@ namespace D3D12Hook
 		IDXGISwapChain* pSwapChain;
 		if (pFactory->CreateSwapChain(pCommandQueue, &swapChainDesc, &pSwapChain) < 0)
 		{
-			cout << "Failed to create swap chain" << endl;
+			cout << "Failed to create swap chain." << endl;
+			FinishInstall(false);
 			return;
 		}
 
 		// Get VTable
 		pSwapChainVTable = (DWORD_PTR*)((DWORD_PTR*)pSwapChain)[0];
-		toHook = (LPVOID)pSwapChainVTable[8];
 
-		if (MH_CreateHook(toHook, &PresentHook, reinterpret_cast<LPVOID*>(&presentHookTrampoline)) != MH_OK) {
+		// Release resources
+		pDevice->Release();
+		pSwapChain->Release();
+		pDevice = NULL;
+		pSwapChain = NULL;
+
+		presentHookAddress = (LPVOID)pSwapChainVTable[static_cast<uint32_t>(DXGIHook::DXGIOffsets::Present)];
+		if (MH_CreateHook(presentHookAddress, &PresentHook, reinterpret_cast<LPVOID*>(&presentHookTrampoline)) != MH_OK) {
 			cout << "Failed to install hooks for D3D12." << endl;
+			FinishInstall(false);
 			return;
 		};
 
-		if (MH_EnableHook(toHook) != MH_OK) {
+		Enable();
+	}
+
+	void Instance::Enable() {
+		if (MH_EnableHook(presentHookAddress) != MH_OK) {
 			cout << "Failed to enable hooks for D3D12." << endl;
+			if (!installed) FinishInstall(false);
 			return;
 		}
 	}
 
-	void Uninstall() {
-		MH_DisableHook(toHook);
-		MH_RemoveHook(toHook);
+	void Instance::Disable() {
+		if (!installed || !enabled)
+			return;
+
+		MH_DisableHook(presentHookAddress);
+	}
+
+	void Instance::Uninstall() {
+		if (!installed || enabled)
+			return;
+
+		MH_RemoveHook(presentHookAddress);
 	}
 }
