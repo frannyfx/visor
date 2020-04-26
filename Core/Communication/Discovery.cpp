@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include "Discovery.h"
 #include "../Engine/Engine.h"
+#include "Client.h"
 
 using namespace std;
 
@@ -46,10 +47,11 @@ namespace Discovery {
 
 	void HandleResult(bool result, string receivedEndpoint = "") {
 		if (!result) {
-			//Engine::ShowNotification("Something went wrong.", "Please restart your game and try again.");
+			Engine::ShowNotification("Something went wrong.", "Please restart your game and try again.");
 			return;
 		}
 
+		Client::Open(receivedEndpoint);
 		cout << receivedEndpoint << endl;
 	}
 

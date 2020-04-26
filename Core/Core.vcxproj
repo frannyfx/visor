@@ -74,25 +74,25 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)\Build\$(Configuration)\$(Platform)</OutDir>
     <IntDir>$(SolutionDir)\Build\Intermediate\$(ProjectName)\$(Configuration)\$(Platform)</IntDir>
-    <IncludePath>$(SolutionDir)Core\Include;$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core\Include;$(DXSDK_DIR)Include;$(SolutionDir)Common\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)\Build\$(Configuration)\$(Platform)</OutDir>
     <IntDir>$(SolutionDir)\Build\Intermediate\$(ProjectName)\$(Configuration)\$(Platform)</IntDir>
-    <IncludePath>$(SolutionDir)Core\Include;$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core\Include;$(DXSDK_DIR)Include;$(SolutionDir)Common\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)\Build\$(Configuration)\$(Platform)</OutDir>
     <IntDir>$(SolutionDir)\Build\Intermediate\$(ProjectName)\$(Configuration)\$(Platform)</IntDir>
-    <IncludePath>$(SolutionDir)Core\Include;$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core\Include;$(DXSDK_DIR)Include;$(SolutionDir)Common\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)\Build\$(Configuration)\$(Platform)</OutDir>
     <IntDir>$(SolutionDir)\Build\Intermediate\$(ProjectName)\$(Configuration)\$(Platform)</IntDir>
-    <IncludePath>$(SolutionDir)Core\Include;$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core\Include;$(DXSDK_DIR)Include;$(SolutionDir)Common\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -175,6 +175,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Communication\Client.cpp" />
     <ClCompile Include="Communication\Discovery.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\EngineResources.cpp" />
@@ -201,6 +202,7 @@
     <ClCompile Include="Utils\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Communication\Client.h" />
     <ClInclude Include="Communication\Discovery.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\EngineResources.h" />

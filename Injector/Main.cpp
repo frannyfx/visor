@@ -31,6 +31,7 @@ int main()
 
     // Get library path and inject
     cout << "Injecting libraries from " << parentDirectory << " into " << processName << " (" << pid << ")." << endl;
+    InjectLibrary(pid, parentDirectory + "\\boost_random-vc142-mt-gd-x64-1_72.dll");
     InjectLibrary(pid, parentDirectory + MIN_HOOK_NAME);
     InjectLibrary(pid, parentDirectory + "\\Core.dll");
     return 0;

@@ -10,7 +10,7 @@ using namespace std::chrono;
 class Notification {
 public:
 	// Rendering style
-	const int NOTIFICATION_DURATION = 10000;
+	const int NOTIFICATION_DURATION = 5000;
 	const int NOTIFICATION_FADE_DURATION = 300;
 	const int NOTIFICATION_DISTANCE = 10;
 	const float NOTIFICATION_MAX_ALPHA = 1;
