@@ -113,7 +113,7 @@ DWORD __stdcall InitialiseHooks(LPVOID) {
 
 #if VISOR_HOOK_D3D12
 	if (loaded.D3D12Loaded) {
-		InitialiseD3D12Hooks();
+		D3D12Hook::InitialiseD3D12Hooks();
 	}
 #endif
 

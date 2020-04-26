@@ -84,16 +84,7 @@
     <ClCompile Include="Communication\Discovery.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Include\asio\impl\src.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\websocketpp\out\build\x64-Debug\CMakeFiles\3.16.19112601-MSVC_2\CompilerIdC\CMakeCCompilerId.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\websocketpp\out\build\x64-Debug\CMakeFiles\3.16.19112601-MSVC_2\CompilerIdCXX\CMakeCXXCompilerId.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\websocketpp\out\build\x64-Debug\CMakeFiles\ShowIncludes\main.c">
+    <ClCompile Include="Include\ImGui\imgui_impl_dx12.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -176,10 +167,7 @@
     <ClInclude Include="Communication\Discovery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\GLFW\glfw3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\GLFW\glfw3native.h">
+    <ClInclude Include="Include\ImGui\imgui_impl_dx12.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Include\asio\detail\impl\buffer_sequence_adapter.ipp">

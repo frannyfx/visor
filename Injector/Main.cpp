@@ -31,8 +31,6 @@ int main()
 
     // Get library path and inject
     cout << "Injecting libraries from " << parentDirectory << " into " << processName << " (" << pid << ")." << endl;
-    //InjectLibrary(pid, parentDirectory + "\\capstone.dll");
-    //InjectLibrary(pid, parentDirectory + "\\PolyHook_2.dll");
     InjectLibrary(pid, parentDirectory + MIN_HOOK_NAME);
     InjectLibrary(pid, parentDirectory + "\\Core.dll");
     return 0;
