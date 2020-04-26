@@ -214,24 +214,13 @@
     <ClInclude Include="Hook\APIs\Vulkan.h" />
     <ClInclude Include="Hook\GraphicsAPI.h" />
     <ClInclude Include="Hook\Hook.h" />
-    <ClInclude Include="Include\GLFW\glfw3.h" />
-    <ClInclude Include="Include\GLFW\glfw3native.h" />
-    <ClInclude Include="Include\ImGui\imconfig.h" />
-    <ClInclude Include="Include\ImGui\imgui.h" />
-    <ClInclude Include="Include\ImGui\imgui_impl_dx11.h" />
-    <ClInclude Include="Include\ImGui\imgui_impl_dx9.h" />
-    <ClInclude Include="Include\ImGui\imgui_impl_win32.h" />
-    <ClInclude Include="Include\ImGui\imgui_internal.h" />
-    <ClInclude Include="Include\ImGui\imstb_rectpack.h" />
-    <ClInclude Include="Include\ImGui\imstb_textedit.h" />
-    <ClInclude Include="Include\ImGui\imstb_truetype.h" />
-    <ClInclude Include="Include\MinHook\MinHook.h" />
-    <ClInclude Include="Include\STB\stb_image.h" />
     <ClInclude Include="Utils\Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Include\MinHook\lib\MinHook.x64.dll" />
     <None Include="Include\MinHook\lib\MinHook.x86.dll" />
+    <None Include="Include\websocketpp\out\build\x64-Debug\CMakeFiles\3.16.19112601-MSVC_2\CMakeDetermineCompilerABI_C.bin" />
+    <None Include="Include\websocketpp\out\build\x64-Debug\CMakeFiles\3.16.19112601-MSVC_2\CMakeDetermineCompilerABI_CXX.bin" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Include\MinHook\lib\MinHook.x64.lib" />
