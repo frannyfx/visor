@@ -188,6 +188,10 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Common\Include\Protocols\client.pb.cc" />
+    <ClCompile Include="..\Common\Include\Protocols\server.pb.cc" />
+    <ClCompile Include="Capture\Capture.cpp" />
+    <ClCompile Include="Config.cpp" />
     <ClCompile Include="Communication\Client.cpp" />
     <ClCompile Include="Communication\Discovery.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
@@ -215,6 +219,10 @@
     <ClCompile Include="Utils\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Common\Include\Protocols\client.pb.h" />
+    <ClInclude Include="..\Common\Include\Protocols\server.pb.h" />
+    <ClInclude Include="Capture\Capture.h" />
+    <ClInclude Include="Capture\Config.h" />
     <ClInclude Include="Communication\Client.h" />
     <ClInclude Include="Communication\Discovery.h" />
     <ClInclude Include="Engine\Engine.h" />

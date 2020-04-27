@@ -277,11 +277,11 @@ class ClientMessage_Hello :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kExecutablePathFieldNumber = 3,
+    kExecutablePathFieldNumber = 2,
+    kWindowTitleFieldNumber = 3,
     kPidFieldNumber = 1,
-    kGameIdFieldNumber = 2,
   };
-  // string executable_path = 3;
+  // string executable_path = 2;
   void clear_executable_path();
   const std::string& executable_path() const;
   void set_executable_path(const std::string& value);
@@ -297,6 +297,22 @@ class ClientMessage_Hello :
   std::string* _internal_mutable_executable_path();
   public:
 
+  // string window_title = 3;
+  void clear_window_title();
+  const std::string& window_title() const;
+  void set_window_title(const std::string& value);
+  void set_window_title(std::string&& value);
+  void set_window_title(const char* value);
+  void set_window_title(const char* value, size_t size);
+  std::string* mutable_window_title();
+  std::string* release_window_title();
+  void set_allocated_window_title(std::string* window_title);
+  private:
+  const std::string& _internal_window_title() const;
+  void _internal_set_window_title(const std::string& value);
+  std::string* _internal_mutable_window_title();
+  public:
+
   // int32 pid = 1;
   void clear_pid();
   ::PROTOBUF_NAMESPACE_ID::int32 pid() const;
@@ -306,23 +322,14 @@ class ClientMessage_Hello :
   void _internal_set_pid(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // int32 game_id = 2;
-  void clear_game_id();
-  ::PROTOBUF_NAMESPACE_ID::int32 game_id() const;
-  void set_game_id(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_game_id() const;
-  void _internal_set_game_id(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
   // @@protoc_insertion_point(class_scope:ClientMessage.Hello)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr executable_path_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr window_title_;
   ::PROTOBUF_NAMESPACE_ID::int32 pid_;
-  ::PROTOBUF_NAMESPACE_ID::int32 game_id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_client_2eproto;
 };
@@ -1175,29 +1182,12 @@ class ClientMessage :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kSessionIdFieldNumber = 1,
-    kHelloFieldNumber = 3,
-    kFrameFieldNumber = 4,
-    kBookmarkFieldNumber = 5,
-    kMessageTypeFieldNumber = 2,
+    kHelloFieldNumber = 2,
+    kFrameFieldNumber = 3,
+    kBookmarkFieldNumber = 4,
+    kMessageTypeFieldNumber = 1,
   };
-  // string session_id = 1;
-  void clear_session_id();
-  const std::string& session_id() const;
-  void set_session_id(const std::string& value);
-  void set_session_id(std::string&& value);
-  void set_session_id(const char* value);
-  void set_session_id(const char* value, size_t size);
-  std::string* mutable_session_id();
-  std::string* release_session_id();
-  void set_allocated_session_id(std::string* session_id);
-  private:
-  const std::string& _internal_session_id() const;
-  void _internal_set_session_id(const std::string& value);
-  std::string* _internal_mutable_session_id();
-  public:
-
-  // .ClientMessage.Hello hello = 3;
+  // .ClientMessage.Hello hello = 2;
   bool has_hello() const;
   private:
   bool _internal_has_hello() const;
@@ -1212,7 +1202,7 @@ class ClientMessage :
   ::ClientMessage_Hello* _internal_mutable_hello();
   public:
 
-  // .ClientMessage.Frame frame = 4;
+  // .ClientMessage.Frame frame = 3;
   bool has_frame() const;
   private:
   bool _internal_has_frame() const;
@@ -1227,7 +1217,7 @@ class ClientMessage :
   ::ClientMessage_Frame* _internal_mutable_frame();
   public:
 
-  // .ClientMessage.Bookmark bookmark = 5;
+  // .ClientMessage.Bookmark bookmark = 4;
   bool has_bookmark() const;
   private:
   bool _internal_has_bookmark() const;
@@ -1242,7 +1232,7 @@ class ClientMessage :
   ::ClientMessage_Bookmark* _internal_mutable_bookmark();
   public:
 
-  // .ClientMessage.Type message_type = 2;
+  // .ClientMessage.Type message_type = 1;
   void clear_message_type();
   ::ClientMessage_Type message_type() const;
   void set_message_type(::ClientMessage_Type value);
@@ -1256,7 +1246,6 @@ class ClientMessage :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr session_id_;
   ::ClientMessage_Hello* hello_;
   ::ClientMessage_Frame* frame_;
   ::ClientMessage_Bookmark* bookmark_;
@@ -1295,27 +1284,7 @@ inline void ClientMessage_Hello::set_pid(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:ClientMessage.Hello.pid)
 }
 
-// int32 game_id = 2;
-inline void ClientMessage_Hello::clear_game_id() {
-  game_id_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 ClientMessage_Hello::_internal_game_id() const {
-  return game_id_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 ClientMessage_Hello::game_id() const {
-  // @@protoc_insertion_point(field_get:ClientMessage.Hello.game_id)
-  return _internal_game_id();
-}
-inline void ClientMessage_Hello::_internal_set_game_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  game_id_ = value;
-}
-inline void ClientMessage_Hello::set_game_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_game_id(value);
-  // @@protoc_insertion_point(field_set:ClientMessage.Hello.game_id)
-}
-
-// string executable_path = 3;
+// string executable_path = 2;
 inline void ClientMessage_Hello::clear_executable_path() {
   executable_path_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -1373,6 +1342,66 @@ inline void ClientMessage_Hello::set_allocated_executable_path(std::string* exec
   }
   executable_path_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), executable_path);
   // @@protoc_insertion_point(field_set_allocated:ClientMessage.Hello.executable_path)
+}
+
+// string window_title = 3;
+inline void ClientMessage_Hello::clear_window_title() {
+  window_title_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& ClientMessage_Hello::window_title() const {
+  // @@protoc_insertion_point(field_get:ClientMessage.Hello.window_title)
+  return _internal_window_title();
+}
+inline void ClientMessage_Hello::set_window_title(const std::string& value) {
+  _internal_set_window_title(value);
+  // @@protoc_insertion_point(field_set:ClientMessage.Hello.window_title)
+}
+inline std::string* ClientMessage_Hello::mutable_window_title() {
+  // @@protoc_insertion_point(field_mutable:ClientMessage.Hello.window_title)
+  return _internal_mutable_window_title();
+}
+inline const std::string& ClientMessage_Hello::_internal_window_title() const {
+  return window_title_.GetNoArena();
+}
+inline void ClientMessage_Hello::_internal_set_window_title(const std::string& value) {
+  
+  window_title_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+}
+inline void ClientMessage_Hello::set_window_title(std::string&& value) {
+  
+  window_title_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:ClientMessage.Hello.window_title)
+}
+inline void ClientMessage_Hello::set_window_title(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  window_title_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:ClientMessage.Hello.window_title)
+}
+inline void ClientMessage_Hello::set_window_title(const char* value, size_t size) {
+  
+  window_title_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:ClientMessage.Hello.window_title)
+}
+inline std::string* ClientMessage_Hello::_internal_mutable_window_title() {
+  
+  return window_title_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* ClientMessage_Hello::release_window_title() {
+  // @@protoc_insertion_point(field_release:ClientMessage.Hello.window_title)
+  
+  return window_title_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void ClientMessage_Hello::set_allocated_window_title(std::string* window_title) {
+  if (window_title != nullptr) {
+    
+  } else {
+    
+  }
+  window_title_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), window_title);
+  // @@protoc_insertion_point(field_set_allocated:ClientMessage.Hello.window_title)
 }
 
 // -------------------------------------------------------------------
@@ -1755,67 +1784,7 @@ inline void ClientMessage_Bookmark::set_allocated_csgo(::ClientMessage_Bookmark_
 
 // ClientMessage
 
-// string session_id = 1;
-inline void ClientMessage::clear_session_id() {
-  session_id_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline const std::string& ClientMessage::session_id() const {
-  // @@protoc_insertion_point(field_get:ClientMessage.session_id)
-  return _internal_session_id();
-}
-inline void ClientMessage::set_session_id(const std::string& value) {
-  _internal_set_session_id(value);
-  // @@protoc_insertion_point(field_set:ClientMessage.session_id)
-}
-inline std::string* ClientMessage::mutable_session_id() {
-  // @@protoc_insertion_point(field_mutable:ClientMessage.session_id)
-  return _internal_mutable_session_id();
-}
-inline const std::string& ClientMessage::_internal_session_id() const {
-  return session_id_.GetNoArena();
-}
-inline void ClientMessage::_internal_set_session_id(const std::string& value) {
-  
-  session_id_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
-}
-inline void ClientMessage::set_session_id(std::string&& value) {
-  
-  session_id_.SetNoArena(
-    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:ClientMessage.session_id)
-}
-inline void ClientMessage::set_session_id(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  session_id_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:ClientMessage.session_id)
-}
-inline void ClientMessage::set_session_id(const char* value, size_t size) {
-  
-  session_id_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:ClientMessage.session_id)
-}
-inline std::string* ClientMessage::_internal_mutable_session_id() {
-  
-  return session_id_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline std::string* ClientMessage::release_session_id() {
-  // @@protoc_insertion_point(field_release:ClientMessage.session_id)
-  
-  return session_id_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline void ClientMessage::set_allocated_session_id(std::string* session_id) {
-  if (session_id != nullptr) {
-    
-  } else {
-    
-  }
-  session_id_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), session_id);
-  // @@protoc_insertion_point(field_set_allocated:ClientMessage.session_id)
-}
-
-// .ClientMessage.Type message_type = 2;
+// .ClientMessage.Type message_type = 1;
 inline void ClientMessage::clear_message_type() {
   message_type_ = 0;
 }
@@ -1835,7 +1804,7 @@ inline void ClientMessage::set_message_type(::ClientMessage_Type value) {
   // @@protoc_insertion_point(field_set:ClientMessage.message_type)
 }
 
-// .ClientMessage.Hello hello = 3;
+// .ClientMessage.Hello hello = 2;
 inline bool ClientMessage::_internal_has_hello() const {
   return this != internal_default_instance() && hello_ != nullptr;
 }
@@ -1895,7 +1864,7 @@ inline void ClientMessage::set_allocated_hello(::ClientMessage_Hello* hello) {
   // @@protoc_insertion_point(field_set_allocated:ClientMessage.hello)
 }
 
-// .ClientMessage.Frame frame = 4;
+// .ClientMessage.Frame frame = 3;
 inline bool ClientMessage::_internal_has_frame() const {
   return this != internal_default_instance() && frame_ != nullptr;
 }
@@ -1955,7 +1924,7 @@ inline void ClientMessage::set_allocated_frame(::ClientMessage_Frame* frame) {
   // @@protoc_insertion_point(field_set_allocated:ClientMessage.frame)
 }
 
-// .ClientMessage.Bookmark bookmark = 5;
+// .ClientMessage.Bookmark bookmark = 4;
 inline bool ClientMessage::_internal_has_bookmark() const {
   return this != internal_default_instance() && bookmark_ != nullptr;
 }

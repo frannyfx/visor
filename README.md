@@ -5,7 +5,12 @@ A game capture system, along with a social media platform dedicated to sharing v
 You can download the latest version of Visor from https://visor.gg/notyetourdomain.
 
 ## Building
-LOL
+### VCPKG 
+Install the following packages:
+- ffmpeg (x86-windows-static, x64-windows-static)
+- websocketpp (x86-windows, x64-windows)
+- protobuf (x86-windows, x64-windows)
+- boost-random (x86-windows, x64-windows)
 
 ## About the project
 ### Injection

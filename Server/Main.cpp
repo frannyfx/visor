@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <thread>
-#include "Discovery.h"
-#include "Server.h"
+#include "Discovery/Discovery.h"
+#include "Server/Server.h"
 
 using namespace std;
 

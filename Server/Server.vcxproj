@@ -159,13 +159,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Discovery.cpp" />
+    <ClCompile Include="..\Common\Include\Protocols\client.pb.cc" />
+    <ClCompile Include="..\Common\Include\Protocols\server.pb.cc" />
+    <ClCompile Include="Discovery\Discovery.cpp" />
+    <ClCompile Include="Encoder\Instance.cpp" />
+    <ClCompile Include="Encoder\Encoder.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Server.cpp" />
+    <ClCompile Include="Server\Server.cpp" />
+    <ClCompile Include="Server\VisorClient.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Discovery.h" />
-    <ClInclude Include="Server.h" />
+    <ClInclude Include="..\Common\Include\Protocols\client.pb.h" />
+    <ClInclude Include="..\Common\Include\Protocols\server.pb.h" />
+    <ClInclude Include="Discovery\Discovery.h" />
+    <ClInclude Include="Encoder\Instance.h" />
+    <ClInclude Include="Encoder\Encoder.h" />
+    <ClInclude Include="Server\Server.h" />
+    <ClInclude Include="Server\VisorClient.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

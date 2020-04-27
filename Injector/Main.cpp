@@ -32,6 +32,8 @@ int main()
 
     // Get library path and inject
     InjectLibrary(pid, parentDirectory + BOOST_DLL);
+    InjectLibrary(pid, parentDirectory + "\\libprotobufd.dll");
+    InjectLibrary(pid, parentDirectory + "\\libprotobuf-lited.dll");
     InjectLibrary(pid, parentDirectory + "\\Core.dll");
     return 0;
 }

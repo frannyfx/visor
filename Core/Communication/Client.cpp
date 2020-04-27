@@ -8,6 +8,7 @@
 #include <Protocols/server.pb.h>
 
 #include "../Engine/Engine.h"
+#include "../Utils/Utils.h";
 
 using websocketpp::lib::placeholders::_1;
 using websocketpp::lib::placeholders::_2;
@@ -21,7 +22,7 @@ namespace Client {
 	// Forward declaration
 	void OnMessage(client* visor_client, websocketpp::connection_hdl hdl, message_ptr msg);
 	void OnOpen(client* visor_client, websocketpp::connection_hdl hdl);
-	void SendMessage(const string& message);
+	void SendClientMessage(ClientMessage& message);
 
 	// Client
 	string endpoint;
@@ -68,13 +69,32 @@ namespace Client {
 		cout << "Successfully opened connection." << endl;
 		handle = hdl;
 
-		Engine::ShowNotification("Connected to server successfully!", endpoint);
-		SendMessage("I love juuling.");
+		// Send message with game details
+		ClientMessage message;
+		message.set_message_type(ClientMessage_Type_HELLO);
+		
+		ClientMessage_Hello hello;
+		hello.set_pid(Utils::GetPID());
+		hello.set_executable_path(Utils::GetExecutablePath());
+		hello.set_window_title(Utils::GetWindowTitle());
+		message.set_allocated_hello(&hello);
+		SendClientMessage(message);
 	}
 
-	void SendMessage(const string &message) {
+	void SendClientMessage(ClientMessage &message) {
 		websocketpp::lib::error_code error;
-		visor_client.send(handle, message, websocketpp::frame::opcode::text);
+
+		// Serialise the message
+		string data;
+		message.SerializeToString(&data);
+
+		// Release message
+		message.release_bookmark();
+		message.release_frame();
+		message.release_hello();
+		message.Clear();
+
+		visor_client.send(handle, data, websocketpp::frame::opcode::binary);
 		if (error) {
 			cout << "Sending message failed: " << error.message() << endl;
 		}

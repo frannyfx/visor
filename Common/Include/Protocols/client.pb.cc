@@ -143,8 +143,8 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_client_2eproto::offsets[] PROT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::ClientMessage_Hello, pid_),
-  PROTOBUF_FIELD_OFFSET(::ClientMessage_Hello, game_id_),
   PROTOBUF_FIELD_OFFSET(::ClientMessage_Hello, executable_path_),
+  PROTOBUF_FIELD_OFFSET(::ClientMessage_Hello, window_title_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::ClientMessage_Frame, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -182,7 +182,6 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_client_2eproto::offsets[] PROT
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::ClientMessage, session_id_),
   PROTOBUF_FIELD_OFFSET(::ClientMessage, message_type_),
   PROTOBUF_FIELD_OFFSET(::ClientMessage, hello_),
   PROTOBUF_FIELD_OFFSET(::ClientMessage, frame_),
@@ -207,34 +206,33 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 };
 
 const char descriptor_table_protodef_client_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\014client.proto\"\242\010\n\rClientMessage\022\022\n\nsess"
-  "ion_id\030\001 \001(\t\022)\n\014message_type\030\002 \001(\0162\023.Cli"
-  "entMessage.Type\022#\n\005hello\030\003 \001(\0132\024.ClientM"
-  "essage.Hello\022#\n\005frame\030\004 \001(\0132\024.ClientMess"
-  "age.Frame\022)\n\010bookmark\030\005 \001(\0132\027.ClientMess"
-  "age.Bookmark\032>\n\005Hello\022\013\n\003pid\030\001 \001(\005\022\017\n\007ga"
-  "me_id\030\002 \001(\005\022\027\n\017executable_path\030\003 \001(\t\032\027\n\005"
-  "Frame\022\016\n\006buffer\030\001 \001(\014\032\232\005\n\010Bookmark\022\021\n\tis"
-  "_manual\030\001 \001(\010\0222\n\004type\030\002 \001(\0162$.ClientMess"
-  "age.Bookmark.BookmarkType\0229\n\004csgo\030\003 \001(\0132"
-  "+.ClientMessage.Bookmark.CSGODeepIntegra"
-  "tion\032\347\003\n\023CSGODeepIntegration\022D\n\005event\030\001 "
-  "\001(\01625.ClientMessage.Bookmark.CSGODeepInt"
-  "egration.CSGOEvent\022\026\n\016is_competitive\030\002 \001"
-  "(\010\022M\n\014kill_details\030\003 \001(\01327.ClientMessage"
-  ".Bookmark.CSGODeepIntegration.KillDetail"
-  "s\032z\n\013KillDetails\022\023\n\013is_headshot\030\001 \001(\010\022\023\n"
-  "\013is_wallbang\030\002 \001(\010\022\023\n\013with_assist\030\003 \001(\010\022"
-  "\025\n\rthrough_smoke\030\004 \001(\010\022\025\n\rwhile_blinded\030"
-  "\005 \001(\010\"\246\001\n\tCSGOEvent\022\017\n\013MATCH_START\020\000\022\r\n\t"
-  "MATCH_END\020\001\022\017\n\013ROUND_START\020\002\022\r\n\tROUND_EN"
-  "D\020\003\022\010\n\004KILL\020\004\022\t\n\005DEATH\020\005\022\013\n\007SUICIDE\020\006\022\023\n"
-  "\017HOSTAGE_RESCUED\020\007\022\020\n\014BOMB_PLANTED\020\010\022\020\n\014"
-  "BOMB_DEFUSED\020\t\"\"\n\014BookmarkType\022\010\n\004NONE\020\000"
-  "\022\010\n\004CSGO\020\001\"g\n\004Type\022\t\n\005HELLO\020\000\022\023\n\017CAPTURE"
-  "_STARTED\020\001\022\023\n\017CAPTURE_STOPPED\020\002\022\021\n\rCAPTU"
-  "RE_ERROR\020\003\022\t\n\005FRAME\020\004\022\014\n\010BOOKMARK\020\005b\006pro"
-  "to3"
+  "\n\014client.proto\"\223\010\n\rClientMessage\022)\n\014mess"
+  "age_type\030\001 \001(\0162\023.ClientMessage.Type\022#\n\005h"
+  "ello\030\002 \001(\0132\024.ClientMessage.Hello\022#\n\005fram"
+  "e\030\003 \001(\0132\024.ClientMessage.Frame\022)\n\010bookmar"
+  "k\030\004 \001(\0132\027.ClientMessage.Bookmark\032C\n\005Hell"
+  "o\022\013\n\003pid\030\001 \001(\005\022\027\n\017executable_path\030\002 \001(\t\022"
+  "\024\n\014window_title\030\003 \001(\t\032\027\n\005Frame\022\016\n\006buffer"
+  "\030\001 \001(\014\032\232\005\n\010Bookmark\022\021\n\tis_manual\030\001 \001(\010\0222"
+  "\n\004type\030\002 \001(\0162$.ClientMessage.Bookmark.Bo"
+  "okmarkType\0229\n\004csgo\030\003 \001(\0132+.ClientMessage"
+  ".Bookmark.CSGODeepIntegration\032\347\003\n\023CSGODe"
+  "epIntegration\022D\n\005event\030\001 \001(\01625.ClientMes"
+  "sage.Bookmark.CSGODeepIntegration.CSGOEv"
+  "ent\022\026\n\016is_competitive\030\002 \001(\010\022M\n\014kill_deta"
+  "ils\030\003 \001(\01327.ClientMessage.Bookmark.CSGOD"
+  "eepIntegration.KillDetails\032z\n\013KillDetail"
+  "s\022\023\n\013is_headshot\030\001 \001(\010\022\023\n\013is_wallbang\030\002 "
+  "\001(\010\022\023\n\013with_assist\030\003 \001(\010\022\025\n\rthrough_smok"
+  "e\030\004 \001(\010\022\025\n\rwhile_blinded\030\005 \001(\010\"\246\001\n\tCSGOE"
+  "vent\022\017\n\013MATCH_START\020\000\022\r\n\tMATCH_END\020\001\022\017\n\013"
+  "ROUND_START\020\002\022\r\n\tROUND_END\020\003\022\010\n\004KILL\020\004\022\t"
+  "\n\005DEATH\020\005\022\013\n\007SUICIDE\020\006\022\023\n\017HOSTAGE_RESCUE"
+  "D\020\007\022\020\n\014BOMB_PLANTED\020\010\022\020\n\014BOMB_DEFUSED\020\t\""
+  "\"\n\014BookmarkType\022\010\n\004NONE\020\000\022\010\n\004CSGO\020\001\"g\n\004T"
+  "ype\022\t\n\005HELLO\020\000\022\023\n\017CAPTURE_STARTED\020\001\022\023\n\017C"
+  "APTURE_STOPPED\020\002\022\021\n\rCAPTURE_ERROR\020\003\022\t\n\005F"
+  "RAME\020\004\022\014\n\010BOOKMARK\020\005b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_client_2eproto_deps[1] = {
 };
@@ -249,7 +247,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_cli
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_client_2eproto_once;
 static bool descriptor_table_client_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_client_2eproto = {
-  &descriptor_table_client_2eproto_initialized, descriptor_table_protodef_client_2eproto, "client.proto", 1083,
+  &descriptor_table_client_2eproto_initialized, descriptor_table_protodef_client_2eproto, "client.proto", 1068,
   &descriptor_table_client_2eproto_once, descriptor_table_client_2eproto_sccs, descriptor_table_client_2eproto_deps, 6, 0,
   schemas, file_default_instances, TableStruct_client_2eproto::offsets,
   file_level_metadata_client_2eproto, 6, file_level_enum_descriptors_client_2eproto, file_level_service_descriptors_client_2eproto,
@@ -366,18 +364,19 @@ ClientMessage_Hello::ClientMessage_Hello(const ClientMessage_Hello& from)
   if (!from._internal_executable_path().empty()) {
     executable_path_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.executable_path_);
   }
-  ::memcpy(&pid_, &from.pid_,
-    static_cast<size_t>(reinterpret_cast<char*>(&game_id_) -
-    reinterpret_cast<char*>(&pid_)) + sizeof(game_id_));
+  window_title_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_window_title().empty()) {
+    window_title_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.window_title_);
+  }
+  pid_ = from.pid_;
   // @@protoc_insertion_point(copy_constructor:ClientMessage.Hello)
 }
 
 void ClientMessage_Hello::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ClientMessage_Hello_client_2eproto.base);
   executable_path_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  ::memset(&pid_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&game_id_) -
-      reinterpret_cast<char*>(&pid_)) + sizeof(game_id_));
+  window_title_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  pid_ = 0;
 }
 
 ClientMessage_Hello::~ClientMessage_Hello() {
@@ -387,6 +386,7 @@ ClientMessage_Hello::~ClientMessage_Hello() {
 
 void ClientMessage_Hello::SharedDtor() {
   executable_path_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  window_title_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void ClientMessage_Hello::SetCachedSize(int size) const {
@@ -405,9 +405,8 @@ void ClientMessage_Hello::Clear() {
   (void) cached_has_bits;
 
   executable_path_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  ::memset(&pid_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&game_id_) -
-      reinterpret_cast<char*>(&pid_)) + sizeof(game_id_));
+  window_title_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  pid_ = 0;
   _internal_metadata_.Clear();
 }
 
@@ -425,19 +424,21 @@ const char* ClientMessage_Hello::_InternalParse(const char* ptr, ::PROTOBUF_NAME
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // int32 game_id = 2;
+      // string executable_path = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          game_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // string executable_path = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
           auto str = _internal_mutable_executable_path();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "ClientMessage.Hello.executable_path"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string window_title = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          auto str = _internal_mutable_window_title();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "ClientMessage.Hello.window_title"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -473,20 +474,24 @@ failure:
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_pid(), target);
   }
 
-  // int32 game_id = 2;
-  if (this->game_id() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_game_id(), target);
-  }
-
-  // string executable_path = 3;
+  // string executable_path = 2;
   if (this->executable_path().size() > 0) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_executable_path().data(), static_cast<int>(this->_internal_executable_path().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "ClientMessage.Hello.executable_path");
     target = stream->WriteStringMaybeAliased(
-        3, this->_internal_executable_path(), target);
+        2, this->_internal_executable_path(), target);
+  }
+
+  // string window_title = 3;
+  if (this->window_title().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_window_title().data(), static_cast<int>(this->_internal_window_title().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "ClientMessage.Hello.window_title");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_window_title(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -505,11 +510,18 @@ size_t ClientMessage_Hello::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string executable_path = 3;
+  // string executable_path = 2;
   if (this->executable_path().size() > 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_executable_path());
+  }
+
+  // string window_title = 3;
+  if (this->window_title().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_window_title());
   }
 
   // int32 pid = 1;
@@ -517,13 +529,6 @@ size_t ClientMessage_Hello::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->_internal_pid());
-  }
-
-  // int32 game_id = 2;
-  if (this->game_id() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_game_id());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -561,11 +566,12 @@ void ClientMessage_Hello::MergeFrom(const ClientMessage_Hello& from) {
 
     executable_path_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.executable_path_);
   }
+  if (from.window_title().size() > 0) {
+
+    window_title_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.window_title_);
+  }
   if (from.pid() != 0) {
     _internal_set_pid(from._internal_pid());
-  }
-  if (from.game_id() != 0) {
-    _internal_set_game_id(from._internal_game_id());
   }
 }
 
@@ -592,8 +598,9 @@ void ClientMessage_Hello::InternalSwap(ClientMessage_Hello* other) {
   _internal_metadata_.Swap(&other->_internal_metadata_);
   executable_path_.Swap(&other->executable_path_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
+  window_title_.Swap(&other->window_title_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(pid_, other->pid_);
-  swap(game_id_, other->game_id_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ClientMessage_Hello::GetMetadata() const {
@@ -1629,10 +1636,6 @@ ClientMessage::ClientMessage(const ClientMessage& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  session_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_session_id().empty()) {
-    session_id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.session_id_);
-  }
   if (from._internal_has_hello()) {
     hello_ = new ::ClientMessage_Hello(*from.hello_);
   } else {
@@ -1654,7 +1657,6 @@ ClientMessage::ClientMessage(const ClientMessage& from)
 
 void ClientMessage::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ClientMessage_client_2eproto.base);
-  session_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&hello_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&message_type_) -
       reinterpret_cast<char*>(&hello_)) + sizeof(message_type_));
@@ -1666,7 +1668,6 @@ ClientMessage::~ClientMessage() {
 }
 
 void ClientMessage::SharedDtor() {
-  session_id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete hello_;
   if (this != internal_default_instance()) delete frame_;
   if (this != internal_default_instance()) delete bookmark_;
@@ -1687,7 +1688,6 @@ void ClientMessage::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  session_id_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (GetArenaNoVirtual() == nullptr && hello_ != nullptr) {
     delete hello_;
   }
@@ -1711,40 +1711,31 @@ const char* ClientMessage::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // string session_id = 1;
+      // .ClientMessage.Type message_type = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          auto str = _internal_mutable_session_id();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "ClientMessage.session_id"));
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // .ClientMessage.Type message_type = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
           ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
           CHK_(ptr);
           _internal_set_message_type(static_cast<::ClientMessage_Type>(val));
         } else goto handle_unusual;
         continue;
-      // .ClientMessage.Hello hello = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+      // .ClientMessage.Hello hello = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
           ptr = ctx->ParseMessage(_internal_mutable_hello(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // .ClientMessage.Frame frame = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+      // .ClientMessage.Frame frame = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
           ptr = ctx->ParseMessage(_internal_mutable_frame(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // .ClientMessage.Bookmark bookmark = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+      // .ClientMessage.Bookmark bookmark = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
           ptr = ctx->ParseMessage(_internal_mutable_bookmark(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
@@ -1775,45 +1766,35 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string session_id = 1;
-  if (this->session_id().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_session_id().data(), static_cast<int>(this->_internal_session_id().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "ClientMessage.session_id");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_session_id(), target);
-  }
-
-  // .ClientMessage.Type message_type = 2;
+  // .ClientMessage.Type message_type = 1;
   if (this->message_type() != 0) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
-      2, this->_internal_message_type(), target);
+      1, this->_internal_message_type(), target);
   }
 
-  // .ClientMessage.Hello hello = 3;
+  // .ClientMessage.Hello hello = 2;
   if (this->has_hello()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        3, _Internal::hello(this), target, stream);
+        2, _Internal::hello(this), target, stream);
   }
 
-  // .ClientMessage.Frame frame = 4;
+  // .ClientMessage.Frame frame = 3;
   if (this->has_frame()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        4, _Internal::frame(this), target, stream);
+        3, _Internal::frame(this), target, stream);
   }
 
-  // .ClientMessage.Bookmark bookmark = 5;
+  // .ClientMessage.Bookmark bookmark = 4;
   if (this->has_bookmark()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        5, _Internal::bookmark(this), target, stream);
+        4, _Internal::bookmark(this), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1832,35 +1813,28 @@ size_t ClientMessage::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string session_id = 1;
-  if (this->session_id().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_session_id());
-  }
-
-  // .ClientMessage.Hello hello = 3;
+  // .ClientMessage.Hello hello = 2;
   if (this->has_hello()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *hello_);
   }
 
-  // .ClientMessage.Frame frame = 4;
+  // .ClientMessage.Frame frame = 3;
   if (this->has_frame()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *frame_);
   }
 
-  // .ClientMessage.Bookmark bookmark = 5;
+  // .ClientMessage.Bookmark bookmark = 4;
   if (this->has_bookmark()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *bookmark_);
   }
 
-  // .ClientMessage.Type message_type = 2;
+  // .ClientMessage.Type message_type = 1;
   if (this->message_type() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_message_type());
@@ -1897,10 +1871,6 @@ void ClientMessage::MergeFrom(const ClientMessage& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.session_id().size() > 0) {
-
-    session_id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.session_id_);
-  }
   if (from.has_hello()) {
     _internal_mutable_hello()->::ClientMessage_Hello::MergeFrom(from._internal_hello());
   }
@@ -1936,8 +1906,6 @@ bool ClientMessage::IsInitialized() const {
 void ClientMessage::InternalSwap(ClientMessage* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  session_id_.Swap(&other->session_id_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   swap(hello_, other->hello_);
   swap(frame_, other->frame_);
   swap(bookmark_, other->bookmark_);

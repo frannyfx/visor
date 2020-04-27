@@ -12,8 +12,8 @@ message ClientMessage {
     
     message Hello {
         int32 pid = 1;
-        int32 game_id = 2;
-        string executable_path = 3;
+        string executable_path = 2;
+        string window_title = 3;
     }
 
     message Frame {
@@ -58,9 +58,8 @@ message ClientMessage {
         CSGODeepIntegration csgo = 3;
     }
 
-    string session_id = 1;
-    Type message_type = 2;
-    Hello hello = 3;
-    Frame frame = 4;
-    Bookmark bookmark = 5;
+    Type message_type = 1;
+    Hello hello = 2;
+    Frame frame = 3;
+    Bookmark bookmark = 4;
 }

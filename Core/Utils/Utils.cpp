@@ -1,4 +1,8 @@
 #include "../Include/ImGui/imgui.h"
+#include <Windows.h>
+#include <string>
+
+using namespace std;
 
 namespace Utils {
 	float Clamp(float value, float min, float max) {
@@ -19,5 +23,23 @@ namespace Utils {
 	float Lerp(float a, float b, float f) {
 		f = Clamp(f, 0, 1);
 		return a + (b - a) * f;
+	}
+
+	string GetWindowTitle() {
+		HWND hWindow = GetForegroundWindow();
+
+		char windowTitle[256];
+		GetWindowText(hWindow, windowTitle, sizeof(windowTitle));
+		return string(windowTitle);
+	}
+
+	int GetPID() {
+		return GetCurrentProcessId();
+	}
+
+	string GetExecutablePath() {
+		char filename[MAX_PATH];
+		GetModuleFileNameA(0, filename, sizeof(filename));
+		return string(filename);
 	}
 }
