@@ -48,6 +48,7 @@ int GetPIDWithName(const string &processName) {
 }
 
 bool InjectLibrary(const unsigned int pid, const string &libraryPath) {
+	cout << "Injecting library " << libraryPath << " into " << pid << "." << endl;
 	// Open a handle to the process
 	HANDLE injectionProcess = OpenProcess(PROCESS_ALL_ACCESS, false, pid);
 	if (injectionProcess == NULL) {

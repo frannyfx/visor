@@ -11,9 +11,9 @@
 #include "../Communication/Discovery.h"
 
 #if _WIN64
-#pragma comment(lib, "Include/MinHook/lib/MinHook.x64.lib")
+#pragma comment(lib, "Include/MinHook/lib/libMinHook-x64-v141-mdd.lib")
 #else
-#pragma comment(lib, "Include/MinHook/lib/MinHook.x86.lib")
+#pragma comment(lib, "Include/MinHook/lib/libMinHook-x86-v141-mdd.lib")
 #endif
 
 #if VISOR_HOOK_D3D9
@@ -171,6 +171,5 @@ DWORD __stdcall InitialiseHooks(LPVOID) {
 	}
 #endif
 	
-	Engine::ShowNotification("Visor is enabled.", "Press CTRL + F2 to bookmark.");
 	return NULL;
 }

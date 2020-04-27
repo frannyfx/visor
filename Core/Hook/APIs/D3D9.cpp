@@ -1,4 +1,5 @@
 #include "D3D9.h"
+#include <D3DX/d3dx9tex.h>
 
 namespace Hook::D3D9 {
 	// Hooking
@@ -9,8 +10,15 @@ namespace Hook::D3D9 {
 
 	// D3D objects
 	LPDIRECT3DDEVICE9 device;
-
 	DWORD_PTR* pDeviceVTable = NULL;
+
+	// Capture
+	D3DPRESENT_PARAMETERS presentParameters;
+	IDirect3DSwapChain9* pSwapChain;
+	IDirect3DSurface9* pRenderSurface;
+	HANDLE* pSharedHandle;
+	IDirect3DSurface9* pBackBuffer;
+	LPD3DXBUFFER pDestBuffer;
 
 	// Instance
 	Instance* instance = Instance::GetInstance();
@@ -33,6 +41,12 @@ namespace Hook::D3D9 {
 			D3DDEVICE_CREATION_PARAMETERS parameters;
 			pDevice->GetCreationParameters(&parameters);
 
+			// Initialise capture
+			pDevice->GetSwapChain(0, &pSwapChain);
+			pSwapChain->GetPresentParameters(&presentParameters);
+			pDevice->CreateOffscreenPlainSurface(presentParameters.BackBufferWidth, presentParameters.BackBufferHeight, presentParameters.BackBufferFormat, D3DPOOL_SYSTEMMEM, &pRenderSurface, pSharedHandle);
+			pDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &pBackBuffer);
+
 			// Initialise our engine
 			EngineResources::SetD3D9Device(&pDevice);
 			EngineResources::AddTexture(new Texture(TextureID::VISOR_LOGO, "C:\\Users\\blazi\\Desktop\\glasses.png"));
@@ -45,6 +59,14 @@ namespace Hook::D3D9 {
 			instance->FinishInstall(true);
 			presentCalled = true;
 		}
+
+		// Capture
+		// TODO: Only capture when Capture::ShouldCapture() is true.
+		pDevice->GetRenderTargetData(pBackBuffer, pRenderSurface);
+		D3DXSaveSurfaceToFileInMemory(&pDestBuffer, D3DXIFF_BMP, pRenderSurface, NULL, NULL);
+
+		// Release buffer once done.
+		pDestBuffer->Release();
 
 		// Render
 		ImGui_ImplDX9_NewFrame();

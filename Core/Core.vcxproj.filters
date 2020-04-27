@@ -84,9 +84,6 @@
     <ClCompile Include="Communication\Discovery.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Include\ImGui\imgui_impl_dx12.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Communication\Client.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -141,9 +138,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Communication\Client.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\ImGui\imgui_impl_dx12.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Include\ImGui\imgui_impl_dx11.h">
@@ -206,10 +200,11 @@
     <ClInclude Include="Hook\APIs\HookBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Include\MinHook\MinHook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Include\MinHook\lib\MinHook.x64.dll" />
-    <None Include="Include\MinHook\lib\MinHook.x86.dll" />
     <None Include="Include\websocketpp\out\build\x64-Debug\CMakeFiles\3.16.19112601-MSVC_2\CMakeDetermineCompilerABI_C.bin">
       <Filter>Resource Files</Filter>
     </None>
@@ -221,7 +216,53 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="Include\MinHook\lib\MinHook.x64.lib" />
-    <Library Include="Include\MinHook\lib\MinHook.x86.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v141-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v90-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v90-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v90-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v90-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v100-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v100-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v100-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v100-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v110-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v110-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v110-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v110-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v120-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v120-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v120-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v120-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v140-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v140-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v140-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v140-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v141-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v141-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v141-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v141-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v90-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v90-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v90-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v90-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v100-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v100-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v100-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v100-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v110-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v110-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v110-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v110-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v120-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v120-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v120-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v120-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v140-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v140-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v140-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v140-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v141-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v141-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v141-mt.lib" />
   </ItemGroup>
 </Project>

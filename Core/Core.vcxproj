@@ -103,7 +103,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalOptions>/D_HAS_STD_BYTE=0 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/D_HAS_STD_BYTE=0 /std:c++17 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -113,7 +113,8 @@
       <AdditionalDependencies>$(DXSDK_DIR)Lib\x86\d3dx9.lib;$(DXSDK_DIR)Lib\x86\d3dx11.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y  $(ProjectDir)Include\MinHook\lib\MinHook.x86.dll $(OutDir)</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -125,7 +126,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalOptions>/D_HAS_STD_BYTE=0 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/D_HAS_STD_BYTE=0 /std:c++17 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,7 +134,8 @@
       <AdditionalDependencies>$(DXSDK_DIR)Lib\x64\d3dx9.lib;$(DXSDK_DIR)Lib\x64\d3dx11.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y  $(ProjectDir)Include\MinHook\lib\MinHook.x64.dll $(OutDir)</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -146,6 +148,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalOptions>/D_HAS_STD_BYTE=0 /std:c++17 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -154,6 +157,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>$(DXSDK_DIR)Lib\x86\d3dx9.lib;$(DXSDK_DIR)Lib\x86\d3dx11.lib</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -165,6 +172,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalOptions>/D_HAS_STD_BYTE=0 /std:c++17 %(AdditionalOptions)</AdditionalOptions>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -173,6 +182,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>$(DXSDK_DIR)Lib\x64\d3dx9.lib;$(DXSDK_DIR)Lib\x64\d3dx11.lib</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Communication\Client.cpp" />
@@ -195,7 +208,6 @@
     <ClCompile Include="Include\ImGui\imgui_demo.cpp" />
     <ClCompile Include="Include\ImGui\imgui_draw.cpp" />
     <ClCompile Include="Include\ImGui\imgui_impl_dx11.cpp" />
-    <ClCompile Include="Include\ImGui\imgui_impl_dx12.cpp" />
     <ClCompile Include="Include\ImGui\imgui_impl_dx9.cpp" />
     <ClCompile Include="Include\ImGui\imgui_impl_win32.cpp" />
     <ClCompile Include="Include\ImGui\imgui_widgets.cpp" />
@@ -232,27 +244,70 @@
     <ClInclude Include="Include\ImGui\imconfig.h" />
     <ClInclude Include="Include\ImGui\imgui.h" />
     <ClInclude Include="Include\ImGui\imgui_impl_dx11.h" />
-    <ClInclude Include="Include\ImGui\imgui_impl_dx12.h" />
     <ClInclude Include="Include\ImGui\imgui_impl_dx9.h" />
     <ClInclude Include="Include\ImGui\imgui_impl_win32.h" />
     <ClInclude Include="Include\ImGui\imgui_internal.h" />
     <ClInclude Include="Include\ImGui\imstb_rectpack.h" />
     <ClInclude Include="Include\ImGui\imstb_textedit.h" />
     <ClInclude Include="Include\ImGui\imstb_truetype.h" />
+    <ClInclude Include="Include\MinHook\MinHook.h" />
     <ClInclude Include="Utils\Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Include\D3DX\d3dx9math.inl" />
-    <None Include="Include\MinHook\lib\MinHook.x64.dll" />
-    <None Include="Include\MinHook\lib\MinHook.x86.dll" />
     <None Include="Include\websocketpp\out\build\x64-Debug\CMakeFiles\3.16.19112601-MSVC_2\CMakeDetermineCompilerABI_C.bin" />
     <None Include="Include\websocketpp\out\build\x64-Debug\CMakeFiles\3.16.19112601-MSVC_2\CMakeDetermineCompilerABI_CXX.bin" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="Include\MinHook\lib\MinHook.x64.lib" />
-    <Library Include="Include\MinHook\lib\MinHook.x86.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v100-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v100-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v100-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v100-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v110-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v110-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v110-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v110-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v120-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v120-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v120-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v120-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v140-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v140-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v140-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v140-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v141-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v141-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v141-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v141-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v90-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v90-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v90-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x64-v90-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v100-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v100-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v100-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v100-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v110-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v110-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v110-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v110-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v120-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v120-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v120-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v120-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v140-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v140-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v140-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v140-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v141-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v141-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v141-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v141-mtd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v90-md.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v90-mdd.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v90-mt.lib" />
+    <Library Include="Include\MinHook\lib\libMinHook-x86-v90-mtd.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

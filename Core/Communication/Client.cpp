@@ -7,6 +7,8 @@
 #include <Protocols/client.pb.h>
 #include <Protocols/server.pb.h>
 
+#include "../Engine/Engine.h"
+
 using websocketpp::lib::placeholders::_1;
 using websocketpp::lib::placeholders::_2;
 using websocketpp::lib::bind;
@@ -22,10 +24,12 @@ namespace Client {
 	void SendMessage(const string& message);
 
 	// Client
+	string endpoint;
 	client visor_client;
 	websocketpp::connection_hdl handle;
 
-	void Open(string endpoint) {
+	void Open(string e) {
+		endpoint = e;
 		cout << "Attempting to connect to " << endpoint << endl;
 
 		try {
@@ -64,6 +68,7 @@ namespace Client {
 		cout << "Successfully opened connection." << endl;
 		handle = hdl;
 
+		Engine::ShowNotification("Connected to server successfully!", endpoint);
 		SendMessage("I love juuling.");
 	}
 

@@ -8,10 +8,11 @@ using namespace std;
 string processName = "GFXTest64.exe";
 
 #if _WIN64
-#define MIN_HOOK_NAME "\\MinHook.x64.dll"
+#define BOOST_DLL "\\boost_random-vc142-mt-gd-x64-1_72.dll"
 #else
-#define MIN_HOOK_NAME "\\MinHook.x86.dll"
+#define BOOST_DLL "\\boost_random-vc142-mt-gd-x32-1_72.dll"
 #endif
+
 int main()
 {
     // Get running directory
@@ -30,9 +31,7 @@ int main()
     cout << "Found process " << processName << " (" << pid << ")." << endl;
 
     // Get library path and inject
-    cout << "Injecting libraries from " << parentDirectory << " into " << processName << " (" << pid << ")." << endl;
-    InjectLibrary(pid, parentDirectory + "\\boost_random-vc142-mt-gd-x64-1_72.dll");
-    InjectLibrary(pid, parentDirectory + MIN_HOOK_NAME);
+    InjectLibrary(pid, parentDirectory + BOOST_DLL);
     InjectLibrary(pid, parentDirectory + "\\Core.dll");
     return 0;
 }
