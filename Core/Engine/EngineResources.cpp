@@ -8,6 +8,7 @@ namespace EngineResources {
 	// Graphics devices
 	LPDIRECT3DDEVICE9* pD3D9Device = nullptr;
 	ID3D11Device* pD3D11Device = nullptr;
+	ID3D12Device* pD3D12Device = nullptr;
 
 	// DX11 Resources
 	vector<ID3D11ShaderResourceView*>  dx11SRVs;
@@ -18,6 +19,10 @@ namespace EngineResources {
 
 	void SetD3D11Device(ID3D11Device* pDevice) {
 		pD3D11Device = pDevice;
+	}
+
+	void SetD3D12Device(ID3D12Device* pDevice) {
+		pD3D12Device = pDevice;
 	}
 
 	void AddTexture(Texture* texture) {

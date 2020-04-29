@@ -23,8 +23,8 @@ namespace Engine {
 		ImGui::StyleColorsDark();
 
 		// Setup fonts
-		Fonts::RegisterFont(Fonts::Font::BOLD, io.Fonts->AddFontFromFileTTF("C:\\Users\\blazi\\Desktop\\Visor\\Build\\Debug\\x64\\Resources\\Fonts\\Rubik-Bold.ttf", 16.0f));
-		Fonts::RegisterFont(Fonts::Font::REGULAR, io.Fonts->AddFontFromFileTTF("C:\\Users\\blazi\\Desktop\\Visor\\Build\\Debug\\x64\\Resources\\Fonts\\Rubik-Regular.ttf", 14.0f));
+		Fonts::RegisterFont(Fonts::Font::BOLD, io.Fonts->AddFontFromFileTTF("C:\\Users\\spydas\\source\\repos\\visor\\Assets\\Fonts\\Rubik-Bold.ttf", 16.0f));
+		Fonts::RegisterFont(Fonts::Font::REGULAR, io.Fonts->AddFontFromFileTTF("C:\\Users\\spydas\\source\\repos\\visor\\Assets\\Fonts\\Rubik-Regular.ttf", 14.0f));
 	}
 
 	void Render(GraphicsAPI graphicsAPI) {

@@ -51,7 +51,7 @@ namespace Hook::D3D11 {
 
 			//Initialise our engine
 			EngineResources::SetD3D11Device(pDevice);
-			EngineResources::AddTexture(new Texture(TextureID::VISOR_LOGO, "C:\\Users\\blazi\\Desktop\\glasses.png"));
+			//EngineResources::AddTexture(new Texture(TextureID::VISOR_LOGO, "C:\\Users\\blazi\\Desktop\\glasses.png"));
 
 			ImGui_ImplWin32_Init(sd.OutputWindow);
 			ImGui_ImplDX11_Init(pDevice, pContext);

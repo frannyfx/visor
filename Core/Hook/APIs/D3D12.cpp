@@ -8,12 +8,16 @@ namespace Hook::D3D12
 	bool presentCalled = false;
 	LPVOID presentHookAddress = NULL;
 
-	// D3D Objects
+	// D3D Objects & Consts
 	ID3D12Device* pDevice;
 	DWORD_PTR* pSwapChainVTable = NULL;
+	ID3D12DescriptorHeap* pDescHeap;
 
 	// Instance
 	Instance* instance = Instance::GetInstance();
+
+	// ImGui consts
+	int const NUM_FRAMES_IN_FLIGHT = 3;
 
 	long __stdcall PresentHook(IDXGISwapChain* pSwapChain, UINT syncInterval, UINT flags) {
 		// Prevent calling while hook is being disabled
@@ -30,10 +34,50 @@ namespace Hook::D3D12
 				return presentHookTrampoline(pSwapChain, syncInterval, flags);
 			}
 
+			// Setup ImGui context
+			IMGUI_CHECKVERSION();
+			ImGui::CreateContext();
+			ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+			// Setup ImGui style
+			ImGui::StyleColorsDark();
+
+			// Get window
+			DXGI_SWAP_CHAIN_DESC sd;
+			pSwapChain->GetDesc(&sd);
+
+			// Initialise our engine
+			EngineResources::SetD3D12Device(pDevice);
+			//EngineResources::AddTexture(new Texture(TextureID::VISOR_LOGO, "C:\\Users\\blazi\\Desktop\\glasses.png"));
+
+			// Create device descriptor heap
+			D3D12_DESCRIPTOR_HEAP_DESC desc = {};
+			desc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
+			desc.NumDescriptors = 1;
+			desc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
+			if (pDevice->CreateDescriptorHeap(&desc, IID_PPV_ARGS(&pDescHeap)) != S_OK) {
+				cout << "Failed to create descriptor heap for D3D12 device. Disabling D3D12 hook." << endl;
+				Instance::GetInstance()->FinishInstall(false);
+				return presentHookTrampoline(pSwapChain, syncInterval, flags);
+			}
+
+			// Initialise ImGui
+			ImGui_ImplWin32_Init(sd.OutputWindow);
+			ImGui_ImplDX12_Init(pDevice, NUM_FRAMES_IN_FLIGHT,
+				DXGI_FORMAT_R8G8B8A8_UNORM, pDescHeap,
+				pDescHeap->GetCPUDescriptorHandleForHeapStart(),
+				pDescHeap->GetGPUDescriptorHandleForHeapStart());
+
 			// Complete install
 			presentCalled = true;
 			Instance::GetInstance()->FinishInstall(true);
 		}
+
+		// Create ImGui frames
+		ImGui_ImplDX12_NewFrame();
+		ImGui_ImplWin32_NewFrame();
+		Engine::Render(GraphicsAPI::D3D12);
+		ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), NULL);
 
 		return presentHookTrampoline(pSwapChain, syncInterval, flags);
 	}
@@ -109,6 +153,7 @@ namespace Hook::D3D12
 			return;
 		}
 
+		// Create command queue
 		D3D12_COMMAND_QUEUE_DESC queueDesc;
 		queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
 		queueDesc.Priority = 0;
@@ -123,6 +168,7 @@ namespace Hook::D3D12
 			return;
 		}
 
+		// Create comman allocator
 		ID3D12CommandAllocator* pCommandAllocator;
 		if (pDevice->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, __uuidof(ID3D12CommandAllocator), (void**)&pCommandAllocator) < 0)
 		{
@@ -131,6 +177,7 @@ namespace Hook::D3D12
 			return;
 		}
 
+		// Create command list
 		ID3D12GraphicsCommandList* pCommandList;
 		if (pDevice->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, pCommandAllocator, NULL, __uuidof(ID3D12GraphicsCommandList), (void**)&pCommandList) < 0)
 		{
@@ -139,6 +186,7 @@ namespace Hook::D3D12
 			return;
 		}
 
+		// Create swap chain
 		DXGI_SWAP_CHAIN_DESC swapChainDesc = DXGIHook::CreateSwapChainDescription(hWindow);
 
 		IDXGISwapChain* pSwapChain;
@@ -158,6 +206,7 @@ namespace Hook::D3D12
 		pDevice = NULL;
 		pSwapChain = NULL;
 
+		// Hook onto present function
 		presentHookAddress = (LPVOID)pSwapChainVTable[static_cast<uint32_t>(DXGIHook::DXGIOffsets::Present)];
 		if (MH_CreateHook(presentHookAddress, &PresentHook, reinterpret_cast<LPVOID*>(&presentHookTrampoline)) != MH_OK) {
 			cout << "Failed to install hooks for D3D12." << endl;
