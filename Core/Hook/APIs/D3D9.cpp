@@ -1,5 +1,8 @@
 #include "D3D9.h"
 #include <D3DX/d3dx9tex.h>
+#include <sstream>
+
+#include "../../Capture/Capture.h"
 
 namespace Hook::D3D9 {
 	// Hooking
@@ -46,6 +49,7 @@ namespace Hook::D3D9 {
 			pSwapChain->GetPresentParameters(&presentParameters);
 			pDevice->CreateOffscreenPlainSurface(presentParameters.BackBufferWidth, presentParameters.BackBufferHeight, presentParameters.BackBufferFormat, D3DPOOL_SYSTEMMEM, &pRenderSurface, pSharedHandle);
 			pDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &pBackBuffer);
+			Capture::SetResolution(presentParameters.BackBufferWidth, presentParameters.BackBufferHeight);
 
 			// Initialise our engine
 			EngineResources::SetD3D9Device(&pDevice);
@@ -61,12 +65,18 @@ namespace Hook::D3D9 {
 		}
 
 		// Capture
-		// TODO: Only capture when Capture::ShouldCapture() is true.
-		pDevice->GetRenderTargetData(pBackBuffer, pRenderSurface);
-		D3DXSaveSurfaceToFileInMemory(&pDestBuffer, D3DXIFF_BMP, pRenderSurface, NULL, NULL);
+		if (Capture::ShouldCapture()) {
+			pDevice->GetRenderTargetData(pBackBuffer, pRenderSurface);
+			D3DXSaveSurfaceToFileInMemory(&pDestBuffer, D3DXIFF_BMP, pRenderSurface, NULL, NULL);
+			void* pBuffer = pDestBuffer->GetBufferPointer();
+			DWORD size = pDestBuffer->GetBufferSize();
 
-		// Release buffer once done.
-		pDestBuffer->Release();
+			// Add the frame
+			Capture::AddFrame((char*)pBuffer, size);
+
+			// Release buffer once done.
+			pDestBuffer->Release();
+		}
 
 		// Render
 		ImGui_ImplDX9_NewFrame();

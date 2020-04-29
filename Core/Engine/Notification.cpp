@@ -3,6 +3,7 @@
 #include "Notification.h"
 #include "../Utils/Utils.h"
 #include "EngineResources.h"
+#include "Fonts.h"
 
 using namespace std;
 using namespace std::chrono;
@@ -56,13 +57,30 @@ ImVec2 Notification::Render(GraphicsAPI graphicsAPI, int offset) {
 	
 	// Create window
 	if (ImGui::Begin(title.c_str(), &visible, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav)) {
-		ImGui::Columns(2);
-		ImGui::SetColumnWidth(0, 60);
+		ImGui::Columns(2, 0, false);
+		ImGui::SetColumnWidth(0, NOTIFICATION_ICON_SIZE.x + 20);
+
+		// Render image centered vertically.
+		ImGui::SetCursorPosY((NOTIFICATION_SIZE.y - NOTIFICATION_ICON_SIZE.y) / 2);
 		EngineResources::RenderTexture(graphicsAPI, TextureID::VISOR_LOGO, NOTIFICATION_ICON_SIZE);
+
+		// Get fonts
+		ImFont* bold = Engine::Fonts::GetFont(Engine::Fonts::Font::BOLD);
+		ImFont* regular = Engine::Fonts::GetFont(Engine::Fonts::Font::REGULAR);
+		
+		int textWindowWidth = NOTIFICATION_SIZE.x - NOTIFICATION_ICON_SIZE.x - 60;
+		float textHeight = bold->CalcTextSizeA(bold->FontSize, FLT_MAX, textWindowWidth, title.c_str()).y;
+		textHeight += regular->CalcTextSizeA(regular->FontSize, FLT_MAX, textWindowWidth, content.c_str()).y;
+		textHeight += 5;
+
 		ImGui::NextColumn();
+		ImGui::SetCursorPosY((NOTIFICATION_SIZE.y - textHeight) / 2);
+		ImGui::PushFont(bold);
 		ImGui::TextWrapped(title.c_str());
+		ImGui::PopFont();
+		ImGui::PushFont(regular);
 		ImGui::TextWrapped(content.c_str());
-		ImGui::NextColumn();
+		ImGui::PopFont();
 	}
 
 	// Cleanup

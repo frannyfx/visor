@@ -1118,27 +1118,10 @@ class ServerMessage :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kSessionIdFieldNumber = 1,
-    kConfigFieldNumber = 3,
-    kMessageTypeFieldNumber = 2,
+    kConfigFieldNumber = 2,
+    kMessageTypeFieldNumber = 1,
   };
-  // string session_id = 1;
-  void clear_session_id();
-  const std::string& session_id() const;
-  void set_session_id(const std::string& value);
-  void set_session_id(std::string&& value);
-  void set_session_id(const char* value);
-  void set_session_id(const char* value, size_t size);
-  std::string* mutable_session_id();
-  std::string* release_session_id();
-  void set_allocated_session_id(std::string* session_id);
-  private:
-  const std::string& _internal_session_id() const;
-  void _internal_set_session_id(const std::string& value);
-  std::string* _internal_mutable_session_id();
-  public:
-
-  // .Config config = 3;
+  // .Config config = 2;
   bool has_config() const;
   private:
   bool _internal_has_config() const;
@@ -1153,7 +1136,7 @@ class ServerMessage :
   ::Config* _internal_mutable_config();
   public:
 
-  // .ServerMessage.Type message_type = 2;
+  // .ServerMessage.Type message_type = 1;
   void clear_message_type();
   ::ServerMessage_Type message_type() const;
   void set_message_type(::ServerMessage_Type value);
@@ -1167,7 +1150,6 @@ class ServerMessage :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr session_id_;
   ::Config* config_;
   int message_type_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -1704,67 +1686,7 @@ inline void Config::set_allocated_capture(::Config_CaptureConfig* capture) {
 
 // ServerMessage
 
-// string session_id = 1;
-inline void ServerMessage::clear_session_id() {
-  session_id_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline const std::string& ServerMessage::session_id() const {
-  // @@protoc_insertion_point(field_get:ServerMessage.session_id)
-  return _internal_session_id();
-}
-inline void ServerMessage::set_session_id(const std::string& value) {
-  _internal_set_session_id(value);
-  // @@protoc_insertion_point(field_set:ServerMessage.session_id)
-}
-inline std::string* ServerMessage::mutable_session_id() {
-  // @@protoc_insertion_point(field_mutable:ServerMessage.session_id)
-  return _internal_mutable_session_id();
-}
-inline const std::string& ServerMessage::_internal_session_id() const {
-  return session_id_.GetNoArena();
-}
-inline void ServerMessage::_internal_set_session_id(const std::string& value) {
-  
-  session_id_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
-}
-inline void ServerMessage::set_session_id(std::string&& value) {
-  
-  session_id_.SetNoArena(
-    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:ServerMessage.session_id)
-}
-inline void ServerMessage::set_session_id(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  session_id_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:ServerMessage.session_id)
-}
-inline void ServerMessage::set_session_id(const char* value, size_t size) {
-  
-  session_id_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:ServerMessage.session_id)
-}
-inline std::string* ServerMessage::_internal_mutable_session_id() {
-  
-  return session_id_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline std::string* ServerMessage::release_session_id() {
-  // @@protoc_insertion_point(field_release:ServerMessage.session_id)
-  
-  return session_id_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline void ServerMessage::set_allocated_session_id(std::string* session_id) {
-  if (session_id != nullptr) {
-    
-  } else {
-    
-  }
-  session_id_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), session_id);
-  // @@protoc_insertion_point(field_set_allocated:ServerMessage.session_id)
-}
-
-// .ServerMessage.Type message_type = 2;
+// .ServerMessage.Type message_type = 1;
 inline void ServerMessage::clear_message_type() {
   message_type_ = 0;
 }
@@ -1784,7 +1706,7 @@ inline void ServerMessage::set_message_type(::ServerMessage_Type value) {
   // @@protoc_insertion_point(field_set:ServerMessage.message_type)
 }
 
-// .Config config = 3;
+// .Config config = 2;
 inline bool ServerMessage::_internal_has_config() const {
   return this != internal_default_instance() && config_ != nullptr;
 }

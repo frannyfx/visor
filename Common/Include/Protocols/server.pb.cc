@@ -180,7 +180,6 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_server_2eproto::offsets[] PROT
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::ServerMessage, session_id_),
   PROTOBUF_FIELD_OFFSET(::ServerMessage, message_type_),
   PROTOBUF_FIELD_OFFSET(::ServerMessage, config_),
 };
@@ -218,13 +217,12 @@ const char descriptor_table_protodef_server_2eproto[] PROTOBUF_SECTION_VARIABLE(
   ".Config.CaptureConfig.CaptureMode\022\021\n\tfra"
   "merate\030\003 \001(\005\022\037\n\027instant_replay_duration\030"
   "\004 \001(\005\"*\n\013CaptureMode\022\007\n\003DVR\020\000\022\022\n\016INSTANT"
-  "_REPLAY\020\001\"\241\001\n\rServerMessage\022\022\n\nsession_i"
-  "d\030\001 \001(\t\022)\n\014message_type\030\002 \001(\0162\023.ServerMe"
-  "ssage.Type\022\027\n\006config\030\003 \001(\0132\007.Config\"8\n\004T"
-  "ype\022\n\n\006CONFIG\020\000\022\021\n\rENCODER_READY\020\001\022\021\n\rEN"
-  "CODER_ERROR\020\002*J\n\010Position\022\014\n\010TOP_LEFT\020\000\022"
-  "\r\n\tTOP_RIGHT\020\001\022\017\n\013BOTTOM_LEFT\020\002\022\020\n\014BOTTO"
-  "M_RIGHT\020\003b\006proto3"
+  "_REPLAY\020\001\"\215\001\n\rServerMessage\022)\n\014message_t"
+  "ype\030\001 \001(\0162\023.ServerMessage.Type\022\027\n\006config"
+  "\030\002 \001(\0132\007.Config\"8\n\004Type\022\n\n\006CONFIG\020\000\022\021\n\rE"
+  "NCODER_READY\020\001\022\021\n\rENCODER_ERROR\020\002*J\n\010Pos"
+  "ition\022\014\n\010TOP_LEFT\020\000\022\r\n\tTOP_RIGHT\020\001\022\017\n\013BO"
+  "TTOM_LEFT\020\002\022\020\n\014BOTTOM_RIGHT\020\003b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_server_2eproto_deps[1] = {
 };
@@ -239,7 +237,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_ser
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_server_2eproto_once;
 static bool descriptor_table_server_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_server_2eproto = {
-  &descriptor_table_server_2eproto_initialized, descriptor_table_protodef_server_2eproto, "server.proto", 857,
+  &descriptor_table_server_2eproto_initialized, descriptor_table_protodef_server_2eproto, "server.proto", 837,
   &descriptor_table_server_2eproto_once, descriptor_table_server_2eproto_sccs, descriptor_table_server_2eproto_deps, 6, 0,
   schemas, file_default_instances, TableStruct_server_2eproto::offsets,
   file_level_metadata_server_2eproto, 6, file_level_enum_descriptors_server_2eproto, file_level_service_descriptors_server_2eproto,
@@ -1596,10 +1594,6 @@ ServerMessage::ServerMessage(const ServerMessage& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  session_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_session_id().empty()) {
-    session_id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.session_id_);
-  }
   if (from._internal_has_config()) {
     config_ = new ::Config(*from.config_);
   } else {
@@ -1611,7 +1605,6 @@ ServerMessage::ServerMessage(const ServerMessage& from)
 
 void ServerMessage::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ServerMessage_server_2eproto.base);
-  session_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&config_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&message_type_) -
       reinterpret_cast<char*>(&config_)) + sizeof(message_type_));
@@ -1623,7 +1616,6 @@ ServerMessage::~ServerMessage() {
 }
 
 void ServerMessage::SharedDtor() {
-  session_id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete config_;
 }
 
@@ -1642,7 +1634,6 @@ void ServerMessage::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  session_id_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (GetArenaNoVirtual() == nullptr && config_ != nullptr) {
     delete config_;
   }
@@ -1658,26 +1649,17 @@ const char* ServerMessage::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // string session_id = 1;
+      // .ServerMessage.Type message_type = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          auto str = _internal_mutable_session_id();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "ServerMessage.session_id"));
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // .ServerMessage.Type message_type = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
           ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
           CHK_(ptr);
           _internal_set_message_type(static_cast<::ServerMessage_Type>(val));
         } else goto handle_unusual;
         continue;
-      // .Config config = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+      // .Config config = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
           ptr = ctx->ParseMessage(_internal_mutable_config(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
@@ -1708,29 +1690,19 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string session_id = 1;
-  if (this->session_id().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_session_id().data(), static_cast<int>(this->_internal_session_id().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "ServerMessage.session_id");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_session_id(), target);
-  }
-
-  // .ServerMessage.Type message_type = 2;
+  // .ServerMessage.Type message_type = 1;
   if (this->message_type() != 0) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
-      2, this->_internal_message_type(), target);
+      1, this->_internal_message_type(), target);
   }
 
-  // .Config config = 3;
+  // .Config config = 2;
   if (this->has_config()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        3, _Internal::config(this), target, stream);
+        2, _Internal::config(this), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1749,21 +1721,14 @@ size_t ServerMessage::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string session_id = 1;
-  if (this->session_id().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_session_id());
-  }
-
-  // .Config config = 3;
+  // .Config config = 2;
   if (this->has_config()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *config_);
   }
 
-  // .ServerMessage.Type message_type = 2;
+  // .ServerMessage.Type message_type = 1;
   if (this->message_type() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_message_type());
@@ -1800,10 +1765,6 @@ void ServerMessage::MergeFrom(const ServerMessage& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.session_id().size() > 0) {
-
-    session_id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.session_id_);
-  }
   if (from.has_config()) {
     _internal_mutable_config()->::Config::MergeFrom(from._internal_config());
   }
@@ -1833,8 +1794,6 @@ bool ServerMessage::IsInitialized() const {
 void ServerMessage::InternalSwap(ServerMessage* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  session_id_.Swap(&other->session_id_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   swap(config_, other->config_);
   swap(message_type_, other->message_type_);
 }

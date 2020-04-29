@@ -67,9 +67,9 @@ extern ClientMessage_Bookmark_CSGODeepIntegrationDefaultTypeInternal _ClientMess
 class ClientMessage_Bookmark_CSGODeepIntegration_KillDetails;
 class ClientMessage_Bookmark_CSGODeepIntegration_KillDetailsDefaultTypeInternal;
 extern ClientMessage_Bookmark_CSGODeepIntegration_KillDetailsDefaultTypeInternal _ClientMessage_Bookmark_CSGODeepIntegration_KillDetails_default_instance_;
-class ClientMessage_Frame;
-class ClientMessage_FrameDefaultTypeInternal;
-extern ClientMessage_FrameDefaultTypeInternal _ClientMessage_Frame_default_instance_;
+class ClientMessage_Capture;
+class ClientMessage_CaptureDefaultTypeInternal;
+extern ClientMessage_CaptureDefaultTypeInternal _ClientMessage_Capture_default_instance_;
 class ClientMessage_Hello;
 class ClientMessage_HelloDefaultTypeInternal;
 extern ClientMessage_HelloDefaultTypeInternal _ClientMessage_Hello_default_instance_;
@@ -78,7 +78,7 @@ template<> ::ClientMessage* Arena::CreateMaybeMessage<::ClientMessage>(Arena*);
 template<> ::ClientMessage_Bookmark* Arena::CreateMaybeMessage<::ClientMessage_Bookmark>(Arena*);
 template<> ::ClientMessage_Bookmark_CSGODeepIntegration* Arena::CreateMaybeMessage<::ClientMessage_Bookmark_CSGODeepIntegration>(Arena*);
 template<> ::ClientMessage_Bookmark_CSGODeepIntegration_KillDetails* Arena::CreateMaybeMessage<::ClientMessage_Bookmark_CSGODeepIntegration_KillDetails>(Arena*);
-template<> ::ClientMessage_Frame* Arena::CreateMaybeMessage<::ClientMessage_Frame>(Arena*);
+template<> ::ClientMessage_Capture* Arena::CreateMaybeMessage<::ClientMessage_Capture>(Arena*);
 template<> ::ClientMessage_Hello* Arena::CreateMaybeMessage<::ClientMessage_Hello>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 
@@ -335,23 +335,23 @@ class ClientMessage_Hello :
 };
 // -------------------------------------------------------------------
 
-class ClientMessage_Frame :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ClientMessage.Frame) */ {
+class ClientMessage_Capture :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ClientMessage.Capture) */ {
  public:
-  ClientMessage_Frame();
-  virtual ~ClientMessage_Frame();
+  ClientMessage_Capture();
+  virtual ~ClientMessage_Capture();
 
-  ClientMessage_Frame(const ClientMessage_Frame& from);
-  ClientMessage_Frame(ClientMessage_Frame&& from) noexcept
-    : ClientMessage_Frame() {
+  ClientMessage_Capture(const ClientMessage_Capture& from);
+  ClientMessage_Capture(ClientMessage_Capture&& from) noexcept
+    : ClientMessage_Capture() {
     *this = ::std::move(from);
   }
 
-  inline ClientMessage_Frame& operator=(const ClientMessage_Frame& from) {
+  inline ClientMessage_Capture& operator=(const ClientMessage_Capture& from) {
     CopyFrom(from);
     return *this;
   }
-  inline ClientMessage_Frame& operator=(ClientMessage_Frame&& from) noexcept {
+  inline ClientMessage_Capture& operator=(ClientMessage_Capture&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -369,37 +369,37 @@ class ClientMessage_Frame :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return GetMetadataStatic().reflection;
   }
-  static const ClientMessage_Frame& default_instance();
+  static const ClientMessage_Capture& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ClientMessage_Frame* internal_default_instance() {
-    return reinterpret_cast<const ClientMessage_Frame*>(
-               &_ClientMessage_Frame_default_instance_);
+  static inline const ClientMessage_Capture* internal_default_instance() {
+    return reinterpret_cast<const ClientMessage_Capture*>(
+               &_ClientMessage_Capture_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     1;
 
-  friend void swap(ClientMessage_Frame& a, ClientMessage_Frame& b) {
+  friend void swap(ClientMessage_Capture& a, ClientMessage_Capture& b) {
     a.Swap(&b);
   }
-  inline void Swap(ClientMessage_Frame* other) {
+  inline void Swap(ClientMessage_Capture* other) {
     if (other == this) return;
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ClientMessage_Frame* New() const final {
-    return CreateMaybeMessage<ClientMessage_Frame>(nullptr);
+  inline ClientMessage_Capture* New() const final {
+    return CreateMaybeMessage<ClientMessage_Capture>(nullptr);
   }
 
-  ClientMessage_Frame* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<ClientMessage_Frame>(arena);
+  ClientMessage_Capture* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ClientMessage_Capture>(arena);
   }
   void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const ClientMessage_Frame& from);
-  void MergeFrom(const ClientMessage_Frame& from);
+  void CopyFrom(const ClientMessage_Capture& from);
+  void MergeFrom(const ClientMessage_Capture& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -413,10 +413,10 @@ class ClientMessage_Frame :
   inline void SharedCtor();
   inline void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(ClientMessage_Frame* other);
+  void InternalSwap(ClientMessage_Capture* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "ClientMessage.Frame";
+    return "ClientMessage.Capture";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -441,30 +441,34 @@ class ClientMessage_Frame :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kBufferFieldNumber = 1,
+    kWidthFieldNumber = 1,
+    kHeightFieldNumber = 2,
   };
-  // bytes buffer = 1;
-  void clear_buffer();
-  const std::string& buffer() const;
-  void set_buffer(const std::string& value);
-  void set_buffer(std::string&& value);
-  void set_buffer(const char* value);
-  void set_buffer(const void* value, size_t size);
-  std::string* mutable_buffer();
-  std::string* release_buffer();
-  void set_allocated_buffer(std::string* buffer);
+  // int32 width = 1;
+  void clear_width();
+  ::PROTOBUF_NAMESPACE_ID::int32 width() const;
+  void set_width(::PROTOBUF_NAMESPACE_ID::int32 value);
   private:
-  const std::string& _internal_buffer() const;
-  void _internal_set_buffer(const std::string& value);
-  std::string* _internal_mutable_buffer();
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_width() const;
+  void _internal_set_width(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // @@protoc_insertion_point(class_scope:ClientMessage.Frame)
+  // int32 height = 2;
+  void clear_height();
+  ::PROTOBUF_NAMESPACE_ID::int32 height() const;
+  void set_height(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_height() const;
+  void _internal_set_height(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:ClientMessage.Capture)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr buffer_;
+  ::PROTOBUF_NAMESPACE_ID::int32 width_;
+  ::PROTOBUF_NAMESPACE_ID::int32 height_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_client_2eproto;
 };
@@ -1138,7 +1142,7 @@ class ClientMessage :
   // nested types ----------------------------------------------------
 
   typedef ClientMessage_Hello Hello;
-  typedef ClientMessage_Frame Frame;
+  typedef ClientMessage_Capture Capture;
   typedef ClientMessage_Bookmark Bookmark;
 
   typedef ClientMessage_Type Type;
@@ -1182,11 +1186,28 @@ class ClientMessage :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kFrameFieldNumber = 5,
     kHelloFieldNumber = 2,
-    kFrameFieldNumber = 3,
+    kCaptureFieldNumber = 3,
     kBookmarkFieldNumber = 4,
     kMessageTypeFieldNumber = 1,
   };
+  // bytes frame = 5;
+  void clear_frame();
+  const std::string& frame() const;
+  void set_frame(const std::string& value);
+  void set_frame(std::string&& value);
+  void set_frame(const char* value);
+  void set_frame(const void* value, size_t size);
+  std::string* mutable_frame();
+  std::string* release_frame();
+  void set_allocated_frame(std::string* frame);
+  private:
+  const std::string& _internal_frame() const;
+  void _internal_set_frame(const std::string& value);
+  std::string* _internal_mutable_frame();
+  public:
+
   // .ClientMessage.Hello hello = 2;
   bool has_hello() const;
   private:
@@ -1202,19 +1223,19 @@ class ClientMessage :
   ::ClientMessage_Hello* _internal_mutable_hello();
   public:
 
-  // .ClientMessage.Frame frame = 3;
-  bool has_frame() const;
+  // .ClientMessage.Capture capture = 3;
+  bool has_capture() const;
   private:
-  bool _internal_has_frame() const;
+  bool _internal_has_capture() const;
   public:
-  void clear_frame();
-  const ::ClientMessage_Frame& frame() const;
-  ::ClientMessage_Frame* release_frame();
-  ::ClientMessage_Frame* mutable_frame();
-  void set_allocated_frame(::ClientMessage_Frame* frame);
+  void clear_capture();
+  const ::ClientMessage_Capture& capture() const;
+  ::ClientMessage_Capture* release_capture();
+  ::ClientMessage_Capture* mutable_capture();
+  void set_allocated_capture(::ClientMessage_Capture* capture);
   private:
-  const ::ClientMessage_Frame& _internal_frame() const;
-  ::ClientMessage_Frame* _internal_mutable_frame();
+  const ::ClientMessage_Capture& _internal_capture() const;
+  ::ClientMessage_Capture* _internal_mutable_capture();
   public:
 
   // .ClientMessage.Bookmark bookmark = 4;
@@ -1246,8 +1267,9 @@ class ClientMessage :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr frame_;
   ::ClientMessage_Hello* hello_;
-  ::ClientMessage_Frame* frame_;
+  ::ClientMessage_Capture* capture_;
   ::ClientMessage_Bookmark* bookmark_;
   int message_type_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -1406,66 +1428,46 @@ inline void ClientMessage_Hello::set_allocated_window_title(std::string* window_
 
 // -------------------------------------------------------------------
 
-// ClientMessage_Frame
+// ClientMessage_Capture
 
-// bytes buffer = 1;
-inline void ClientMessage_Frame::clear_buffer() {
-  buffer_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+// int32 width = 1;
+inline void ClientMessage_Capture::clear_width() {
+  width_ = 0;
 }
-inline const std::string& ClientMessage_Frame::buffer() const {
-  // @@protoc_insertion_point(field_get:ClientMessage.Frame.buffer)
-  return _internal_buffer();
+inline ::PROTOBUF_NAMESPACE_ID::int32 ClientMessage_Capture::_internal_width() const {
+  return width_;
 }
-inline void ClientMessage_Frame::set_buffer(const std::string& value) {
-  _internal_set_buffer(value);
-  // @@protoc_insertion_point(field_set:ClientMessage.Frame.buffer)
+inline ::PROTOBUF_NAMESPACE_ID::int32 ClientMessage_Capture::width() const {
+  // @@protoc_insertion_point(field_get:ClientMessage.Capture.width)
+  return _internal_width();
 }
-inline std::string* ClientMessage_Frame::mutable_buffer() {
-  // @@protoc_insertion_point(field_mutable:ClientMessage.Frame.buffer)
-  return _internal_mutable_buffer();
-}
-inline const std::string& ClientMessage_Frame::_internal_buffer() const {
-  return buffer_.GetNoArena();
-}
-inline void ClientMessage_Frame::_internal_set_buffer(const std::string& value) {
+inline void ClientMessage_Capture::_internal_set_width(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
-  buffer_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+  width_ = value;
 }
-inline void ClientMessage_Frame::set_buffer(std::string&& value) {
+inline void ClientMessage_Capture::set_width(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_width(value);
+  // @@protoc_insertion_point(field_set:ClientMessage.Capture.width)
+}
+
+// int32 height = 2;
+inline void ClientMessage_Capture::clear_height() {
+  height_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 ClientMessage_Capture::_internal_height() const {
+  return height_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 ClientMessage_Capture::height() const {
+  // @@protoc_insertion_point(field_get:ClientMessage.Capture.height)
+  return _internal_height();
+}
+inline void ClientMessage_Capture::_internal_set_height(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
-  buffer_.SetNoArena(
-    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:ClientMessage.Frame.buffer)
+  height_ = value;
 }
-inline void ClientMessage_Frame::set_buffer(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  buffer_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:ClientMessage.Frame.buffer)
-}
-inline void ClientMessage_Frame::set_buffer(const void* value, size_t size) {
-  
-  buffer_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:ClientMessage.Frame.buffer)
-}
-inline std::string* ClientMessage_Frame::_internal_mutable_buffer() {
-  
-  return buffer_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline std::string* ClientMessage_Frame::release_buffer() {
-  // @@protoc_insertion_point(field_release:ClientMessage.Frame.buffer)
-  
-  return buffer_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline void ClientMessage_Frame::set_allocated_buffer(std::string* buffer) {
-  if (buffer != nullptr) {
-    
-  } else {
-    
-  }
-  buffer_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), buffer);
-  // @@protoc_insertion_point(field_set_allocated:ClientMessage.Frame.buffer)
+inline void ClientMessage_Capture::set_height(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_height(value);
+  // @@protoc_insertion_point(field_set:ClientMessage.Capture.height)
 }
 
 // -------------------------------------------------------------------
@@ -1864,64 +1866,64 @@ inline void ClientMessage::set_allocated_hello(::ClientMessage_Hello* hello) {
   // @@protoc_insertion_point(field_set_allocated:ClientMessage.hello)
 }
 
-// .ClientMessage.Frame frame = 3;
-inline bool ClientMessage::_internal_has_frame() const {
-  return this != internal_default_instance() && frame_ != nullptr;
+// .ClientMessage.Capture capture = 3;
+inline bool ClientMessage::_internal_has_capture() const {
+  return this != internal_default_instance() && capture_ != nullptr;
 }
-inline bool ClientMessage::has_frame() const {
-  return _internal_has_frame();
+inline bool ClientMessage::has_capture() const {
+  return _internal_has_capture();
 }
-inline void ClientMessage::clear_frame() {
-  if (GetArenaNoVirtual() == nullptr && frame_ != nullptr) {
-    delete frame_;
+inline void ClientMessage::clear_capture() {
+  if (GetArenaNoVirtual() == nullptr && capture_ != nullptr) {
+    delete capture_;
   }
-  frame_ = nullptr;
+  capture_ = nullptr;
 }
-inline const ::ClientMessage_Frame& ClientMessage::_internal_frame() const {
-  const ::ClientMessage_Frame* p = frame_;
-  return p != nullptr ? *p : *reinterpret_cast<const ::ClientMessage_Frame*>(
-      &::_ClientMessage_Frame_default_instance_);
+inline const ::ClientMessage_Capture& ClientMessage::_internal_capture() const {
+  const ::ClientMessage_Capture* p = capture_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::ClientMessage_Capture*>(
+      &::_ClientMessage_Capture_default_instance_);
 }
-inline const ::ClientMessage_Frame& ClientMessage::frame() const {
-  // @@protoc_insertion_point(field_get:ClientMessage.frame)
-  return _internal_frame();
+inline const ::ClientMessage_Capture& ClientMessage::capture() const {
+  // @@protoc_insertion_point(field_get:ClientMessage.capture)
+  return _internal_capture();
 }
-inline ::ClientMessage_Frame* ClientMessage::release_frame() {
-  // @@protoc_insertion_point(field_release:ClientMessage.frame)
+inline ::ClientMessage_Capture* ClientMessage::release_capture() {
+  // @@protoc_insertion_point(field_release:ClientMessage.capture)
   
-  ::ClientMessage_Frame* temp = frame_;
-  frame_ = nullptr;
+  ::ClientMessage_Capture* temp = capture_;
+  capture_ = nullptr;
   return temp;
 }
-inline ::ClientMessage_Frame* ClientMessage::_internal_mutable_frame() {
+inline ::ClientMessage_Capture* ClientMessage::_internal_mutable_capture() {
   
-  if (frame_ == nullptr) {
-    auto* p = CreateMaybeMessage<::ClientMessage_Frame>(GetArenaNoVirtual());
-    frame_ = p;
+  if (capture_ == nullptr) {
+    auto* p = CreateMaybeMessage<::ClientMessage_Capture>(GetArenaNoVirtual());
+    capture_ = p;
   }
-  return frame_;
+  return capture_;
 }
-inline ::ClientMessage_Frame* ClientMessage::mutable_frame() {
-  // @@protoc_insertion_point(field_mutable:ClientMessage.frame)
-  return _internal_mutable_frame();
+inline ::ClientMessage_Capture* ClientMessage::mutable_capture() {
+  // @@protoc_insertion_point(field_mutable:ClientMessage.capture)
+  return _internal_mutable_capture();
 }
-inline void ClientMessage::set_allocated_frame(::ClientMessage_Frame* frame) {
+inline void ClientMessage::set_allocated_capture(::ClientMessage_Capture* capture) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == nullptr) {
-    delete frame_;
+    delete capture_;
   }
-  if (frame) {
+  if (capture) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
     if (message_arena != submessage_arena) {
-      frame = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, frame, submessage_arena);
+      capture = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, capture, submessage_arena);
     }
     
   } else {
     
   }
-  frame_ = frame;
-  // @@protoc_insertion_point(field_set_allocated:ClientMessage.frame)
+  capture_ = capture;
+  // @@protoc_insertion_point(field_set_allocated:ClientMessage.capture)
 }
 
 // .ClientMessage.Bookmark bookmark = 4;
@@ -1982,6 +1984,66 @@ inline void ClientMessage::set_allocated_bookmark(::ClientMessage_Bookmark* book
   }
   bookmark_ = bookmark;
   // @@protoc_insertion_point(field_set_allocated:ClientMessage.bookmark)
+}
+
+// bytes frame = 5;
+inline void ClientMessage::clear_frame() {
+  frame_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& ClientMessage::frame() const {
+  // @@protoc_insertion_point(field_get:ClientMessage.frame)
+  return _internal_frame();
+}
+inline void ClientMessage::set_frame(const std::string& value) {
+  _internal_set_frame(value);
+  // @@protoc_insertion_point(field_set:ClientMessage.frame)
+}
+inline std::string* ClientMessage::mutable_frame() {
+  // @@protoc_insertion_point(field_mutable:ClientMessage.frame)
+  return _internal_mutable_frame();
+}
+inline const std::string& ClientMessage::_internal_frame() const {
+  return frame_.GetNoArena();
+}
+inline void ClientMessage::_internal_set_frame(const std::string& value) {
+  
+  frame_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+}
+inline void ClientMessage::set_frame(std::string&& value) {
+  
+  frame_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:ClientMessage.frame)
+}
+inline void ClientMessage::set_frame(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  frame_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:ClientMessage.frame)
+}
+inline void ClientMessage::set_frame(const void* value, size_t size) {
+  
+  frame_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:ClientMessage.frame)
+}
+inline std::string* ClientMessage::_internal_mutable_frame() {
+  
+  return frame_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* ClientMessage::release_frame() {
+  // @@protoc_insertion_point(field_release:ClientMessage.frame)
+  
+  return frame_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void ClientMessage::set_allocated_frame(std::string* frame) {
+  if (frame != nullptr) {
+    
+  } else {
+    
+  }
+  frame_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), frame);
+  // @@protoc_insertion_point(field_set_allocated:ClientMessage.frame)
 }
 
 #ifdef __GNUC__

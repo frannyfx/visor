@@ -17,16 +17,16 @@
 extern PROTOBUF_INTERNAL_EXPORT_client_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ClientMessage_Bookmark_client_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_client_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ClientMessage_Bookmark_CSGODeepIntegration_client_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_client_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ClientMessage_Bookmark_CSGODeepIntegration_KillDetails_client_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_client_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ClientMessage_Frame_client_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_client_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ClientMessage_Capture_client_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_client_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ClientMessage_Hello_client_2eproto;
 class ClientMessage_HelloDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ClientMessage_Hello> _instance;
 } _ClientMessage_Hello_default_instance_;
-class ClientMessage_FrameDefaultTypeInternal {
+class ClientMessage_CaptureDefaultTypeInternal {
  public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ClientMessage_Frame> _instance;
-} _ClientMessage_Frame_default_instance_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ClientMessage_Capture> _instance;
+} _ClientMessage_Capture_default_instance_;
 class ClientMessage_Bookmark_CSGODeepIntegration_KillDetailsDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ClientMessage_Bookmark_CSGODeepIntegration_KillDetails> _instance;
@@ -57,7 +57,7 @@ static void InitDefaultsscc_info_ClientMessage_client_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_ClientMessage_client_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 3, 0, InitDefaultsscc_info_ClientMessage_client_2eproto}, {
       &scc_info_ClientMessage_Hello_client_2eproto.base,
-      &scc_info_ClientMessage_Frame_client_2eproto.base,
+      &scc_info_ClientMessage_Capture_client_2eproto.base,
       &scc_info_ClientMessage_Bookmark_client_2eproto.base,}};
 
 static void InitDefaultsscc_info_ClientMessage_Bookmark_client_2eproto() {
@@ -104,19 +104,19 @@ static void InitDefaultsscc_info_ClientMessage_Bookmark_CSGODeepIntegration_Kill
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ClientMessage_Bookmark_CSGODeepIntegration_KillDetails_client_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ClientMessage_Bookmark_CSGODeepIntegration_KillDetails_client_2eproto}, {}};
 
-static void InitDefaultsscc_info_ClientMessage_Frame_client_2eproto() {
+static void InitDefaultsscc_info_ClientMessage_Capture_client_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::_ClientMessage_Frame_default_instance_;
-    new (ptr) ::ClientMessage_Frame();
+    void* ptr = &::_ClientMessage_Capture_default_instance_;
+    new (ptr) ::ClientMessage_Capture();
     ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::ClientMessage_Frame::InitAsDefaultInstance();
+  ::ClientMessage_Capture::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ClientMessage_Frame_client_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ClientMessage_Frame_client_2eproto}, {}};
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ClientMessage_Capture_client_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ClientMessage_Capture_client_2eproto}, {}};
 
 static void InitDefaultsscc_info_ClientMessage_Hello_client_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -146,11 +146,12 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_client_2eproto::offsets[] PROT
   PROTOBUF_FIELD_OFFSET(::ClientMessage_Hello, executable_path_),
   PROTOBUF_FIELD_OFFSET(::ClientMessage_Hello, window_title_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::ClientMessage_Frame, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::ClientMessage_Capture, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::ClientMessage_Frame, buffer_),
+  PROTOBUF_FIELD_OFFSET(::ClientMessage_Capture, width_),
+  PROTOBUF_FIELD_OFFSET(::ClientMessage_Capture, height_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::ClientMessage_Bookmark_CSGODeepIntegration_KillDetails, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -184,21 +185,22 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_client_2eproto::offsets[] PROT
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::ClientMessage, message_type_),
   PROTOBUF_FIELD_OFFSET(::ClientMessage, hello_),
-  PROTOBUF_FIELD_OFFSET(::ClientMessage, frame_),
+  PROTOBUF_FIELD_OFFSET(::ClientMessage, capture_),
   PROTOBUF_FIELD_OFFSET(::ClientMessage, bookmark_),
+  PROTOBUF_FIELD_OFFSET(::ClientMessage, frame_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::ClientMessage_Hello)},
-  { 8, -1, sizeof(::ClientMessage_Frame)},
-  { 14, -1, sizeof(::ClientMessage_Bookmark_CSGODeepIntegration_KillDetails)},
-  { 24, -1, sizeof(::ClientMessage_Bookmark_CSGODeepIntegration)},
-  { 32, -1, sizeof(::ClientMessage_Bookmark)},
-  { 40, -1, sizeof(::ClientMessage)},
+  { 8, -1, sizeof(::ClientMessage_Capture)},
+  { 15, -1, sizeof(::ClientMessage_Bookmark_CSGODeepIntegration_KillDetails)},
+  { 25, -1, sizeof(::ClientMessage_Bookmark_CSGODeepIntegration)},
+  { 33, -1, sizeof(::ClientMessage_Bookmark)},
+  { 41, -1, sizeof(::ClientMessage)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_ClientMessage_Hello_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_ClientMessage_Frame_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_ClientMessage_Capture_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_ClientMessage_Bookmark_CSGODeepIntegration_KillDetails_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_ClientMessage_Bookmark_CSGODeepIntegration_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_ClientMessage_Bookmark_default_instance_),
@@ -206,33 +208,34 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 };
 
 const char descriptor_table_protodef_client_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\014client.proto\"\223\010\n\rClientMessage\022)\n\014mess"
+  "\n\014client.proto\"\267\010\n\rClientMessage\022)\n\014mess"
   "age_type\030\001 \001(\0162\023.ClientMessage.Type\022#\n\005h"
-  "ello\030\002 \001(\0132\024.ClientMessage.Hello\022#\n\005fram"
-  "e\030\003 \001(\0132\024.ClientMessage.Frame\022)\n\010bookmar"
-  "k\030\004 \001(\0132\027.ClientMessage.Bookmark\032C\n\005Hell"
-  "o\022\013\n\003pid\030\001 \001(\005\022\027\n\017executable_path\030\002 \001(\t\022"
-  "\024\n\014window_title\030\003 \001(\t\032\027\n\005Frame\022\016\n\006buffer"
-  "\030\001 \001(\014\032\232\005\n\010Bookmark\022\021\n\tis_manual\030\001 \001(\010\0222"
-  "\n\004type\030\002 \001(\0162$.ClientMessage.Bookmark.Bo"
-  "okmarkType\0229\n\004csgo\030\003 \001(\0132+.ClientMessage"
-  ".Bookmark.CSGODeepIntegration\032\347\003\n\023CSGODe"
-  "epIntegration\022D\n\005event\030\001 \001(\01625.ClientMes"
-  "sage.Bookmark.CSGODeepIntegration.CSGOEv"
-  "ent\022\026\n\016is_competitive\030\002 \001(\010\022M\n\014kill_deta"
-  "ils\030\003 \001(\01327.ClientMessage.Bookmark.CSGOD"
-  "eepIntegration.KillDetails\032z\n\013KillDetail"
-  "s\022\023\n\013is_headshot\030\001 \001(\010\022\023\n\013is_wallbang\030\002 "
-  "\001(\010\022\023\n\013with_assist\030\003 \001(\010\022\025\n\rthrough_smok"
-  "e\030\004 \001(\010\022\025\n\rwhile_blinded\030\005 \001(\010\"\246\001\n\tCSGOE"
-  "vent\022\017\n\013MATCH_START\020\000\022\r\n\tMATCH_END\020\001\022\017\n\013"
-  "ROUND_START\020\002\022\r\n\tROUND_END\020\003\022\010\n\004KILL\020\004\022\t"
-  "\n\005DEATH\020\005\022\013\n\007SUICIDE\020\006\022\023\n\017HOSTAGE_RESCUE"
-  "D\020\007\022\020\n\014BOMB_PLANTED\020\010\022\020\n\014BOMB_DEFUSED\020\t\""
-  "\"\n\014BookmarkType\022\010\n\004NONE\020\000\022\010\n\004CSGO\020\001\"g\n\004T"
-  "ype\022\t\n\005HELLO\020\000\022\023\n\017CAPTURE_STARTED\020\001\022\023\n\017C"
-  "APTURE_STOPPED\020\002\022\021\n\rCAPTURE_ERROR\020\003\022\t\n\005F"
-  "RAME\020\004\022\014\n\010BOOKMARK\020\005b\006proto3"
+  "ello\030\002 \001(\0132\024.ClientMessage.Hello\022\'\n\007capt"
+  "ure\030\003 \001(\0132\026.ClientMessage.Capture\022)\n\010boo"
+  "kmark\030\004 \001(\0132\027.ClientMessage.Bookmark\022\r\n\005"
+  "frame\030\005 \001(\014\032C\n\005Hello\022\013\n\003pid\030\001 \001(\005\022\027\n\017exe"
+  "cutable_path\030\002 \001(\t\022\024\n\014window_title\030\003 \001(\t"
+  "\032(\n\007Capture\022\r\n\005width\030\001 \001(\005\022\016\n\006height\030\002 \001"
+  "(\005\032\232\005\n\010Bookmark\022\021\n\tis_manual\030\001 \001(\010\0222\n\004ty"
+  "pe\030\002 \001(\0162$.ClientMessage.Bookmark.Bookma"
+  "rkType\0229\n\004csgo\030\003 \001(\0132+.ClientMessage.Boo"
+  "kmark.CSGODeepIntegration\032\347\003\n\023CSGODeepIn"
+  "tegration\022D\n\005event\030\001 \001(\01625.ClientMessage"
+  ".Bookmark.CSGODeepIntegration.CSGOEvent\022"
+  "\026\n\016is_competitive\030\002 \001(\010\022M\n\014kill_details\030"
+  "\003 \001(\01327.ClientMessage.Bookmark.CSGODeepI"
+  "ntegration.KillDetails\032z\n\013KillDetails\022\023\n"
+  "\013is_headshot\030\001 \001(\010\022\023\n\013is_wallbang\030\002 \001(\010\022"
+  "\023\n\013with_assist\030\003 \001(\010\022\025\n\rthrough_smoke\030\004 "
+  "\001(\010\022\025\n\rwhile_blinded\030\005 \001(\010\"\246\001\n\tCSGOEvent"
+  "\022\017\n\013MATCH_START\020\000\022\r\n\tMATCH_END\020\001\022\017\n\013ROUN"
+  "D_START\020\002\022\r\n\tROUND_END\020\003\022\010\n\004KILL\020\004\022\t\n\005DE"
+  "ATH\020\005\022\013\n\007SUICIDE\020\006\022\023\n\017HOSTAGE_RESCUED\020\007\022"
+  "\020\n\014BOMB_PLANTED\020\010\022\020\n\014BOMB_DEFUSED\020\t\"\"\n\014B"
+  "ookmarkType\022\010\n\004NONE\020\000\022\010\n\004CSGO\020\001\"g\n\004Type\022"
+  "\t\n\005HELLO\020\000\022\023\n\017CAPTURE_STARTED\020\001\022\023\n\017CAPTU"
+  "RE_STOPPED\020\002\022\021\n\rCAPTURE_ERROR\020\003\022\t\n\005FRAME"
+  "\020\004\022\014\n\010BOOKMARK\020\005b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_client_2eproto_deps[1] = {
 };
@@ -241,13 +244,13 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_cli
   &scc_info_ClientMessage_Bookmark_client_2eproto.base,
   &scc_info_ClientMessage_Bookmark_CSGODeepIntegration_client_2eproto.base,
   &scc_info_ClientMessage_Bookmark_CSGODeepIntegration_KillDetails_client_2eproto.base,
-  &scc_info_ClientMessage_Frame_client_2eproto.base,
+  &scc_info_ClientMessage_Capture_client_2eproto.base,
   &scc_info_ClientMessage_Hello_client_2eproto.base,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_client_2eproto_once;
 static bool descriptor_table_client_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_client_2eproto = {
-  &descriptor_table_client_2eproto_initialized, descriptor_table_protodef_client_2eproto, "client.proto", 1068,
+  &descriptor_table_client_2eproto_initialized, descriptor_table_protodef_client_2eproto, "client.proto", 1104,
   &descriptor_table_client_2eproto_once, descriptor_table_client_2eproto_sccs, descriptor_table_client_2eproto_deps, 6, 0,
   schemas, file_default_instances, TableStruct_client_2eproto::offsets,
   file_level_metadata_client_2eproto, 6, file_level_enum_descriptors_client_2eproto, file_level_service_descriptors_client_2eproto,
@@ -610,73 +613,80 @@ void ClientMessage_Hello::InternalSwap(ClientMessage_Hello* other) {
 
 // ===================================================================
 
-void ClientMessage_Frame::InitAsDefaultInstance() {
+void ClientMessage_Capture::InitAsDefaultInstance() {
 }
-class ClientMessage_Frame::_Internal {
+class ClientMessage_Capture::_Internal {
  public:
 };
 
-ClientMessage_Frame::ClientMessage_Frame()
+ClientMessage_Capture::ClientMessage_Capture()
   : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:ClientMessage.Frame)
+  // @@protoc_insertion_point(constructor:ClientMessage.Capture)
 }
-ClientMessage_Frame::ClientMessage_Frame(const ClientMessage_Frame& from)
+ClientMessage_Capture::ClientMessage_Capture(const ClientMessage_Capture& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  buffer_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_buffer().empty()) {
-    buffer_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.buffer_);
-  }
-  // @@protoc_insertion_point(copy_constructor:ClientMessage.Frame)
+  ::memcpy(&width_, &from.width_,
+    static_cast<size_t>(reinterpret_cast<char*>(&height_) -
+    reinterpret_cast<char*>(&width_)) + sizeof(height_));
+  // @@protoc_insertion_point(copy_constructor:ClientMessage.Capture)
 }
 
-void ClientMessage_Frame::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ClientMessage_Frame_client_2eproto.base);
-  buffer_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+void ClientMessage_Capture::SharedCtor() {
+  ::memset(&width_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&height_) -
+      reinterpret_cast<char*>(&width_)) + sizeof(height_));
 }
 
-ClientMessage_Frame::~ClientMessage_Frame() {
-  // @@protoc_insertion_point(destructor:ClientMessage.Frame)
+ClientMessage_Capture::~ClientMessage_Capture() {
+  // @@protoc_insertion_point(destructor:ClientMessage.Capture)
   SharedDtor();
 }
 
-void ClientMessage_Frame::SharedDtor() {
-  buffer_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+void ClientMessage_Capture::SharedDtor() {
 }
 
-void ClientMessage_Frame::SetCachedSize(int size) const {
+void ClientMessage_Capture::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ClientMessage_Frame& ClientMessage_Frame::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ClientMessage_Frame_client_2eproto.base);
+const ClientMessage_Capture& ClientMessage_Capture::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ClientMessage_Capture_client_2eproto.base);
   return *internal_default_instance();
 }
 
 
-void ClientMessage_Frame::Clear() {
-// @@protoc_insertion_point(message_clear_start:ClientMessage.Frame)
+void ClientMessage_Capture::Clear() {
+// @@protoc_insertion_point(message_clear_start:ClientMessage.Capture)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  buffer_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&width_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&height_) -
+      reinterpret_cast<char*>(&width_)) + sizeof(height_));
   _internal_metadata_.Clear();
 }
 
-const char* ClientMessage_Frame::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+const char* ClientMessage_Capture::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // bytes buffer = 1;
+      // int32 width = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          auto str = _internal_mutable_buffer();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          width_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 height = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          height_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -700,39 +710,52 @@ failure:
 #undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* ClientMessage_Frame::_InternalSerialize(
+::PROTOBUF_NAMESPACE_ID::uint8* ClientMessage_Capture::_InternalSerialize(
     ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:ClientMessage.Frame)
+  // @@protoc_insertion_point(serialize_to_array_start:ClientMessage.Capture)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // bytes buffer = 1;
-  if (this->buffer().size() > 0) {
-    target = stream->WriteBytesMaybeAliased(
-        1, this->_internal_buffer(), target);
+  // int32 width = 1;
+  if (this->width() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_width(), target);
+  }
+
+  // int32 height = 2;
+  if (this->height() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_height(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:ClientMessage.Frame)
+  // @@protoc_insertion_point(serialize_to_array_end:ClientMessage.Capture)
   return target;
 }
 
-size_t ClientMessage_Frame::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:ClientMessage.Frame)
+size_t ClientMessage_Capture::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:ClientMessage.Capture)
   size_t total_size = 0;
 
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // bytes buffer = 1;
-  if (this->buffer().size() > 0) {
+  // int32 width = 1;
+  if (this->width() != 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
-        this->_internal_buffer());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_width());
+  }
+
+  // int32 height = 2;
+  if (this->height() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_height());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -744,60 +767,62 @@ size_t ClientMessage_Frame::ByteSizeLong() const {
   return total_size;
 }
 
-void ClientMessage_Frame::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:ClientMessage.Frame)
+void ClientMessage_Capture::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:ClientMessage.Capture)
   GOOGLE_DCHECK_NE(&from, this);
-  const ClientMessage_Frame* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ClientMessage_Frame>(
+  const ClientMessage_Capture* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ClientMessage_Capture>(
           &from);
   if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:ClientMessage.Frame)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:ClientMessage.Capture)
     ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:ClientMessage.Frame)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:ClientMessage.Capture)
     MergeFrom(*source);
   }
 }
 
-void ClientMessage_Frame::MergeFrom(const ClientMessage_Frame& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:ClientMessage.Frame)
+void ClientMessage_Capture::MergeFrom(const ClientMessage_Capture& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:ClientMessage.Capture)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.buffer().size() > 0) {
-
-    buffer_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.buffer_);
+  if (from.width() != 0) {
+    _internal_set_width(from._internal_width());
+  }
+  if (from.height() != 0) {
+    _internal_set_height(from._internal_height());
   }
 }
 
-void ClientMessage_Frame::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:ClientMessage.Frame)
+void ClientMessage_Capture::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:ClientMessage.Capture)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void ClientMessage_Frame::CopyFrom(const ClientMessage_Frame& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:ClientMessage.Frame)
+void ClientMessage_Capture::CopyFrom(const ClientMessage_Capture& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:ClientMessage.Capture)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool ClientMessage_Frame::IsInitialized() const {
+bool ClientMessage_Capture::IsInitialized() const {
   return true;
 }
 
-void ClientMessage_Frame::InternalSwap(ClientMessage_Frame* other) {
+void ClientMessage_Capture::InternalSwap(ClientMessage_Capture* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  buffer_.Swap(&other->buffer_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
+  swap(width_, other->width_);
+  swap(height_, other->height_);
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata ClientMessage_Frame::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata ClientMessage_Capture::GetMetadata() const {
   return GetMetadataStatic();
 }
 
@@ -1603,15 +1628,15 @@ void ClientMessage_Bookmark::InternalSwap(ClientMessage_Bookmark* other) {
 void ClientMessage::InitAsDefaultInstance() {
   ::_ClientMessage_default_instance_._instance.get_mutable()->hello_ = const_cast< ::ClientMessage_Hello*>(
       ::ClientMessage_Hello::internal_default_instance());
-  ::_ClientMessage_default_instance_._instance.get_mutable()->frame_ = const_cast< ::ClientMessage_Frame*>(
-      ::ClientMessage_Frame::internal_default_instance());
+  ::_ClientMessage_default_instance_._instance.get_mutable()->capture_ = const_cast< ::ClientMessage_Capture*>(
+      ::ClientMessage_Capture::internal_default_instance());
   ::_ClientMessage_default_instance_._instance.get_mutable()->bookmark_ = const_cast< ::ClientMessage_Bookmark*>(
       ::ClientMessage_Bookmark::internal_default_instance());
 }
 class ClientMessage::_Internal {
  public:
   static const ::ClientMessage_Hello& hello(const ClientMessage* msg);
-  static const ::ClientMessage_Frame& frame(const ClientMessage* msg);
+  static const ::ClientMessage_Capture& capture(const ClientMessage* msg);
   static const ::ClientMessage_Bookmark& bookmark(const ClientMessage* msg);
 };
 
@@ -1619,9 +1644,9 @@ const ::ClientMessage_Hello&
 ClientMessage::_Internal::hello(const ClientMessage* msg) {
   return *msg->hello_;
 }
-const ::ClientMessage_Frame&
-ClientMessage::_Internal::frame(const ClientMessage* msg) {
-  return *msg->frame_;
+const ::ClientMessage_Capture&
+ClientMessage::_Internal::capture(const ClientMessage* msg) {
+  return *msg->capture_;
 }
 const ::ClientMessage_Bookmark&
 ClientMessage::_Internal::bookmark(const ClientMessage* msg) {
@@ -1636,15 +1661,19 @@ ClientMessage::ClientMessage(const ClientMessage& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  frame_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_frame().empty()) {
+    frame_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.frame_);
+  }
   if (from._internal_has_hello()) {
     hello_ = new ::ClientMessage_Hello(*from.hello_);
   } else {
     hello_ = nullptr;
   }
-  if (from._internal_has_frame()) {
-    frame_ = new ::ClientMessage_Frame(*from.frame_);
+  if (from._internal_has_capture()) {
+    capture_ = new ::ClientMessage_Capture(*from.capture_);
   } else {
-    frame_ = nullptr;
+    capture_ = nullptr;
   }
   if (from._internal_has_bookmark()) {
     bookmark_ = new ::ClientMessage_Bookmark(*from.bookmark_);
@@ -1657,6 +1686,7 @@ ClientMessage::ClientMessage(const ClientMessage& from)
 
 void ClientMessage::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ClientMessage_client_2eproto.base);
+  frame_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&hello_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&message_type_) -
       reinterpret_cast<char*>(&hello_)) + sizeof(message_type_));
@@ -1668,8 +1698,9 @@ ClientMessage::~ClientMessage() {
 }
 
 void ClientMessage::SharedDtor() {
+  frame_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete hello_;
-  if (this != internal_default_instance()) delete frame_;
+  if (this != internal_default_instance()) delete capture_;
   if (this != internal_default_instance()) delete bookmark_;
 }
 
@@ -1688,14 +1719,15 @@ void ClientMessage::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  frame_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (GetArenaNoVirtual() == nullptr && hello_ != nullptr) {
     delete hello_;
   }
   hello_ = nullptr;
-  if (GetArenaNoVirtual() == nullptr && frame_ != nullptr) {
-    delete frame_;
+  if (GetArenaNoVirtual() == nullptr && capture_ != nullptr) {
+    delete capture_;
   }
-  frame_ = nullptr;
+  capture_ = nullptr;
   if (GetArenaNoVirtual() == nullptr && bookmark_ != nullptr) {
     delete bookmark_;
   }
@@ -1726,10 +1758,10 @@ const char* ClientMessage::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // .ClientMessage.Frame frame = 3;
+      // .ClientMessage.Capture capture = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          ptr = ctx->ParseMessage(_internal_mutable_frame(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_capture(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1737,6 +1769,14 @@ const char* ClientMessage::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
           ptr = ctx->ParseMessage(_internal_mutable_bookmark(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // bytes frame = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+          auto str = _internal_mutable_frame();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1781,12 +1821,12 @@ failure:
         2, _Internal::hello(this), target, stream);
   }
 
-  // .ClientMessage.Frame frame = 3;
-  if (this->has_frame()) {
+  // .ClientMessage.Capture capture = 3;
+  if (this->has_capture()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        3, _Internal::frame(this), target, stream);
+        3, _Internal::capture(this), target, stream);
   }
 
   // .ClientMessage.Bookmark bookmark = 4;
@@ -1795,6 +1835,12 @@ failure:
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
         4, _Internal::bookmark(this), target, stream);
+  }
+
+  // bytes frame = 5;
+  if (this->frame().size() > 0) {
+    target = stream->WriteBytesMaybeAliased(
+        5, this->_internal_frame(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1813,6 +1859,13 @@ size_t ClientMessage::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  // bytes frame = 5;
+  if (this->frame().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_frame());
+  }
+
   // .ClientMessage.Hello hello = 2;
   if (this->has_hello()) {
     total_size += 1 +
@@ -1820,11 +1873,11 @@ size_t ClientMessage::ByteSizeLong() const {
         *hello_);
   }
 
-  // .ClientMessage.Frame frame = 3;
-  if (this->has_frame()) {
+  // .ClientMessage.Capture capture = 3;
+  if (this->has_capture()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *frame_);
+        *capture_);
   }
 
   // .ClientMessage.Bookmark bookmark = 4;
@@ -1871,11 +1924,15 @@ void ClientMessage::MergeFrom(const ClientMessage& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from.frame().size() > 0) {
+
+    frame_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.frame_);
+  }
   if (from.has_hello()) {
     _internal_mutable_hello()->::ClientMessage_Hello::MergeFrom(from._internal_hello());
   }
-  if (from.has_frame()) {
-    _internal_mutable_frame()->::ClientMessage_Frame::MergeFrom(from._internal_frame());
+  if (from.has_capture()) {
+    _internal_mutable_capture()->::ClientMessage_Capture::MergeFrom(from._internal_capture());
   }
   if (from.has_bookmark()) {
     _internal_mutable_bookmark()->::ClientMessage_Bookmark::MergeFrom(from._internal_bookmark());
@@ -1906,8 +1963,10 @@ bool ClientMessage::IsInitialized() const {
 void ClientMessage::InternalSwap(ClientMessage* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  frame_.Swap(&other->frame_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(hello_, other->hello_);
-  swap(frame_, other->frame_);
+  swap(capture_, other->capture_);
   swap(bookmark_, other->bookmark_);
   swap(message_type_, other->message_type_);
 }
@@ -1922,8 +1981,8 @@ PROTOBUF_NAMESPACE_OPEN
 template<> PROTOBUF_NOINLINE ::ClientMessage_Hello* Arena::CreateMaybeMessage< ::ClientMessage_Hello >(Arena* arena) {
   return Arena::CreateInternal< ::ClientMessage_Hello >(arena);
 }
-template<> PROTOBUF_NOINLINE ::ClientMessage_Frame* Arena::CreateMaybeMessage< ::ClientMessage_Frame >(Arena* arena) {
-  return Arena::CreateInternal< ::ClientMessage_Frame >(arena);
+template<> PROTOBUF_NOINLINE ::ClientMessage_Capture* Arena::CreateMaybeMessage< ::ClientMessage_Capture >(Arena* arena) {
+  return Arena::CreateInternal< ::ClientMessage_Capture >(arena);
 }
 template<> PROTOBUF_NOINLINE ::ClientMessage_Bookmark_CSGODeepIntegration_KillDetails* Arena::CreateMaybeMessage< ::ClientMessage_Bookmark_CSGODeepIntegration_KillDetails >(Arena* arena) {
   return Arena::CreateInternal< ::ClientMessage_Bookmark_CSGODeepIntegration_KillDetails >(arena);

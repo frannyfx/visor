@@ -7,7 +7,7 @@ You can download the latest version of Visor from https://visor.gg/notyetourdoma
 ## Building
 ### VCPKG 
 Install the following packages:
-- ffmpeg (x86-windows, x64-windows)
+- ffmpeg[avresample,bzip2,core,ffmpeg,ffplay,ffprobe,ffserver,gpl,lzma,nonfree,opencl,openssl,version3,x264] (x86-windows, x64-windows)
 - x264 (x86-windows, x64-windows)
 - websocketpp (x86-windows, x64-windows)
 - protobuf (x86-windows, x64-windows)

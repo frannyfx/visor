@@ -10,12 +10,12 @@ using namespace std::chrono;
 class Notification {
 public:
 	// Rendering style
-	const int NOTIFICATION_DURATION = 5000;
+	const int NOTIFICATION_DURATION = 30000;
 	const int NOTIFICATION_FADE_DURATION = 300;
 	const int NOTIFICATION_DISTANCE = 10;
 	const float NOTIFICATION_MAX_ALPHA = 1;
 	const float NOTIFICATION_BG_ALPHA = 0.7f;
-	const ImVec2 NOTIFICATION_SIZE = ImVec2(250, 70);
+	const ImVec2 NOTIFICATION_SIZE = ImVec2(300, 100);
 	const ImVec2 NOTIFICATION_ICON_SIZE = ImVec2(40, 40);
 
 	// Properties

@@ -1,5 +1,7 @@
 #pragma once
+#include "../Server/VisorClient.h"
+
 namespace Encoder {
-	void Spawn(connection_hdl hdl);
-	void EncodeFrame(connection_hdl hdl);
+	void Spawn(VisorClient client);
+	void EncodeFrame(VisorClient client);
 }

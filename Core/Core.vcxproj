@@ -191,11 +191,13 @@
     <ClCompile Include="..\Common\Include\Protocols\client.pb.cc" />
     <ClCompile Include="..\Common\Include\Protocols\server.pb.cc" />
     <ClCompile Include="Capture\Capture.cpp" />
+    <ClCompile Include="Capture\Config.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Communication\Client.cpp" />
     <ClCompile Include="Communication\Discovery.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\EngineResources.cpp" />
+    <ClCompile Include="Engine\Fonts.cpp" />
     <ClCompile Include="Engine\Notification.cpp" />
     <ClCompile Include="Engine\Texture.cpp" />
     <ClCompile Include="Entry.cpp" />
@@ -227,6 +229,7 @@
     <ClInclude Include="Communication\Discovery.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\EngineResources.h" />
+    <ClInclude Include="Engine\Fonts.h" />
     <ClInclude Include="Engine\Notification.h" />
     <ClInclude Include="Engine\Texture.h" />
     <ClInclude Include="Hook\APIs\D3D10.h" />

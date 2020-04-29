@@ -3,12 +3,10 @@
 #include <websocketpp/config/asio_no_tls_client.hpp>
 #include <websocketpp/client.hpp>
 
-// Protocols
-#include <Protocols/client.pb.h>
-#include <Protocols/server.pb.h>
-
 #include "../Engine/Engine.h"
 #include "../Utils/Utils.h";
+#include "../Capture/Config.h"
+#include "../Capture/Capture.h"
 
 using websocketpp::lib::placeholders::_1;
 using websocketpp::lib::placeholders::_2;
@@ -23,6 +21,10 @@ namespace Client {
 	void OnMessage(client* visor_client, websocketpp::connection_hdl hdl, message_ptr msg);
 	void OnOpen(client* visor_client, websocketpp::connection_hdl hdl);
 	void SendClientMessage(ClientMessage& message);
+
+	// Handlers
+	void HandleConfig(ServerMessage& message);
+	void HandleEncoderReady(ServerMessage& message);
 
 	// Client
 	string endpoint;
@@ -62,7 +64,25 @@ namespace Client {
 	}
 
 	void OnMessage(client* visor_client, websocketpp::connection_hdl hdl, message_ptr msg) {
-		cout << "Message received with HDL: " << hdl.lock().get() << " - Message: " << msg->get_payload() << endl;
+		cout << "Received message!" << endl;
+
+		// Parse message
+		ServerMessage message;
+		if (!message.ParseFromString(msg->get_payload())) {
+			cout << "Failed to parse server message." << endl;
+			return;
+		}
+
+		switch (message.message_type()) {
+		case ServerMessage_Type_CONFIG:
+			HandleConfig(message);
+			break;
+		case ServerMessage_Type_ENCODER_READY:
+			HandleEncoderReady(message);
+			break;
+		default:
+			cout << "Unhandled server message type." << endl;
+		}
 	}
 
 	void OnOpen(client* visor_client, websocketpp::connection_hdl hdl) {
@@ -89,14 +109,33 @@ namespace Client {
 		message.SerializeToString(&data);
 
 		// Release message
+		message.release_hello();
+		message.release_capture();
 		message.release_bookmark();
 		message.release_frame();
-		message.release_hello();
 		message.Clear();
 
 		visor_client.send(handle, data, websocketpp::frame::opcode::binary);
 		if (error) {
 			cout << "Sending message failed: " << error.message() << endl;
 		}
+	}
+
+	void HandleConfig(ServerMessage& message) {
+		if (!message.has_config())
+			return;
+
+		cout << "Received config successfully!" << endl;
+		VisorConfig::Instance::GetInstance()->SetConfig(message.config());
+
+		// Handle capture
+		if (VisorConfig::Instance::GetInstance()->GetConfig().capture().enabled()) {
+			Capture::Start();
+		}
+	}
+
+	void HandleEncoderReady(ServerMessage& message) {
+		cout << "Received encoder ready!" << endl;
+		Capture::ReceivedReady();
 	}
 }

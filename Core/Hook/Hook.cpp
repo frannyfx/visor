@@ -170,6 +170,7 @@ DWORD __stdcall InitialiseHooks(LPVOID) {
 		//InitialiseVulkanHooks();
 	}
 #endif
-	
+
+	Engine::ShowNotification("Visor is running.", "I smoke dope like Kid Cudi. XDDDDDD long text :)))) asdasdjk asdkaad jksadjkasdkj");
 	return NULL;
 }

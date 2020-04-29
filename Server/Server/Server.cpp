@@ -28,11 +28,14 @@ namespace Server {
 	void OnMessage(server* s, connection_hdl hdl, message_ptr msg);
 	void OnOpen(server* s, connection_hdl hdl);
 	void OnClose(server* s, connection_hdl hdl);
+	void SendServerMessage(connection_hdl hdl, ServerMessage& message);
 
 	DWORD WINAPI StartServer(LPVOID);
 
 	// Handlers
-	void HandleHello(connection_hdl hdl, ClientMessage message);
+	void HandleHello(connection_hdl hdl, ClientMessage& message);
+	void HandleCaptureStarted(connection_hdl hdl, ClientMessage& message);
+	void HandleFrame(connection_hdl hdl, ClientMessage& message);
 
 	// Server
 	string endpoint = "ws://localhost:1337";
@@ -120,13 +123,32 @@ namespace Server {
 		case ClientMessage_Type::ClientMessage_Type_HELLO:
 			HandleHello(hdl, message);
 			break;
+		case ClientMessage_Type_CAPTURE_STARTED:
+			HandleCaptureStarted(hdl, message);
+			break;
+		case ClientMessage_Type_FRAME:
+			HandleFrame(hdl, message);
+			break;
 		default:
 			cout << "Unhandled client message type." << endl;
 			break;
 		}
 	}
 
-	void HandleHello(connection_hdl hdl, ClientMessage message) {
+	void SendServerMessage(connection_hdl hdl, ServerMessage& message) {
+		lib::error_code error;
+
+		// Serialise the message
+		string data;
+		message.SerializeToString(&data);
+
+		visor_server.send(hdl, data, websocketpp::frame::opcode::binary);
+		if (error) {
+			cout << "Sending message failed: " << error.message() << endl;
+		}
+	}
+
+	void HandleHello(connection_hdl hdl, ClientMessage& message) {
 		// Don't add client if the payload is invalid or if the client has already been added.
 		if (!message.has_hello() && connectionList.find(hdl) != connectionList.end())
 			return;
@@ -137,7 +159,46 @@ namespace Server {
 		// Add to connection list.
 		cout << "Added client injected in " << client.windowTitle << endl;
 		connectionList[hdl] = client;
+		
+		// Send configuration
+		ServerMessage response;
+		response.set_message_type(ServerMessage_Type_CONFIG);
+		
+		Config config;
+		Config_CaptureConfig captureConfig;
+		captureConfig.set_enabled(true);
+		captureConfig.set_capture_mode(Config_CaptureConfig_CaptureMode_DVR);
+		captureConfig.set_framerate(60);
+		config.set_allocated_capture(&captureConfig);
+		response.set_allocated_config(&config);
+		SendServerMessage(hdl, response);
 
-		// Spawn encoder instance for client
+		config.release_capture();
+		response.release_config();
+		response.Clear();
+	}
+
+	void HandleCaptureStarted(connection_hdl hdl, ClientMessage& message) {
+		if (!message.has_capture())
+			return;
+
+		// Get client
+		VisorClient client = connectionList[hdl];
+		if (client.pid == -1) {
+			cout << "Client not found!" << endl;
+			return;
+		}
+
+		// Set the resolution
+		cout << "Source resolution: " << message.capture().width() << "x" << message.capture().height() << endl;
+		client.SetSourceResolution(message.capture().width(), message.capture().height());
+
+		// Spawn thread
+		cout << "Spawning new encoder." << endl;
+		Encoder::Spawn(client);
+	}
+
+	void HandleFrame(connection_hdl hdl, ClientMessage& message) {
+
 	}
 }

@@ -7,6 +7,7 @@
 #include "Notification.h"
 #include "Engine.h"
 #include "EngineResources.h"
+#include "Fonts.h"
 
 using namespace std;
 
@@ -20,6 +21,10 @@ namespace Engine {
 		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
 		ImGui::StyleColorsDark();
+
+		// Setup fonts
+		Fonts::RegisterFont(Fonts::Font::BOLD, io.Fonts->AddFontFromFileTTF("C:\\Users\\blazi\\Desktop\\Visor\\Build\\Debug\\x64\\Resources\\Fonts\\Rubik-Bold.ttf", 16.0f));
+		Fonts::RegisterFont(Fonts::Font::REGULAR, io.Fonts->AddFontFromFileTTF("C:\\Users\\blazi\\Desktop\\Visor\\Build\\Debug\\x64\\Resources\\Fonts\\Rubik-Regular.ttf", 14.0f));
 	}
 
 	void Render(GraphicsAPI graphicsAPI) {

@@ -16,8 +16,9 @@ message ClientMessage {
         string window_title = 3;
     }
 
-    message Frame {
-        bytes buffer = 1;
+    message Capture {
+        int32 width = 1;
+        int32 height = 2;
     }
 
     message Bookmark {
@@ -60,6 +61,7 @@ message ClientMessage {
 
     Type message_type = 1;
     Hello hello = 2;
-    Frame frame = 3;
+    Capture capture = 3;
     Bookmark bookmark = 4;
+    bytes frame = 5;
 }

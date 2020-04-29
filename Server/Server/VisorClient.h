@@ -9,6 +9,8 @@ class VisorClient {
 private:
 	connection_hdl hdl;
 	bool isRecording;
+	int sourceWidth;
+	int sourceHeight;
 
 public:
 	int pid;
@@ -17,7 +19,12 @@ public:
 
 	VisorClient() : pid(-1) {}
 	
-	VisorClient(connection_hdl hdl, int pid, string executablePath, string windowTitle) : pid(pid), executablePath(executablePath), windowTitle(windowTitle) {
+	VisorClient(connection_hdl hdl, int pid, string executablePath, string windowTitle) : pid(pid), executablePath(executablePath), windowTitle(windowTitle), isRecording(false), sourceWidth(0), sourceHeight(0) {
 		isRecording = false;
 	}
+
+	void SetRecording(bool recording);
+	void SetSourceResolution(int width, int height);
+	int GetWidth();
+	int GetHeight();
 };
