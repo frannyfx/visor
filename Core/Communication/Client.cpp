@@ -37,8 +37,9 @@ namespace Client {
 
 		try {
 			// Set logging to be pretty verbose (everything except message payloads)
-			visor_client.set_access_channels(websocketpp::log::alevel::all);
-			visor_client.clear_access_channels(websocketpp::log::alevel::frame_payload);
+			//visor_client.set_access_channels(websocketpp::log::alevel::all);
+			//visor_client.clear_access_channels(websocketpp::log::alevel::frame_payload);
+			visor_client.clear_access_channels(websocketpp::log::alevel::all);
 
 			// Initialise ASIO
 			visor_client.init_asio();
@@ -105,6 +106,7 @@ namespace Client {
 		websocketpp::lib::error_code error;
 
 		// Serialise the message
+		
 		string data;
 		message.SerializeToString(&data);
 
@@ -115,7 +117,12 @@ namespace Client {
 		message.release_frame();
 		message.Clear();
 
+		auto start = std::chrono::system_clock::now();
+
 		visor_client.send(handle, data, websocketpp::frame::opcode::binary);
+		auto end = std::chrono::system_clock::now();
+		auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+		cout << elapsed.count() << endl;
 		if (error) {
 			cout << "Sending message failed: " << error.message() << endl;
 		}

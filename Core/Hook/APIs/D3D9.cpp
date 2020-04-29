@@ -21,8 +21,7 @@ namespace Hook::D3D9 {
 	IDirect3DSurface9* pRenderSurface;
 	HANDLE* pSharedHandle;
 	IDirect3DSurface9* pBackBuffer;
-	LPD3DXBUFFER pDestBuffer;
-
+	
 	// Instance
 	Instance* instance = Instance::GetInstance();
 
@@ -53,7 +52,7 @@ namespace Hook::D3D9 {
 
 			// Initialise our engine
 			EngineResources::SetD3D9Device(&pDevice);
-			EngineResources::AddTexture(new Texture(TextureID::VISOR_LOGO, "C:\\Users\\blazi\\Desktop\\glasses.png"));
+			EngineResources::AddTexture(new Texture(TextureID::VISOR_LOGO, "C:\\Users\\blazi\\Desktop\\Visor\\Build\\Debug\\x64\\Images\\glasses.png"));
 
 			// Initialise ImGui
 			ImGui_ImplWin32_Init(parameters.hFocusWindow);
@@ -66,16 +65,13 @@ namespace Hook::D3D9 {
 
 		// Capture
 		if (Capture::ShouldCapture()) {
+			// Create buffer and fill it with back buffer data.
+			LPD3DXBUFFER pDestBuffer;
 			pDevice->GetRenderTargetData(pBackBuffer, pRenderSurface);
 			D3DXSaveSurfaceToFileInMemory(&pDestBuffer, D3DXIFF_BMP, pRenderSurface, NULL, NULL);
-			void* pBuffer = pDestBuffer->GetBufferPointer();
-			DWORD size = pDestBuffer->GetBufferSize();
 
 			// Add the frame
-			Capture::AddFrame((char*)pBuffer, size);
-
-			// Release buffer once done.
-			pDestBuffer->Release();
+			Capture::AddFrame(pDestBuffer);
 		}
 
 		// Render

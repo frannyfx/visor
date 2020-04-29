@@ -194,8 +194,15 @@ namespace Server {
 		client.SetSourceResolution(message.capture().width(), message.capture().height());
 
 		// Spawn thread
-		cout << "Spawning new encoder." << endl;
-		Encoder::Spawn(client);
+		if (Encoder::Spawn(client)) {
+			cout << "New encoder spawned successfully." << endl;
+			
+			// Send a message saying we're ready to receive frames
+			ServerMessage response;
+			response.set_message_type(ServerMessage_Type_ENCODER_READY);
+			SendServerMessage(hdl, response);
+			response.Clear();
+		}
 	}
 
 	void HandleFrame(connection_hdl hdl, ClientMessage& message) {

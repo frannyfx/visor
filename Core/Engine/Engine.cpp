@@ -23,8 +23,8 @@ namespace Engine {
 		ImGui::StyleColorsDark();
 
 		// Setup fonts
-		Fonts::RegisterFont(Fonts::Font::BOLD, io.Fonts->AddFontFromFileTTF("C:\\Users\\blazi\\Desktop\\Visor\\Build\\Debug\\x64\\Resources\\Fonts\\Rubik-Bold.ttf", 16.0f));
-		Fonts::RegisterFont(Fonts::Font::REGULAR, io.Fonts->AddFontFromFileTTF("C:\\Users\\blazi\\Desktop\\Visor\\Build\\Debug\\x64\\Resources\\Fonts\\Rubik-Regular.ttf", 14.0f));
+		Fonts::RegisterFont(Fonts::Font::BOLD, io.Fonts->AddFontFromFileTTF("C:\\Users\\blazi\\Desktop\\Visor\\Build\\Debug\\x64\\Fonts\\Rubik-Bold.ttf", 16.0f));
+		Fonts::RegisterFont(Fonts::Font::REGULAR, io.Fonts->AddFontFromFileTTF("C:\\Users\\blazi\\Desktop\\Visor\\Build\\Debug\\x64\\Fonts\\Rubik-Regular.ttf", 14.0f));
 	}
 
 	void Render(GraphicsAPI graphicsAPI) {
@@ -36,7 +36,7 @@ namespace Engine {
 
 		// Offset
 		int notificationOffset = 0;
-		for (vector<Notification>::reverse_iterator it = notifications.rbegin(); it != notifications.rend(); ++it) {
+		for (vector<Notification>::reverse_iterator it = notifications.rbegin(); it != notifications.rend(); it++) {
 			ImVec2 offset = it->Render(graphicsAPI, notificationOffset);
 			notificationOffset = offset.y;
 		}

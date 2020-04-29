@@ -16,6 +16,7 @@ extern "C" {
 #include <libavutil/mathematics.h>
 #include <libavformat/avformat.h>
 #include <libavutil/opt.h>
+#include <libavutil/imgutils.h>
 }
 
 #pragma comment(lib, "avcodec.lib")
@@ -32,25 +33,23 @@ namespace Encoder {
 	private:
 		VisorClient client;
 		bool running;
-		mutex frameAvailableMutex;
-		condition_variable frameAvailableCV;
-		vector<vector<char16_t>> frames;
+		vector<uint8_t*> frames;
 		time_point<system_clock> encodeStart;
 
 		// Encoding
+		FILE* file;
 		SwsContext* swsContext;
 		AVFormatContext* outputContext;
 		AVCodecContext* context;
 		AVStream* stream;
-
-		DWORD WINAPI Run(LPVOID);
+		static DWORD WINAPI Run(void* param);
 
 	public:
-		void Start();
+		bool Start();
 		void AddFrame();
 		string GetFileName();
 		Instance() : client(VisorClient()) {}
-		Instance(VisorClient client) : client(client), running(false), outputContext(NULL), context(NULL), stream(NULL) {
+		Instance(VisorClient client) : client(client), running(false), outputContext(NULL), context(NULL), stream(NULL), file(NULL), swsContext(NULL) {
 
 		}
 
@@ -60,6 +59,13 @@ namespace Encoder {
 
 			client = rhs.client;
 			running = rhs.running;
+			frames = rhs.frames;
+			encodeStart = rhs.encodeStart;
+			file = rhs.file;
+			swsContext = rhs.swsContext;
+			outputContext = rhs.outputContext;
+			context = rhs.context;
+			stream = rhs.stream;
 			return *this;
 		}
 	};

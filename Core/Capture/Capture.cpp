@@ -3,6 +3,7 @@
 #include "Config.h"
 #include <sstream>
 
+
 namespace Capture {
 	// Source resolution
 	int width = 0;
@@ -18,8 +19,15 @@ namespace Capture {
 	time_point<steady_clock> captureStart;
 	time_point<steady_clock> lastFrame;
 
+	// Frames
+	vector<LPD3DXBUFFER> frames;
+	vector<LPD3DXBUFFER> waitingFrames;
+
 	// Instance
 	VisorConfig::Instance* instance = VisorConfig::Instance::GetInstance();
+
+	// Forward declarations
+	DWORD WINAPI Run(LPVOID);
 
 	void Start() {
 		if (width == 0 && height == 0) {
@@ -40,6 +48,15 @@ namespace Capture {
 
 		captureStart = high_resolution_clock::now();
 		recording = true;
+
+		HANDLE hThread = CreateThread(
+			NULL,
+			0,
+			Run,
+			NULL,
+			0,
+			NULL
+		);
 
 		// Send capture configuration
 		ClientMessage message;
@@ -66,22 +83,47 @@ namespace Capture {
 		if (starting) Start();
 	}
 
-	void AddFrame(char* bufferPointer, int size) {
+	void AddFrame(LPD3DXBUFFER &buffer) {
 		if (!recording)
 			return;
 
-		// Create message
-		ClientMessage message;
-		message.set_message_type(ClientMessage_Type_FRAME);
-
-		ostringstream ss;
-		ss.write(bufferPointer, size);
-		message.set_frame(ss.str());
-		Client::SendClientMessage(message);
-
-		// Set flag to false
+		waitingFrames.push_back(buffer);
 		firstFrame = false;
 		lastFrame = high_resolution_clock::now();
+	}
+
+	DWORD WINAPI Run(LPVOID) {
+		while (recording) {
+			// Wait for frames to encode
+			while (waitingFrames.empty()) {}
+			
+			frames.swap(waitingFrames);
+			waitingFrames.clear();
+
+			for (vector<LPD3DXBUFFER>::iterator it = frames.begin(); it != frames.end();) {
+				LPD3DXBUFFER p = *it;
+				void* pBuffer = p->GetBufferPointer();
+				DWORD size = p->GetBufferSize();
+				cout << pBuffer << endl;
+				cout << size << endl;
+
+				// Create message
+				ClientMessage message;
+				message.set_message_type(ClientMessage_Type_FRAME);
+
+				ostringstream ss;
+				ss.write((char*)pBuffer, size);
+				message.set_frame(ss.str());
+				
+				Client::SendClientMessage(message);
+
+				// Release buffer
+				if (it != frames.end()) it = frames.erase(it);
+				p->Release();
+			}
+		}
+
+		return NULL;
 	}
 
 	bool ShouldCapture() {
