@@ -1,9 +1,6 @@
 # Visor
 A game capture system, along with a social media platform dedicated to sharing videogame clips.
 
-## Installing
-You can download the latest version of Visor from https://visor.gg/notyetourdomain.
-
 ## Building
 ### VCPKG 
 Install the following packages:
